@@ -1,0 +1,38 @@
+= form_for @course, :html=>{:class=>"form-horizontal course_form"}, :validate => true do |f|
+  = form_error_messages!(@course)
+  %h5 科目分类
+  - if request.path == new_course_path
+    .row
+      .col-xs-10.col-xs-offset-1
+        .form-group
+          = select "second","no1",@seconds,{:include_balnk=>true},{:class=>"form-control",:onchange=>"select_no1_category(this,#{@category_json})"} 
+      .col-xs-10.col-xs-offset-1
+        .form-group
+          = select "third","no2",{},{:include_blank=>true},{:class=>"form-control",:onchange=>"select_no2_category(this,#{@category_json})"}
+      .col-xs-10.col-xs-offset-1
+        .form-group 
+          = select "subject","no3",{},{:include_blank=>true},{:class=>"form-control",:onblur=>"check_select(this)"}
+  - else
+    .row
+      .form-group
+        .col-xs-8.col-xs-offset-2
+          .form-group
+            = select "second","no1",options_for_select(@seconds,selected:@course.category.second),{:include_balnk=>true},{:class=>"form-control",:onchange=>"select_no1_category(this,#{@category_json})"} 
+        .col-xs-8.col-xs-offset-2
+          .form-group
+            = select "third","no2",options_for_select(@thirds,selected:@course.category.third),{:include_balnk=>true},{:class=>"form-control",:onchange=>"select_no2_category(this,#{@category_json})"} 
+        .col-xs-8.col-xs-offset-2
+          .form-group
+            = select "subject","no3",options_for_select(@subjects,selected:@course.category.subject),{:include_balnk=>true},{:class=>"form-control"} 
+  .row
+    .col-xs-4
+      %h5 课时费用
+    .col-xs-4
+      = f.select :price,options_for_select(price_options,@course.price),{:include_blank=>false},{:class => "form-control"}
+    .col-xs-4
+      %h5 元/时
+  %h4
+    %small 课时费用既是试讲费用，也是正式上课费用，两者相同，家长将会按照这个费用支付订单！
+  %hr
+  = f.submit '发布课程', :class=>"btn btn-success btn-block"
+  

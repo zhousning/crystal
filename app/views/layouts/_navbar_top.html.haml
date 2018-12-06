@@ -1,0 +1,44 @@
+%div#site-nav
+  %div.wrapper
+    %ul.status-info
+      %li
+        .main-link-div
+          %a.main-link{:href => root_path}
+            %i.glyphicon.glyphicon-home
+            家教呢首页
+      %li
+        .main-link-div
+          -if parent_signed_in?
+            %a.login-link{:href => profile_parents_path}
+              个人中心
+          -elsif teacher_signed_in?
+            %a.login-link{:href =>basicInfor_teachers_path}
+              个人中心
+      %li
+        客服电话: 13664320122
+    %ul.tag-info
+      -if parent_signed_in?
+        %li
+          %i.glyphicon.glyphicon-user
+          您好，
+          %a.login-link{:href => profile_parents_path}
+            #{current_parent.name}
+        %li
+          %a.register-link{:href => destroy_parent_session_path,"data-method" => "delete"}
+            退出
+      -elsif teacher_signed_in?
+        %li
+          %i.glyphicon.glyphicon-user
+          您好，
+          %a.login-link{:href =>basicInfor_teachers_path}
+            #{current_teacher.name}
+        %li
+          %a.register-link{:href => destroy_teacher_session_path,"data-method" => "delete"}
+            退出
+      -else
+        %li
+          %a.login-link{:href => login_path}
+            %i.glyphicon.glyphicon-user
+            请登录
+          %a.register-link{:href => sign_up_path}
+            免费注册

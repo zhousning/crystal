@@ -1,0 +1,429 @@
+.order-addr-new
+{
+  display:none;
+}
+.checktime_div
+{
+  padding-left:5px;
+  width:550px;
+}
+#new_addr ,#new_addr_sure ,#new_addr_cancle{
+  cursor:pointer;
+  text-decoration:none;
+}
+#new_addr
+{
+  float:left;
+  margin-top:5px;
+  margin-bottom:4px;
+}
+#p1
+{
+  float:left;
+}
+#d2
+{
+  float:left;
+  width:398px;
+  margin-top:4px;
+}
+#c1
+{
+  float:left;
+}
+#new_addr_div
+{
+  float:left;
+}
+#new_addr_sure,#new_addr_cancle
+{
+  margin-top:5px;
+}
+#order-nav-div
+{
+  position:relative;
+  width:100%;
+  min-width:1100px;
+  background-color:#41b5b8;
+  height:80px;
+}
+#details-nav .wrapper
+{
+  position:relative;
+  width:1100px;
+  height:100%;
+  line-height:80px;
+  color:white;
+  font-size:30px;
+}
+#order-teacher-info
+{
+  margin-top:-60px;
+}
+#order-div
+{
+  position:relative;
+  width:100%;
+  min-width:1100px;
+  margin-top:20px;
+  margin-bottom:50px;
+}
+#order-div .wrapper
+{
+  position:relative;
+  width:1100px;
+  height:900px;
+  background-color:white;
+  border:1px solid #dfdfdf;
+}
+#order-progress
+{
+  float:left;
+  width:100%;
+  height:auto;
+  margin-top:20px;
+}
+.order-progress-div
+{
+  float:left;
+  width:1040px;
+  height:36px;
+  margin:15px 30px;
+  background-color:#efefef;
+}
+.order-progress-3-step
+{
+  float:left;
+  width:330px;
+  height:100%;
+  line-height:36px;
+  text-align:center;
+}
+.order-progress-4-step
+{
+  float:left;
+  width:250px;
+  height:100%;
+  line-height:36px;
+  text-align:center;
+}
+.order-progress-5-step
+{
+  float:left;
+  width:200px;
+  height:100%;
+  line-height:36px;
+  text-align:center;
+}
+.order-progress-6-step
+{
+  float:left;
+  width:166px;
+  height:100%;
+  line-height:36px;
+  text-align:center;
+}
+.order-progress-step-active
+{
+  background-color:#41b5e8;
+}
+.order-progress-status
+{
+  float:left;
+}
+.order-progress-status-active
+{
+  border-width: 18px;
+  border-style: solid;
+  -moz-border-top-colors: none;
+  -moz-border-right-colors: none;
+  -moz-border-bottom-colors: none;
+  -moz-border-left-colors: none;
+  border-image: none;
+  content: " ";
+  border-color: transparent transparent transparent #41b5e8;
+}
+.order-step-info
+{
+  float:left;
+  width:1040px;
+  margin:20px auto 20px auto;
+  padding-left:100px;
+}
+.order-info-image
+{
+  float:left;
+  width:230px;
+  padding-left:80px;
+}
+.order-info-image img
+{
+  float:left;
+  width:120px;
+  height:120px;
+  border:4px solid;
+  border-color:#FFF;
+  vertical-align:middle;
+  border-radius:60px;
+}
+.order-info-teacher
+{
+  float:left;
+  width:190px;
+  padding-top:30px;
+}
+.order-info-course
+{
+  float:left;
+  width:300px;
+  padding-top:30px;
+}
+.order-info-title
+{
+  font-size:18px;
+  color:#3d3d3d;
+}
+.order-step-title
+{
+  float:left;
+  width:1040px;
+  margin:5px 30px auto 30px;
+  border-bottom:1px solid #dfdfdf;
+  height:40px;
+  line-height:40px;
+}
+.order-step-content
+{
+  float:left;
+  width:1040px;
+  margin:20px 30px 20px 30px;
+  padding-left:150px;
+}
+.order-step-content .hours {
+  padding-top:5px;
+}
+.order-step-submit
+{
+  float:left;
+  width:1040px;
+  margin:30px 30px auto 30px;
+  padding-top:20px;
+  border-top:1px solid #dfdfdf;
+  height:40px;
+  line-height:40px;
+}
+.order-submit-footer-words
+{
+  font-size: 16px;
+}
+.order-submit-footer-number
+{
+  font-size: 28px;
+  color: #3d3d3d;
+}
+.order-error-messages {
+  float: left;
+  width:1040px;
+  margin: 20px 0px 0px 30px;
+}
+.order-error-messages .alert {
+  padding-left: 40px;
+}
+.order-text-block {
+  font-size: 16px;
+  padding: 20px 20px
+}
+
+.pay-approach .form-radio {
+  border: 1px solid #ddd;
+  border-color: #f90;
+  width: 195px;
+  padding: 6px 0;
+  margin-right: 5px;
+}
+.pay-approach .form-radio input {
+  margin: 0 10px;
+  cursor: pointer;
+}
+.pay-approach .icon-bank-alipay {
+  vertical-align: middle;
+}
+.icon-bank-alipay {
+  background-position: -106px -83px;
+  width: 63px;
+  background-image: url(bank.jpg);
+  height: 20px;
+  display: inline-block;
+}
+.order-split-line
+{
+  float:left;
+  width:1040px;
+  height:10px;
+  line-height:10px;
+  border-bottom:1px solid #dfdfdf;
+  margin:20px 0 20px 0;
+}
+.order-pay-div
+{
+  float:left;
+  width:1040px;
+  margin-left:30px;
+  font-size:14px;
+}
+.order-pay-div .course
+{
+  margin-left:10px;
+}
+.order-pay-div .course .course-info
+{
+  float:left;
+}
+.order-pay-div .course .course-date
+{
+  float:left;
+  margin-left: 200px;
+}
+.order-pay-div .course .course-price
+{
+  float:right;
+}
+.course-price span {
+  font-size: 24px;
+  display: inline-block;
+  vertical-align: middle;
+  font-weight: 700;
+  color: #f76120;
+  margin: 0 3px;
+}
+.course-date span {
+  font-size: 16px;
+  font-weight: 700;
+  color: #f76120;
+  vertical-align: middle;
+}
+.order-pay-div .pay-approach
+{
+  margin-top:20px;
+  margin-left:10px;
+}
+.order-pay-div .pay-money
+{
+  font-size: 14px;
+  font-weight: 700;
+  text-align: right;
+  margin-bottom: 15px;
+}
+.order-pay-div .pay-button
+{
+  text-align: right;
+  margin-bottom: 15px;
+}
+.pay-button .money
+{
+  float:right;
+  font-size: 20px;
+  color: #f76120;
+}
+.pay-button .money span
+{
+  font-size: 24px;
+  display: inline-block;
+  vertical-align: middle;
+  font-weight: 700;
+  color: #f76120;
+  margin: 0 3px;
+}
+.order-pay-div .order-info
+{
+  clear:both;
+  margin:20px 0 0 10px;
+}
+.order-info .info-parent
+{
+  float:left;
+}
+.order-info .info-address
+{
+  clear:both;
+}
+.order-info .info-hours
+{
+  clear:both;
+}
+.order-info .info-highlight
+{
+  font-size: 16px;
+  font-weight: 700;
+  color: #f76120;
+}
+.order-pay-div .teacher-info
+{
+  clear:both;
+  margin:20px 0 0 10px;
+}
+.teacher-info .teacher-phone
+{
+  float:left;
+  font-size: 16px;
+  font-weight: 700;
+  color: #f76120;
+}
+.teacher-info .teacher-school
+{
+  clear:both;
+  margin: 10px 0 10px 0;
+}
+.order-pay-div .feedback
+{
+  clear:both;
+  margin:20px 0 0 10px;
+}
+.feedback .code
+{
+  float:left;
+  font-size: 16px;
+  font-weight: 700;
+  color: #f76120;
+}
+.feedback .code-info
+{
+  clear:both;
+  margin: 10px 0 10px 0;
+}
+.feedback .code-form
+{
+  margin: 0 0 10px 15px;
+}
+.order-pay-part-title
+{
+  clear:both;
+  font-size:16px;
+  font-weight:bold;
+  color:#333;
+  margin:10px 0 10px 0;
+}
+.order-pay-div .margin-left
+{
+  margin-left: 30px;
+}
+.order-pay-div .order-status
+{
+  margin:20px 0 0 0;
+  border: 1px solid #EED97C;
+  padding: 0 10px;
+  background: #FFFCEB;
+}
+.order-pay-div .order-trace
+{
+  border-right: 1px solid #EED97C;
+  border-bottom: 1px solid #EED97C;
+  border-left: 1px solid #EED97C;
+  padding: 0 2px;
+  margin-bottom: 20px;
+  background: #FFFCEB;
+}
+.order-trace table
+{
+  margin-bottom:0;
+}

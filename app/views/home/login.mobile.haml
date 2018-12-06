@@ -1,0 +1,30 @@
+- provide(:title, t('.title'))
+.row
+  .col-xs-12
+    .row
+      .col-xs-12
+        .login-panel{:role => "tabpanel"}
+          %ul.nav.nav-tabs.nav_back.login-nav-tabs{:role=>"tablist"}
+            %li.active.nav_no.nav_text.bd-right{:role => "presentation"}= link_to "家长登录", "#parent_sign_in", :'aria-controls' => "parent_sign_in", :role => "tab", "data-toggle" => "tab"
+            %li.nav_no.nav_text{:role => "presentation"}= link_to "家教登录", "#teacher_sign_in", :'aria-controls' => "teacher_sign_in", :role=>"tab", "data-toggle"=>"tab"
+          .row
+            .col-xs-12
+              .tab-content
+                .tab-pane.active#parent_sign_in{:role => "tabpanel"}
+                  = render "parents_new"
+                .tab-pane#teacher_sign_in{:role => "tabpanel"}
+                  = render "teachers_new"
+
+        %br
+        .login-panel{:role => "tabpanel"}
+          .sign-up-text 如果您还没有帐号，请先注册
+          .row
+            .col-xs-12
+              .col-xs-6
+                %p
+                  %h3.text-center
+                    = link_to "家长注册", new_parent_registration_path, :class=>"btn btn-default btn-block"
+              .col-xs-6
+                %p
+                  %h3.text-center
+                    = link_to "家教注册", new_teacher_registration_path, :class=>"btn btn-default btn-block"

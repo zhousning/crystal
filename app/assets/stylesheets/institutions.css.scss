@@ -1,0 +1,81 @@
+// Place all the styles related to the institutions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.meaning-nothing {
+  font-size:16px;
+}
+.school .course-list img
+{
+  height:180px;
+  float:left;
+  width:670px;
+}
+.school-price
+{
+  margin-left:700px;
+  padding-top:53px;
+}
+.school
+{
+  margin-top:-10px;
+}
+.school a{
+  color:#ccc;
+}
+.school .course-list
+{
+  height:183px;
+  background:white;
+  margin:10px 0;
+  border: 1px solid white;
+}
+.school .course-list a:hover
+{
+  text-decoration:none
+}
+.school .course-list:hover {
+  border: 1px solid #dc5c95;
+}
+.school .price-ico
+{
+  color: #f60;
+}
+.school .now-price
+{
+  cursor: pointer;
+  font-size: 24px;
+  color: #f60;
+}
+
+.old-price
+{
+  font-size:12px;
+  padding-left:5px;
+  text-decoration: line-through;
+  color: #999;
+}
+
+.school .cheaper
+{
+    background: url("cheaper.png") left -46px no-repeat;
+    margin-left:-20px;
+    margin-right:5px;
+    width: 66px;
+    padding-left: 22px;
+    color: #ff6300;
+    float:left;
+}
+.school .panel img
+{
+  margin-bottom:6px;
+}
+.school .list-logo
+{
+  margin-top:10px;
+}
+.school .list-logo img
+{
+  width:100%;
+  margin-top:5px;
+}

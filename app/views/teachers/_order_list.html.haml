@@ -1,0 +1,29 @@
+- if @orders.empty?
+  .order-text-block 目前还没有接到订单
+- else
+  %table.table.table-hover
+    %thead
+      %th 课程名称
+      %th 联系人
+      %th 联系电话
+      %th 试讲日期
+      %th 状态
+      %th 操作
+  
+    - @orders.each do |order|
+      %tr
+        %td= order.courses[0] ? order.courses[0].name : "课程已删除"
+        %td= order.name
+        %td
+          - if [Setting.orders.status_teacher_paied, Setting.orders.status_trade_success, Setting.orders.status_trade_failed].include? order.status
+            = order.phone
+          - else
+            = order.phone[0..6] + "xxxx"
+        %td= order.appointments_time.strftime("%Y-%m-%d")
+        %td= get_order_status_string(order.status)
+        %td
+          - if order.courses[0]
+            = link_to get_teacher_order_button_string(order.status), teacher_orders_path(:id=>order.number), :class=>"btn btn-sm #{get_teacher_order_button_type(order.status)}"
+          - else
+            = link_to get_teacher_order_button_string(order.status), nil, :class=>"btn btn-sm #{get_teacher_order_button_type(order.status)}"
+

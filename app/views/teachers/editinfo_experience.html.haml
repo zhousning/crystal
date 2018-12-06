@@ -1,0 +1,26 @@
+
+- provide(:title, t('.title'))
+
+%div#p_header
+  %div.p_wrapper
+    %div.p_logo
+      %a{:href => root_path}
+        =image_tag('logo.png',:class => "header-logo-img2")
+    %img.p_title_img{:src => "https://account.xiaomi.com/static/img/passport/photo.jpg"}
+    %div.p_title
+      个人主页
+%div.p_main
+  %div.p_wrapper
+    = render :partial => "teachers/profile"
+    %div.p_content
+      %div.p_block
+        %div.p_block_title.p_content_block_title
+          %h4
+            %i.glyphicon-color.glyphicon.glyphicon-circle-arrow-up
+              教学经历
+      %div.p_block
+        %div.t_main
+          %div.t_right
+            %div.show
+              %div.panel-body
+                = render :partial => "editinfo_experience"

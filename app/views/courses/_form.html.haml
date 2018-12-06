@@ -1,0 +1,59 @@
+= form_for @course, :html=>{:class=>"form-horizontal course_form"}, :validate => true do |f|
+  = form_error_messages!(@course)
+  -#
+    .form-group
+      = f.label "课程名称", :class=>"col-md-2 col-xs-2 control-label"
+      .col-md-4.col-xs-4
+        = f.text_field :name,:class=>"form-control"
+      %span.promot-part= "（* 必填）"
+
+  - if request.path == new_course_path
+    .form-group
+      = f.label "科目分类", :class=>"col-md-2 col-xs-2 control-label"
+      .col-md-4.col-xs-4
+        .form-group
+          = select "second","no1",@seconds,{:include_balnk=>true},{:class=>"form-control ctg_list",:onchange=>"select_no1_category(this,#{@category_json})"} 
+        .form-group
+          = select "third","no2",{},{:include_blank=>true},{:class=>"form-control ctg_list",:onchange=>"select_no2_category(this,#{@category_json})"}
+        .form-group 
+          = select "subject","no3",{},{:include_blank=>true},{:class=>"form-control ctg_list",:onblur=>"check_select(this)"}
+      %span.promot-parts= "（* 必填）"
+  - else
+    .form-group
+      = f.label "科目分类", :class=>"col-md-2 col-xs-2 control-label"
+      .col-md-4.col-xs-4
+        = select "second","no1",options_for_select(@seconds,selected:@course.category.second),{:include_balnk=>true},{:class=>"form-control ctg_list",:onchange=>"select_no1_category(this,#{@category_json})"} 
+        = select "third","no2",options_for_select(@thirds,selected:@course.category.third),{:include_balnk=>true},{:class=>"form-control ctg_list",:onchange=>"select_no2_category(this,#{@category_json})"} 
+        = select "subject","no3",options_for_select(@subjects,selected:@course.category.subject),{:include_balnk=>true},{:class=>"form-control ctg_list"} 
+      %span.promot-parts= "（* 必填）"
+
+  -#
+    .form-group
+      = f.label "授课模式", :class=>"col-md-2 col-xs-2 control-label"
+      .col-md-4.col-xs-4
+        = f.select :mode,mode_option,{:include_blank=>false},{:class=>"form-control"}
+      %span.promot-part= "（* 必填）"
+
+    .form-group
+      = f.label "授课时长", :class=>"col-md-2 col-xs-2 control-label"
+      .col-md-4.col-xs-4
+        = f.number_field :length, :class=>"form-control"
+      .col-md-2.col-xs-2
+        = f.label "小时",:class=>"form-control-static"
+        %span.promot-part= "（* 必填）"
+      
+  .form-group
+    = f.label "课时费用", :class=>"col-md-2 col-xs-2 control-label"
+    .col-md-4.col-xs-4
+      = f.select :price,options_for_select(price_options,@course.price),{:include_blank=>false},{:class => "form-control"}
+    .col-md-2.col-xs-2
+      = f.label "元/时", :class=>"form-control-static"
+      %span.promot-part= "（* 必填）"
+    %p.pinfo (课时费用既是试讲费用，也是正式上课费用，两者相同，家长将会按照这个费用支付订单！)
+  
+  .form-group
+    .col-md-3.col-xs-3.col-md-offset-2.col-xs-offset-2
+      %input{:type=>"button",:value=>"发布",:onclick=>"submit_course()",:class=>"btn btn-success"}
+      &nbsp;&nbsp;
+      = link_to '返回',courses_path,:class=>"btn btn-default"
+

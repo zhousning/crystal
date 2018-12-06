@@ -1,0 +1,83 @@
+// Place all the styles related to the messages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.report-category 
+{
+  width: 200px;
+  float: left;
+}
+.report
+{
+  margin-top:-6px;
+}
+.report-cat-list 
+{
+  margin-left:-15px;
+  margin-top:5px;
+}
+.report-cat-list li
+{
+  border:1px solid rgba(218, 218, 218, 0.51);
+  line-height: 36px;
+  background-color:white;
+  height: 36px;
+  margin-bottom:5px;
+  margin-left: -40px;
+  text-align: center;
+  color: black;
+  display: block;
+  list-style: none;
+}
+
+.report-cat-list  a
+{
+  text-decoration:none;
+}
+.report-cat-list li.active
+{
+  background-color:#41b5e8;
+  color:white;
+}
+.report-cat-list li:hover
+{
+  background-color:#41b5e8;
+  color:white;
+}
+.report-list ul
+{
+  padding:10px 15px 10px 50px;
+  margin:5px -15px 20px -15px;
+  background:white;
+  border:1px solid rgba(218, 218, 218, 0.51);
+}
+.report-list li
+{
+  list-style: none;
+  line-height:28px;
+  margin-left:-10px;
+  display: list-item;
+  background: url(notices-ico.gif) no-repeat 5px center;
+  padding-left: 15px;
+}
+.report-list li a
+{
+  font-family: "宋体";
+  color: currentcolor;
+  line-height: 24px;
+  font-size:15px;
+}
+.report-list li a:hover
+{
+  color:#2a6496;
+}
+.report-list .uline {
+  background: url(uline.gif) repeat-x center center;
+  height:20px;
+}
+.report-list .date
+{
+  font-size:12px;
+  color: lightslategray;
+  float:right;
+  
+}

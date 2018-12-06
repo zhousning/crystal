@@ -1,0 +1,22 @@
+- provide(:title, t('.title'))
+
+= render "layouts/subbar_top"
+
+%div#menu
+  %div.wrapper
+    %div.menu-c-all
+      = link_to "全部课程分类","/filters/index"
+    %div.menu-m
+      %ul
+        %li
+          = link_to "首页", root_path, :class => "menu-m-active"
+        %li 
+          = link_to "预约流程", flow_path, :class=>"menu-m-active"
+        %li
+          = link_to "家教入驻", tflow_path, :class=>"menu-m-active"
+        %li
+          = link_to "校园信息", information_index_path, :class=>"menu-m-active"
+        .cui-ico-new
+
+= render "filter_all"
+= render "index"

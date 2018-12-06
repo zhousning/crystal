@@ -1,0 +1,316 @@
+zh-CN:
+  layouts:
+    application:
+      site_title: "家教呢"
+    application_blank:
+      site_title: "家教呢"
+
+  home:
+    index:
+      title: "家教呢 - 吉林家教O2O平台, 预约老师省时省力"
+    login:
+      title: "登录"
+    sign_up:
+      title: "注册"
+    flow:
+      title: "预约流程"
+    tflow:
+      title: "家教入驻"
+
+  filters:
+    select:
+      title: "搜索家教"
+    search:
+      title: "搜索家教"
+    index:
+      title: "吉林 搜索老师 补课 辅导 托管 考试 中考 高考"
+    subject:
+      title: "家教 一对一家教, 老师上门试讲, 吉林市大学生家教中心"
+
+  courses:
+    create:
+      success: "课程创建成功"
+      error: "课程创建失败, 还没有选择预约时间"
+    update:
+      success: "课程更新成功"
+      error: "课程更新失败, 还没有选择预约时间"
+    destroy:
+      success: "课程删除成功"
+    detail:
+      title: "课程详情"
+    edit:
+      title: "编辑课程"
+      error: "通过身份认证才能编辑课程，请先填写身份认证信息"
+    index:
+      title: "全部课程"
+    new:
+      title: "发布课程"
+      error: "通过身份认证才能发布课程，请先填写身份认证信息"
+    show:
+      title: "查看课程"
+    menu:
+      new: "我要发布"
+      index: "已经发布"
+      edit: "课程编辑"
+      show: "已经发布"
+    delete:
+      title: "确定要删除该课程？"
+  messages:
+    show:
+      title: "查看公告"
+
+  teachers:
+    registrations:
+      new:
+        title: "家教注册"
+      edit:
+        title: "修改密码"
+    basicInfor:
+      title: "个人中心"
+    editInfor:
+      title: "信息修改"
+      success: "信息修改成功"
+      error: "信息修改失败"
+    editinfo_experience:
+      title: "信息修改"
+      success: "信息修改成功"
+      error: "信息修改失败"
+    editinfo_plan:
+      title: "信息修改"
+      success: "信息修改成功"
+      error: "信息修改失败"
+    editinfo_basic:
+      title: "信息修改"
+      success: "信息修改成功"
+      error: "信息修改失败"
+    editinfo_study:
+      title: "信息修改"
+      success: "信息修改成功"
+      error: "信息修改失败"
+    upload:
+      success: "文件上传成功"
+      error: "文件上传失败"
+    order_all:
+      title: "全部订单"
+    order_reserving:
+      title: "预约中的订单"
+    order_transfer:
+      title: "打款中的订单"
+    order_unpay:
+      title: "待支付的订单"
+    paper:
+      title: "资格认证"
+    messages:
+      title: "我的消息"
+    msg:
+      title: "我的消息"
+    gallery:
+      title: "个人相册"
+    detail:
+      teacher: "专职教师"
+      student: "在校学生"
+    infor:
+      teaching_age: "年教龄"
+      course: "课程"
+      idcard: "名片"
+      results: "成果"
+      major: "专业："
+      subject: "任教："
+      experience: "经验"
+    menu:
+      title: "个人中心"
+      basicInfor: "家教主页"
+      editinfo_basic: "基本信息"
+      editinfo_study: "学习成果"
+      editinfo_experience: "教学经历"
+      editinfo_plan: "教学计划"
+      messages: "我的消息"
+      gallery: "我的相册"
+      edit: "密码修改"
+      order_all: "全部订单"
+      order_unpay: "待确认订单"
+      order_transfer: "预约中订单"
+      order_reserving: "打款中订单"
+    
+  registrations:
+    menu:
+      edit: "修改密码"
+  parents:
+    activity:
+      title: "欢迎参加家教呢新用户注册赢红包活动"
+    registrations:
+      new:
+        title: "家长注册"
+      edit:
+        title: "修改密码"
+    modify_info_changed:
+      success: "信息修改成功"
+      error: "信息修改失败"
+    modify_info:
+      title: "信息修改"
+    modify_password:
+      title: "密码修改"
+    order_all:
+      title: "全部订单"
+    order_refund:
+      title: "退款中的订单"
+    order_reserving:
+      title: "预约中的订单"
+    order_unpay:
+      title: "待支付的订单"
+    profile:
+      title: "个人中心"
+    parent_menu:
+      title: "个人中心"
+    messages:
+      title: "我的消息"
+    msg:
+      title: "我的消息"
+    menu:
+      profile: "基本信息"
+      modify_info: "修改信息"
+      edit: "修改密码"
+      messages: "我的消息"
+      order_all: "所有订单"
+      order_unpay: "待支付订单"
+      order_reserving: "打款中订单"
+      order_refund: "退款中订单"
+      
+
+  comments:
+    new:
+      title: "评价老师"
+
+  activities:
+    beauty:
+      title: "最美家教评选活动"
+    vote_create:
+      error: "您今天已经给他投过票了，请让别的小伙伴来支持他，或者给其他候选人投票吧"
+    beauty2:
+      title: "最美家教评选活动"
+
+  orders:
+    create:
+      success: "订单创建成功，请尽快支付"
+      error: "订单创建失败，请重新创建订单"
+    reject:
+      info: "您已经拒绝接受本订单"
+    new:
+      title: "创建订单"
+    parent:
+      title: "订单状态"
+    teacher:
+      title: "订单状态"
+    check_code:
+      success: "反馈码验证成功"
+      error: "反馈码验证失败，请重新输入"
+
+  trades:
+    show:
+      parent_success: "支付成功，订单已经发送给家教，请等待家教接单"
+      teacher_success: "支付成功，家长联系方式已可见，请尽快联系家长"
+
+  activerecord:
+    errors:
+      models:
+        teacher:
+          attributes:
+            teaching_age:
+              blank: 教龄不能为空
+        course:
+          attributes:
+            name:
+              blank: 课程名称不能为空
+            experence:
+              blank: 授课经验不能为空
+              not_a_number: 授课经验需要为整数
+            mode:
+              blank: 授课模式不能为空
+            length:
+              blank: 授课时长不能为空
+              not_a_number: 授课时长需要为整数
+            price:
+              blank: 课时费用不能为空
+            category_id:
+              blank: 科目分类不能为空
+        order:
+          attributes:
+            name:
+              blank: 联系人不能为空
+            phone:
+              blank: 联系电话不能为空
+            addr:
+              blank: 地址不能为空
+            appointments_time:
+              blank: 预约日期不能为空
+        comment:
+          attributes:
+            total:
+              blank: 评价不能为空
+            desc:
+              blank: 描述相符能为空
+            attitude:
+              blank: 教学态度不能为空
+            speed:
+              blank: 响应速度不能为空
+            ucontent:
+              blank: 评价内容不能为空
+        student_identity:
+          attributes:
+            school:
+              blank: 所在学校不能为空
+            grade:
+              blank: 所在年级不能为空
+            major:
+              blank: 所学专业不能为空
+
+        information:
+          attributes:
+            title:
+              blank: 信息标题不能为空
+              too_short: 标题字数须在3-20字之间
+            phone:
+              blank: 联系电话不能为空
+            content:
+              blank: 信息描述不能为空
+            name:
+              blank: 联系人不能为空
+
+  unauthorized:
+      default: 您还没有登录，如果还没有帐号请您先注册帐号
+
+  information:
+    index:
+      title: "吉林兼职广告信息"
+    show:
+      title: "吉林兼职广告"
+    new:
+      title: "免费发布信息"
+    job:
+      position: "分类:"
+      all: "全部"
+      parttime_job: "兼职招聘"
+    parttime:
+      category: "分类"
+      title: "标题"
+      name: "联系人"
+      phone: "联系电话"
+      qq: "QQ号码"
+      weixin: "微信号码"
+      content: "内容"
+      img: "相关图片"
+    send:
+      information: 免费发布信息
+
+  institutions:
+    index:
+      title: 101网校
+
+  views:
+    pagination:
+      first: "首页"
+      last: "末页"
+      previous: "上一页"
+      next: "下一页"
+      truncate: "..."
+  

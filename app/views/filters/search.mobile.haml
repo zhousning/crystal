@@ -1,0 +1,10 @@
+- provide(:title, t('.title'))
+
+= render "layouts/subbar_top"
+
+.row.filter-top
+  .col-xs-12
+    = render "filters/filter"
+.row
+  .col-xs-12.padding-nine
+    = render "index"

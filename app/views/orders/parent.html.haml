@@ -1,0 +1,110 @@
+- provide(:title, t('.title'))
+
+= render "layouts/subbar_top"
+
+#menu
+  .wrapper
+    .menu-c-all
+      = link_to "全部课程","/filters/index"
+    .menu-m
+      %ul
+        %li
+          %a{:class => "menu-m-active", :href=>root_path} 首页
+        %li 
+          %a{:class=>"menu-m-active",:href => flow_path} 预约流程
+        %li
+          %a{:class=>"menu-m-active",:href => tflow_path} 家教入驻
+
+#order-div
+  .wrapper
+    .explain-title#order-progress
+      .explain-title-left
+      预约流程
+      .explain-title-right
+
+    .order-progress-div
+      =status_choice(@order.status)
+
+    .order-pay-div
+      .order-status
+        .order-pay-part-title
+          订单状态：
+          - if parent_signed_in?
+            - if @order.status == Setting.orders.status_trade_created
+              提交订单成功，请立即支付试讲费用
+            - elsif @order.status == Setting.orders.status_parent_paied
+              支付订单成功，请等待家教确认订单
+            - elsif @order.status == Setting.orders.status_teacher_paied
+              家教确认了您的订单，请等待家教与您联系
+            - elsif @order.status == Setting.orders.status_trade_success
+              订单完成，试讲费用已打入家教的支付宝中
+            - elsif @order.status == Setting.orders.status_trade_failed
+              订单完成，试讲费用已退回到您的支付宝中，请注意查收
+
+    .order-pay-div
+      .order-trace
+        %table.table
+          %tr
+            %th{:width=>"25%"} 处理时间
+            %th{:width=>"55%"} 处理信息
+            %th{:width=>"20%"} 操作人
+          - @order.order_traces.each do |t|
+            %tr
+              %td= t.created_at.strftime("%Y-%m-%d %H:%M:%S")
+              %td= t.p_content
+              %td= t.p_operator
+
+      .course
+        .order-pay-part-title 课程信息
+        .course-price
+          - if @order.status == Setting.orders.status_trade_created
+            应付金额:
+            %span= "￥#{@order.total}.00"
+          - else
+            = "应付金额: ￥#{@order.total}.00"
+        .course-info.margin-left= "#{@course.name} - #{@course.teacher.name}"
+        .course-date
+          试讲日期：
+          %span= @order.appointments_time.strftime("%Y-%m-%d")
+
+      - if [Setting.orders.status_teacher_paied, Setting.orders.status_trade_success, Setting.orders.status_trade_failed].include? @order.status
+        .teacher-info
+          .order-pay-part-title 家教信息
+          .teacher-phone.margin-left
+            = @order.teacher.name
+            &nbsp;&nbsp;电话:&nbsp;
+            = @order.teacher.phone
+          .teacher-school.margin-left
+            - if @course.teacher.identity == 1
+              - if @course.teacher.student_identity
+                = @course.teacher.student_identity.school
+                \-
+                = @course.teacher.student_identity.major
+                \-
+                = @course.teacher.student_identity.grade
+
+      .order-info
+        .order-pay-part-title 订单信息
+        .info-parent.margin-left
+          = @order.parent.name
+          &nbsp;&nbsp;
+          = @order.phone
+        .info-address.margin-left= @order.addr
+        .info-hours.margin-left= "购买#{@order.hours}小时课时"
+
+      .pay-approach
+        .order-pay-part-title 支付平台
+        %label.form-radio.margin-left
+          = radio_button_tag "approach", "alipay", true
+          %span.icon-bank-alipay
+
+      .order-split-line
+
+      .pay-button
+        - if @order.status == Setting.orders.status_trade_created
+          = link_to "立即付款", parent_pay_orders_path(:id=>@order.number), :class=>"btn btn-lg btn-warning", :target=>"_blank"
+        - else
+          .money
+            已付预约费:
+            %span= "￥#{@order.total}.00"
+

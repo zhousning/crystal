@@ -1,0 +1,24 @@
+$iconSpritePath: image-path('glyphicons-halflings.png');
+$iconWhiteSpritePath: image-path('glyphicons-halflings-white.png');
+
+@import "bootstrap";
+@import "bootstrap/theme";
+
+
+body {
+  color: #6D6D6D;
+  font-size: 14px;
+  font-family: PingHei,"Hiragino Sans GB","Microsoft YaHei",arial,sans-serif;
+  line-height: 1.5;
+  background-color:#f4f4f4;
+}
+
+.back_container {
+  width:1440px;
+  height:600px;
+  border:2px solid black;
+}
+
+.field_with_errors {
+  color:#cc334d;
+}

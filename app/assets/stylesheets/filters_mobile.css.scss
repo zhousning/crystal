@@ -1,0 +1,65 @@
+.bc-none{
+  background:none;
+  border:none;
+}
+.header-search{
+  padding-top:2%;
+  background:white;
+  border-bottom:1px solid #dfdfdf;
+}
+.search-active{
+  background-color:#41b5e8;
+  color:white;
+}
+.appoint-left{
+  padding-left:90px;
+}
+.header-search>.col-xs-12 > ul>li>a{
+  color:#6D6D6D;
+  text-decoration:none;
+}
+.bd-grey{
+  border:1px solid #DFDFDF;
+}
+.item-back{
+  background:white;
+  border:1px solid #DFDFDF;
+}
+
+.item-bottom{
+  border-top:1px solid #dfdfdf;
+  background:#F8F8F8;
+}
+.price-font{
+  color:#F05033;
+  font-weight:bold;
+}
+.img-padding{
+  padding:5px;
+}
+.link-style{
+  text-decoration:none;
+}
+.link-style:hover{
+  color:#878787;
+  text-decoration:none;
+}
+.font-orange{
+  font-weight:bold;
+  color:#FF4A00;
+}
+.font-bottom{
+  padding-left:5px;
+  color:#6d6d6d;
+}
+.pos-fixed{
+  position:fixed;
+  top:0px;
+  z-index:1;
+}
+.filter-top{
+  margin-top:55px;
+}
+.padding-nine{
+  padding:9px;
+}

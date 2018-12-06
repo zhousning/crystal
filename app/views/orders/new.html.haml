@@ -1,0 +1,115 @@
+- provide(:title, t('.title'))
+
+= render "layouts/subbar_top"
+
+#menu
+  .wrapper
+    .menu-c-all
+      = link_to "全部课程","/filters/index"
+    .menu-m
+      %ul
+        %li
+          %a{:class => "menu-m-active", :href=>root_path} 首页
+        %li 
+          %a{:class=>"menu-m-active",:href => flow_path} 预约流程
+        %li
+          %a{:class=>"menu-m-active",:href => tflow_path} 家教入驻
+
+/#details-nav
+
+/= render "courses/course_info"
+
+#order-div
+  .wrapper
+    .explain-title#order-progress
+      .explain-title-left
+      预约流程
+      .explain-title-right
+
+    .order-progress-div
+      =status_choice(@order.status)
+    
+    .order-error-messages
+      = form_error_messages!(@order)
+
+    = form_for @order, :html=>{:class=>"form-horizontal"}, :validate => true do |f|
+
+      = hidden_field_tag :course_id, @course.id
+
+      .order-step-title
+        第一步：确认课程信息
+      .order-step-info
+        .order-info-image
+          = image_tag(@course.teacher.image_url(:normal),:class=>"img-circle")
+        .order-info-teacher
+          %p.order-info-title= @course.teacher.name
+          %p
+            - if @course.teacher.identity == 1
+              - if @course.teacher.student_identity
+                = @course.teacher.student_identity.school
+        .order-info-course
+          %p.order-info-title= @course.name
+          %p
+            = "价格：￥#{@course.price} /时"
+
+      .order-step-title
+        第二步：填写联系方式
+      .order-step-content
+        .form-group
+          = f.label "联系人", :class=>"col-md-2 col-xs-2 control-label"
+          .col-md-4.col-xs-4
+            = f.text_field :name, :value=>@current_parent.name, :class=>"form-control"
+
+        .form-group
+          = f.label "联系电话", :class=>"col-md-2 col-xs-2 control-label"
+          .col-md-4.col-xs-4
+            = f.text_field :phone, :value=>@current_parent.phone, :class=>"form-control"
+
+        .form-group
+          = f.label "授课地址", :class =>" col-md-2 col-xs-2 control-label"
+          .col-md-4.col-xs-4
+            = f.text_field :addr, :class => "form-control", :id => "addr"
+
+          -#
+            - if @address
+              = f.text_field :addr,:value => get_address_province_string(@address.province)+get_address_city_string(@address.city) + get_address_district_string(@address.district) + get_address_details_string(@address.details), :class => "form-control", :id => "addr"
+            - else
+              = f.text_field :addr, :class => "form-control", :id => "addr"
+            %a#new_addr{:class => "btn btn-warning"} 地址添加
+            #new_addr_div.order-addr-new
+              = fields_for :address, @order.address do |a|
+                = a.select :province,get_address_province,{:include_blank => '请选择所在省'}, :class=>"form-control", :id =>"p1"
+                = a.select :city,get_address_city,{:include_blank => '请选择所在市'}, :class=>"form-control", :id => "c1"
+                = a.select :district, get_address_district, {:include_blank => '请选择所在区'}, :class=>"form-control", :id => "d1"
+                %br
+                = a.text_field :details, autofocus:true,:class => "form-control", :id => "d2"
+              %br
+              %a#new_addr_sure{:class => "btn btn-sm btn-success"} 确定
+              %a#new_addr_cancle{:class => "btn btn-sm btn-danger"} 取消
+
+      .order-step-title
+        第三步：选择授课时间
+      .order-step-content
+        .form-group
+          = f.label "试讲日期", :class=>"col-md-2 col-xs-2 control-label"
+          .col-md-4.col-xs-4
+            .appointment-time
+              = f.text_field :appointments_time, :class=>"form-control"
+
+        .form-group
+          = f.label "购买课时", :class=>"col-md-2 col-xs-2 control-label"
+          .col-md-2.col-xs-2
+            = f.number_field :hours, :class=>"form-control hours-value", :onchange => "input_hours(#{@course.price})"
+          = f.label "小时", :class=>"control-label"
+
+      = render "date"
+
+      .order-step-submit
+        .form-group
+          .col-md-3.col-md-offset-7.col-xs-3.col-xs-offset-7
+            .order-submit-footer-price
+              %span.order-submit-footer-words 订单总价：
+              %span.order-submit-footer-number= "￥#{@course.price * @order.hours}"
+          .col-md-2.col-xs-2
+            = f.submit '提交订单', :class=>"btn btn-lg btn-warning"
+

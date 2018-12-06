@@ -1,0 +1,62 @@
+.row.header-search.form-group
+  .col-xs-12
+    %ul.list-inline
+      %li
+        学生课程:
+      %li{:class => "search-active"}
+        = link_to "全部","/filters/select/all/all/all/all/all/all/", :rel=>"nofollow"
+      %li{:class => (params[:school] == "小学" ? "search-active" : nil)}
+        = link_to "小学","/filters/select/小学/all/all/all/all/all/", :rel=>"nofollow"
+      %li{:class => (params[:school] == "初中" ? "search-active": nil)}
+        = link_to "初中","/filters/select/初中/all/all/all/all/all/", :rel=>"nofollow"
+      %li{:class => (params[:school] == "高中" ? "search-active" : nil)}
+        = link_to "高中","/filters/select/高中/all/all/all/all/all/", :rel=>"nofollow"
+      %li{:class => (params[:school] == "艺术" ? "search-active" : nil)}
+        = link_to "艺术","/filters/select/艺术/all/all/all/all/all/", :rel=>"nofollow"
+  .col-xs-12.appoint-left
+    %ul.list-inline
+      %li{:class => (params[:school] == "计算机" ? "search-active" : nil)}
+        = link_to "电脑","/filters/select/计算机/all/all/all/all/all/", :rel=>"nofollow"
+  .col-xs-12
+    %ul.list-inline
+      %li
+        家教性别:
+      %li{:class => "search-active"}
+        = link_to "全部","/filters/select/all/all/all/all/all/all/", :rel=>"nofollow"
+      %li
+        = link_to "男","/filters/select/all/all/all/1/all/all/", :rel=>"nofollow"
+      %li
+        = link_to "女","/filters/select/all/all/all/2/all/all/", :rel=>"nofollow"
+  .col-xs-12
+    %ul.list-inline
+      %li
+        授课时期:
+      %li{:class => "search-active"}
+        = link_to "全部","/filters/select/all/all/all/all/all/all/", :rel=>"nofollow"
+      %li
+        = link_to "平时可以","/filters/select/all/all/all/all/0/all/", :rel=>"nofollow"
+      %li
+        = link_to "假期可以","/filters/select/all/all/all/all/1/all/", :rel=>"nofollow"
+  .col-xs-12
+    %ul.list-inline
+      %li
+        约课时间:
+      %li{:class => "search-active"}
+        = link_to "全部", "/filters/select/all/all/all/all/all/all/", :rel=>"nofollow"
+      %li
+        = link_to "周一", "/filters/select/all/all/all/all/all/1/", :rel=>"nofollow"
+      %li
+        = link_to "周二", "/filters/select/all/all/all/all/all/2/", :rel=>"nofollow"
+      %li
+        = link_to "周三", "/filters/select/all/all/all/all/all/3/", :rel=>"nofollow"
+      %li
+        = link_to "周四", "/filters/select/all/all/all/all/all/4/", :rel=>"nofollow"
+  .col-xs-12.appoint-left
+    %ul.list-inline
+      %li
+        = link_to "周五", "/filters/select/all/all/all/all/all/5/", :rel=>"nofollow"
+      %li
+        = link_to "周六", "/filters/select/all/all/all/all/all/6/", :rel=>"nofollow"
+      %li
+        = link_to "周日", "/filters/select/all/all/all/all/all/0/", :rel=>"nofollow"
+

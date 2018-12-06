@@ -1,0 +1,15 @@
+- provide(:title, t('.title'))
+
+= render "layouts/header"
+%div.p_main
+  %div.p_wrapper
+    = render :partial => "profile"
+    %div.p_content
+      %div.p_block
+        %div.p_block_title.p_content_block_title
+          %h4
+            = image_tag("dkz.png",class:"icont")
+            打款中的订单
+      %div.p_block
+        = render "order_list"
+

@@ -1,0 +1,31 @@
+- provide(:title, t('.title'))
+
+%div#p_header
+  %div.p_wrapper
+    %div.p_logo
+      %a{:href => root_path}
+        =image_tag('logo.png',:class => "header-logo-img2")
+    %img.p_title_img{:src => "https://account.xiaomi.com/static/img/passport/photo.jpg"}
+    %div.p_title
+      个人主页
+%div.p_main
+  %div.p_wrapper
+    = render :partial => "teachers/profile"
+    %div.p_content
+      %div.p_block
+        %div.p_block_title.p_content_block_title
+          %h4
+            %i.glyphicon-color.glyphicon.glyphicon-circle-arrow-up
+              基本信息 
+      %div.p_block
+        %div.t_main
+          %div.t_right
+            %div.show
+              %div.panel-body
+                %p
+                  %h4.text-danger
+                    1.资格认证和个人基本信息将作为资格审核的重要依据，请认真填写，资格审核通过才能发布课程
+                %p
+                  %h4.text-danger
+                    2.基本信息不能包含qq/邮箱/手机等与个人联系方式相关的内容
+                = render :partial => "editinfo_basic"

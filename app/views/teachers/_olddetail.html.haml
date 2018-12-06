@@ -1,0 +1,91 @@
+.col-md-12.info-title.info-bd.info-pdlr
+  %ul.nav.nav-pills
+    %li{ :role => "presentation" }
+      %a{ :href => "#namecard", :class => "font-black"}
+        我的名片
+    %li{ :role => "presentation" }
+      %a{ :href => "#studyresult", :class => "font-black" }
+        教学理念 
+    %li{ :role => "presentation" }
+      %a{ :href => "#intro", :class => "font-black" }
+        个人简介
+    %li{ :role => "presentation" }
+      %a{ :href => "experience", :class => "font-black" }
+        过往经历
+.col-md-12.info-pdlr
+  .col-md-12.info-content.info-mgb
+    .col-md-12.info-bbtm
+      %h4
+        %span{ :class => "glyphicon glyphicon-user" }
+        %a{ :name => "namecard", :class => "font-black" }
+          我的名片 
+    .col-md-12
+      %h5
+        .col-md-2.info-mgb
+          %span{ :class => "text-muted" }
+            姓名：
+          = @teacher.name
+        .col-md-2
+          %span{ :class => "text-muted" }
+            年龄：
+          = @teacher.age.to_s() +"岁"
+        .col-md-2
+          %span{ :class => "text-muted" }
+            性别：
+          - if  @teacher.sex == 1
+            男
+          - else
+            女
+        .col-md-12.info-mgb
+          %span{ :class => "text-muted" }
+            现居地点：
+          - if @teacher.address
+            = get_address_province_string(@teacher.address.province) + get_address_city_string(@teacher.address.city) + get_address_district_string(@teacher.address.district) + get_address_details_string(@teacher.address.details)
+          - else
+            吉林省吉林市
+        .col-md-12.info-mgb
+          %span{ :class => "text-muted" }
+            教学科目：
+          = @teacher.courses.map{|course| course.category.second[0]+course.category.third[0]+course.category.subject}.join(", &nbsp;").html_safe
+        .col-md-12.info-mgb
+          %span{ :class => "text-muted" }
+            个人爱好：
+          = @teacher.hobby
+                
+  .col-md-12.info-pdlr.info-mgb.info-content
+    .row
+      .col-md-12
+        .col-md-12.info-bbtm
+          %h4
+            %span{ :class => "glyphicon glyphicon-book" }
+            %a{ :name => "studyresult", :class => "font-black"}
+              教学理念
+    .col-md-12
+      .col-md-12.info-bbtm
+        %p= format_string_newline("\"#{@teacher.quotes}\"").html_safe
+
+
+  .col-md-12.info-pdlr.info-mgb.info-content
+    .row
+      .col-md-12
+        .col-md-12.info-bbtm
+          %h4
+            %span{ :class => "glyphicon glyphicon-book" }
+            %a{ :name => "intro", :class => "font-black"}
+              个人简介
+    .col-md-12
+      .col-md-12.info-bbtm
+        %p= format_string_newline(@teacher.introduction).html_safe
+
+  .col-md-12.info-pdlr.info-mgb.info-content
+    .row
+      .col-md-12
+        .col-md-12.info-bbtm
+          %h4
+            %span{ :class => "glyphicon glyphicon-book" }
+            %a{ :name => "experience", :class => "font-black"}
+              过往经历
+    .col-md-12
+      .col-md-12.info-bbtm
+        %p= format_string_newline(@teacher.experience).html_safe
+        

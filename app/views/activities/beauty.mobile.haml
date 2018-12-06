@@ -1,0 +1,54 @@
+- provide(:title, t('.title'))
+
+.row.vote-bd-bottom
+  .col-xs-1
+    %p
+      %h4
+        =link_to "", root_path, :class => "link-style glyphicon glyphicon-home"
+  .col-xs-10
+    %p
+      %h4.text-center
+        最美家教评选活动
+
+.row.form-group
+  = image_tag "vote-t.jpg", :width => "100%"
+.row
+  = form_for "", :url => nil, :html=>{:class=>"form-horizontal", :id => "vote_form"} do |f|
+    - @teachers.each do |t|
+      .col-xs-6.vote-wraper
+        .col-xs-12.sote-border
+          %a{:href => detail_teachers_path(:id => t.number)}
+            .col-xs-12
+              .title-img
+                = image_tag(t.image_url(:normal), :class => "img-circle", :width => "70px", :height => "70px", :alt=>"老师头像")
+            .col-xs-12.padding-none
+              %p
+                %h5.text-center
+                  %span.text-muted
+                    = t.name 
+              %p
+                %h6.text-center
+                  %small
+                    = "ID:" + t.number
+              %p
+                %h6.text-center.text-muted
+                  - if t.identity == 1 and t.student_identity
+                    = t.student_identity.major
+                  -else
+                    = "东北电力大学"
+              %P
+                %h6.text-center
+                  %small.font-orange
+                    = t.teaching_age.to_s + "年教龄"
+
+        .col-xs-12.vote-bottom      
+          .row
+            .col-xs-3
+              %button{:type => "button",:class => "btn btn-default", :'data-toggle' => "modal",:'data-target' => "#loginModal",:'data-backdrop'=>"true", :onclick => "check_radio(this)"}
+                点赞
+              = radio_button("teacher","number", t.number,:class => "sr-only")
+            .col-xs-7.col-xs-offset-2.ticket-wraper
+              %p
+                %h6.text-center.ticket
+                  = t.votes.size.to_s + "票"
+

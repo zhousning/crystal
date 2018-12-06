@@ -1,0 +1,71 @@
+.row
+  .show-menu
+    .show-menu-top
+      .col-xs-2
+        =image_tag("photo.jpg",:class=>"img-circle")
+      .col-xs-8.col-xs-offset-1
+        -if current_parent
+          %p
+            您好,
+            =current_parent.name
+            家长
+          %p 家教呢，欢迎您……
+    %ul.list-group
+      %a{:href=>profile_parents_path}
+        %li.list-group-item
+          %span.glyphicon.glyphicon-user
+          %span.glyphicon.glyphicon-chevron-right.pull-right
+          =t('parents.menu.profile')
+      %a{:href=>modify_info_parents_path}
+        %li.list-group-item
+          %span.glyphicon.glyphicon-cog
+          %span.glyphicon.glyphicon-chevron-right.pull-right
+          =t('parents.menu.modify_info')
+      %a{:href=>edit_parent_registration_path}
+        %li.list-group-item
+          %span.glyphicon.glyphicon-asterisk
+          %span.glyphicon.glyphicon-chevron-right.pull-right
+          =t('parents.menu.edit')
+      %a{:href=>messages_parents_path}
+        %li.list-group-item
+          %span.glyphicon.glyphicon-envelope
+          %span.glyphicon.glyphicon-chevron-right.pull-right
+          =t('parents.menu.messages')
+      %a{:href=>order_all_parents_path}
+        %li.list-group-item
+          %span.glyphicon.glyphicon-align-justify
+          %span.glyphicon.glyphicon-chevron-right.pull-right
+          =t('parents.menu.order_all')
+      %a{:href=>order_unpay_parents_path}
+        %li.list-group-item
+          %span.glyphicon.glyphicon-warning-sign
+          %span.glyphicon.glyphicon-chevron-right.pull-right
+          =t('parents.menu.order_unpay')
+      %a{:href=>order_reserving_parents_path}
+        %li.list-group-item
+          %span.glyphicon.glyphicon-sort-by-attributes
+          %span.glyphicon.glyphicon-chevron-right.pull-right
+          =t('parents.menu.order_reserving')
+      %a{:href=>order_refund_parents_path}
+        %li.list-group-item
+          %span.glyphicon.glyphicon-share-alt
+          %span.glyphicon.glyphicon-chevron-right.pull-right
+          =t('parents.menu.order_refund')
+
+%button.btn.btn-default.btn-block{:"data-toggle"=>"modal",:"data-target"=>".bs-example-modal-sm"}
+  退出帐号
+      
+.modal.fade.bs-example-modal-sm{:tabindex=>"1",:role=>"dialog",:"aria-labelledby"=>"mySmallModalLabel",:"aria-hidden"=>"true"}
+  .modal-dialog.modal-sm
+    .modal-content
+      %p
+        %h4.text-center 退出帐号
+        %p.text-center.text-muted 确定要退出帐号?
+      .modal-footer
+        .col-xs-6
+          %p.center
+            %button.btn.btn-default.btn-block{:"data-dismiss"=>"modal"} 取消 
+        .col-xs-6
+          %button.btn.btn-default.btn-block 
+            %a{:href => destroy_teacher_session_path,:"data-method" => "delete"}
+              退出

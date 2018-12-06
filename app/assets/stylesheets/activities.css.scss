@@ -1,0 +1,155 @@
+.vote_wrapper {
+  width: 1000px;
+  min-height: 1000px;
+  margin: 20px auto 50px auto;
+  background: #F4F4F4;
+}
+.position-middle{
+  width:1000px;
+  margin:0px auto;
+}
+.vote-img{
+  width:120px;
+  height:120px;
+  margin:10px auto;
+}
+
+.vote-button{
+  background:#4BD9D3;
+  height:50px;
+  border-right:1px solid white;
+  color:white;
+  padding-top:2px;
+}
+.vote-no{
+  background:#FA3F73;
+  height:50px;
+  color:white;
+  padding-top:5px;
+}
+.vote-border{
+  border:1px solid #dfdfdf;
+  background:white;
+  padding:0px;
+  height:260px;
+  position:relative;
+}
+.vote-bottom{
+  padding-top:15px;
+  border-top:none;
+}
+.info-details{
+  position:absolute;
+  background:#F2682C;
+  color:white;
+  width:270px;
+  height:auto;
+  padding:5px;
+  border:1px solid #3E94EC;
+  display:none;
+  left:102%;
+  top:0%;
+  z-index:1000;
+}
+.vote-border:hover .info-details{
+  display:block;
+}
+.vote-margin-bottom{
+  margin-bottom:20px;
+}
+.vote-button:hover{
+  cursor:pointer;
+}
+.display-none{
+  display:none;
+}
+.margin-top-fifteen{
+  margin-top:20px;
+}
+.rule-content{
+  border-top:1px solid #dfdfdf;
+  border-bottom:1px solid #dfdfdf;
+  padding:10px;
+  margin-bottom:10px;
+}
+.rule-content .rule-head {
+  font-weight:bold;
+}
+
+.cuadro_intro_hover{
+  padding: 0px;
+  position: relative;
+  overflow: hidden;
+  height:260px;
+}
+.cuadro_intro_hover:hover .caption{
+  opacity: 1;
+  transform: translateY(-260px);
+  -webkit-transform:translateY(-260px);
+  -moz-transform:translateY(-260px);
+  -ms-transform:translateY(-260px);
+  -o-transform:translateY(-260px);
+}
+.cuadro_intro_hover img{
+  z-index: 4;
+}
+.cuadro_intro_hover .caption{
+  position: absolute;
+  top:260px;
+  -webkit-transition:all 0.3s ease-in-out;
+  -moz-transition:all 0.3s ease-in-out;
+  -o-transition:all 0.3s ease-in-out;
+  -ms-transition:all 0.3s ease-in-out;
+  transition:all 0.3s ease-in-out;
+  width: 100%;
+}
+.cuadro_intro_hover .blur{
+  background-color: rgba(0,0,0,0.7);
+  height: 260px;
+  z-index: 5;
+  position: absolute;
+  width: 100%;
+}
+.cuadro_intro_hover .caption-text{
+  padding:5px;
+  line-height:25px;
+  overflow:hidden;
+  z-index: 10;
+  color: #fff;
+  position: absolute;
+  height: 260px;
+  text-align: center;
+  width: 100%;
+}
+
+.introduction-content{
+  height:200px;
+  border-bottom:1px solid white;
+  overflow:hidden;
+}
+.padding-intro{
+  padding-top:10px;
+}
+.padding-left-none{
+  padding-left:0px;
+}
+.votemodal{
+  width:300px;
+}
+.dialog-vote{
+  width:300px;
+  margin:140px auto; 
+}
+.vote_message{
+  width:100%;
+  height:20px;
+  margin-top:-13px;
+}
+.vote_error{
+  color:red;
+  font-size:20px;
+}
+.vote-bd-bottom{
+  border-bottom:1px solid #DDDDDD;
+  background:#fff;
+}

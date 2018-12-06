@@ -1,0 +1,31 @@
+!!! 5
+%html{:lang=>"zh-cn"}
+  %head
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    - if controller_name == "home" and action_name == "index"
+      %title= "#{yield(:title)}"      
+    - else
+      %title= "#{yield(:title)} - #{t('.site_title')}"
+    = stylesheet_link_tag "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+    = include_gon
+    <meta name="keywords", content="家教呢,吉林家教,吉林家教网,吉林大学生家教,吉林老师,吉林家教老师,吉林补课,吉林辅导班,吉林中考,吉林高考" />
+    <meta name="description", content="家教呢汇集优秀的大学生家教,让您找家教省时省力." />
+
+  %body
+    -#
+      - if request.path == root_path
+        %a{:href => activities_beauty_url, :target => "_blank"}
+          .advertise
+            %span{:class=>"glyphicon glyphicon-remove adv_remove"}
+    = render "layouts/navbar_top"
+
+    - unless request.path == root_path
+      = render "layouts/flash_messages"
+
+    = yield
+
+    = render "layouts/footer"

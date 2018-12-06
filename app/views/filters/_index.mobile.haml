@@ -1,0 +1,49 @@
+- if @teachers.count == 0
+  %center
+    没有找到相关的课程
+- @teachers.each do |teacher|
+  %a{:href => detail_teachers_path(:id => teacher.number), :class => "link-style", :target=>"_blank"}
+    .col-xs-12.form-group.item-back
+      .row
+        .col-xs-3.padding-five
+          = image_tag(teacher.image_url(:normal),:height=> "60px", :width => "60px", :alt=>"家教老师头像")
+        .col-xs-9.padding-five
+          .row
+            .col-xs-4.text-muted
+              = teacher.name
+            .col-xs-7.font-orange.text-right
+              = "￥ #{get_min_price(teacher.courses)}"
+
+          .row    
+            .col-xs-12.text-muted  
+              = teacher.teaching_age.to_s() +"年教龄"
+              &nbsp;&nbsp;
+              = "一对一教学"
+            .col-xs-12.text-muted  
+              - if teacher.courses.size > 2
+                = teacher.courses[0,2].map{|course| course.category.second[0]+course.category.third[0]+course.category.subject}.join(", &nbsp;").html_safe+"......"
+              - else  
+                = teacher.courses[0,2].map{|course| course.category.second[0]+course.category.third[0]+course.category.subject}.join(", &nbsp;").html_safe
+      - if teacher.identity == 1
+        .row.item-bottom.padding-five
+          .font-bottom
+            - if teacher.student_identity
+              = "在校学生:"
+              = teacher.student_identity.school
+              \-
+              = teacher.student_identity.major
+            -#  
+              \-
+              = teacher.student_identity.grade
+      - else
+        .row.item-bottom.padding-five
+          .font-bottom
+            -if teacher.teacher_identity
+              = "专职教师:"
+              = teacher.teacher_identity.school
+              \-
+              = teacher.teacher_identity.grade
+            -#  
+              \-
+              = teacher.teacher_identity.subject
+        

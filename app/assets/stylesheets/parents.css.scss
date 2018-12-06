@@ -1,0 +1,373 @@
+.p_header_wrapper
+{
+  height:48px;
+  padding:6px 0px;
+}
+#p_header
+{
+  position:relative;
+  left:0px;
+  top:0px;
+  width:100%;
+  min-width:1100px;
+  margin-top:-1px;
+  height:61px;
+  background-color:#FFFFFF;
+  box-shadow:0px 1px 1px #D7D7D7;
+}
+.p_wrapper
+{
+  width: 1100px;
+  margin: 0px auto;
+}
+#p_header .p_wrapper
+{
+  height:48px;
+  padding:6px 0px;
+}
+.pinfo
+{
+  float:left;
+  margin-left:165px;
+}
+.p_logo
+{
+  border-right: 1px solid grey;
+  width: 120px;
+  line-height:48px;
+  height: 48px;
+  padding-left:20px;
+  float:left;
+  font-size:24px;
+}
+.p_title
+{
+  float:left;
+  margin-left:15px;
+  font-size:15px;
+  line-height:48px;
+  color:black;
+  font-family:黑体;
+}
+.p_title_img
+{
+  float:left;
+  width:40px;
+  margin-top:4px;
+  height:40px;
+  margin-left:10px;
+  border:0px none;
+  vertical-align:middle;
+  border-radius:40px;
+}
+.p_main
+{
+  position:relative;
+  top:0px;
+  left:0px;
+  width:100%;
+  margin-bottom:20px;
+  height:auto;
+}
+.p_main .p_wrapper
+{
+  margin-top:10px;
+}
+.p_menu
+{
+  float:left;
+  width:180px;
+  height:auto;
+  border:1px solid #DFDFDF ;
+  background-color:white;
+}
+.p_content
+{
+  float:right;
+  width:910px;
+  min-height:500px;
+  padding:0px;
+  border:1px solid #dfdfdf;
+  margin-bottom:20px;
+  background-color:#fdfdfe;
+}
+.p_block_password{
+  margin-left:150px;
+  margin-top:50px;
+}
+.p_block_messages {
+  margin: 40px 100px;
+}
+.p_block_messages thead {
+  background-color:#edf3fd;
+}
+.p_block_messages .message-title-unread a {
+  color: #6d6d6d;
+  text-decoration: none;
+  font-weight: bold;
+}
+.p_block_messages .message-title-read a {
+  color: #6d6d6d;
+  text-decoration: none;
+}
+.p_block_msg
+{
+  width:600px;
+  min-height:280px;
+  margin-left:150px;
+  margin-top:50px;
+  border:1px solid #ccc;
+}
+.p_block_msg .message-bar
+{
+  float:left;
+  width:100%;
+  padding:8px 15px;
+  border-bottom:1px solid #ccc;
+  background-color:#edf3fd;
+}
+.p_block_msg .message-title
+{
+  float:left;
+  font-weight:bold;
+}
+.p_block_msg .message-time
+{
+  float:right;
+  font-size:12px;
+  padding-top:2px;
+}
+.p_block_msg .message-content
+{
+  float:left;
+  padding:15px;
+}
+.p_block
+{
+  float:left;
+  width:100%;
+  height:auto;
+  border:0px;
+}
+.p_block_title
+{
+  float:left;
+  width:160px;
+  height:40px;
+  line-height:40px;
+  border-bottom:1px solid #dfdfdf;
+  padding-top:5px;
+  margin-left:10px;
+  margin-right:10px;
+  color:#41b5e8;
+}
+.p_block ul,.p_block ul li
+{
+  float:left;
+  margin-top:1px;
+  width:100%;
+  margin-bottom:1px;
+  padding:0px;
+}
+.p_block ul li a
+{
+  color:#6d6d6d;
+}
+.p_block ul li
+{
+  padding:0px;
+}
+.p_block ul li a:hover
+{
+  background-color:#41b5e8;
+}
+.p_active
+{
+  color:#41b5e8;
+  background-color:#41b5e8;
+}
+.p_content_block_title
+{
+  width:100%;
+  padding-left:10px;
+  background-color:#f6f6f6;
+  margin-left:0px;
+}
+.p_content_block_title2
+{
+  width:100%;
+  padding-left:10px;
+  margin-left:0px;
+  background-color:#f6f6f6;
+  border-top:1px solid #fdfdfd;
+  padding-top:3px;
+  margin-top:0px;
+}
+.p_content_img
+{
+  float:right;
+  width:250px;
+  height:auto;
+}
+.p_content_img img
+{
+  float:left;
+  width:80px;
+  margin-top:50px;
+  height:80px;
+  margin-left:30px;
+  border:0px none;
+  vertical-align:middle;
+  border-radius:40px;
+}
+.p_content_info
+{
+  float:left;
+  width:600px;
+  margin-left:20px;
+  margin-top:20px;
+  height:auto;
+}
+.p_content_t
+{
+  float:left;
+  width:600px;
+  height:30px;
+  color:#F90;
+  font-size:16px;
+  margin:5px 5px 5px 5px;
+  border-bottom:1px solid #41b5e8;
+}
+.p_content_table
+{
+  float:left;
+  width:250px;
+  margin-left:5px;
+}
+.p_content_table2
+{
+  float:left;
+  width:300px;
+  margin-left:5px;
+}
+.p_content_table tr td,.p_content_table2 tr td
+{
+  height:30px;
+}
+
+.p_content_td
+{
+  width:90px;
+}
+.p_content_info table tr td
+{
+  border:0px solid white;
+}
+
+.p_table_td
+{
+  height:40px;
+}
+.p_modify_info table tr td
+{
+  border:0px;
+}
+.p_modify_info_label
+{
+  width:300px;
+}
+.p_modify_info_text
+{
+  width:200px;
+}
+.p_modify_info_text2
+{
+  width:300px;
+}
+.p_table2
+{
+  margin-top:-20px;
+}
+.preg_cta{
+  width:900px;
+  height:540px;
+  margin:20px auto;
+  border:1px solid #58C8FE;
+  background:#FFFFFF;
+}
+.reg_header{
+  width: 820px;
+  height: 50px;
+
+  padding-top:10px;
+  font-size:20px;
+  margin: 0 auto;
+  border-bottom: 1px dashed #efefef;
+}
+.preg_body{
+  width:898px;
+  height:600px;
+  padding-bottom: 30px;
+  margin:2px auto;
+}
+.body_left{
+  float: left;
+  width: 400px;
+  margin: 10px 0 0 30px;
+}
+.pbody_pic{
+  float: left;
+  background: url('bg2.png') no-repeat;
+  width: 406px;
+  height: 470px;
+}
+.form-gro{
+  position: relative;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  width:400px;
+  height:46px;
+}
+.infoset{
+  height:80px;
+}
+
+.ce {
+  float: left;
+  font-weight: 400;
+  padding-right: 5px;
+  text-align: right;
+  width:100px;
+  height:34px;
+}
+.form-con{
+  width:260px;
+  height:36px;
+  margin-left: 110px;
+}
+.form-controls{
+  width:320px;
+  height:36px;
+  margin-left:110px;
+  padding:3px;
+}
+.area-h{
+  height:100px;
+}
+.pos{
+  margin-top:50px;
+  margin-left:0px;
+}
+.area_sec{
+  width:90px;
+  float:left;
+  margin-right:5px;
+}
+.login_btn{
+  margin-right:50px;
+  float:left;
+  padding:8px;
+}
+.greay{
+  color:#656565;
+}

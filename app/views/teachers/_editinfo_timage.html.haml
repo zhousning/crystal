@@ -1,0 +1,42 @@
+= form_for current_teacher,:url=>upload_teachers_path,:html => {:multipart => true,:method=>'post'} do |t|
+  .col-md-6
+    .panel.panel-default.basicpanel-height.b-radius
+      .panel-heading.b-radius
+        %strong个人头像
+      .panel-body
+        .row
+          .col-md-6
+            -if current_teacher.image.blank?
+              =image_tag("user.png",:class=>"img-circle",:width=>"120px",:height=>"120px")
+            -else
+              = image_tag(current_teacher.image_url(:normal),:width=>"120px",:height=>"120px",:class=>"img-circle")
+          .col-md-6.tp-left
+            %P
+              1.请使用近期照片   
+            %p
+              2.照片不大于3M 
+            %p  
+              = t.file_field :image
+  
+  .col-md-6
+    .panel.panel-default.basicpanel-height.b-radius
+      .panel-heading.b-radius
+        %strong个人证件(*必填，否则无法发布课程)
+      .panel-body.text-danger
+        .row
+          .col-md-6
+            -if current_teacher.paper_img.blank?
+              =image_tag("paper.jpg",:class=>"img-circle",:width=>"120",:height=>"120px")
+            -else
+              = image_tag(current_teacher.paper_img_url(:normal),:width=>"120px",:height=>"120px",:class=>"img-circle")
+          .col-md-6.tp-left
+            %p
+              1.学生使用需学生证
+            %p
+              2.家教使用教师资格证
+            %p
+              3.认证通过才能发布课程
+            %p
+              = t.file_field :paper_img
+
+

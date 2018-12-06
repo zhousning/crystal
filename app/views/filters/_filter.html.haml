@@ -1,0 +1,119 @@
+%div#search-item-div
+  .div.wrapper
+    %div.search-item-title
+      = "课程筛选 我们已经为您搜索出相关的老师。"
+    %div.search-item-box
+      %table.table
+        %tr
+          %td{:width => "100px"}
+            学生课程:
+          %td{:align => "left"}
+            %ul
+              %li{:class =>  (params[:school] == "all" ? "search-active" : nil)}
+                = link_to "全部","/filters/select/all/all/all/#{params[:sex]}/#{params[:period]}/#{params[:time]}/", :rel=>"nofollow"
+              %li{:class => (params[:school] == "小学" ? "search-active" : nil)}
+                = link_to "小学","/filters/select/小学/all/#{params[:course]}/#{params[:sex]}/#{params[:period]}/#{params[:time]}/", :rel=>"nofollow"
+              %li{:class => (params[:school] == "初中" ? "search-active": nil)}
+                = link_to "初中","/filters/select/初中/all/#{params[:course]}/#{params[:sex]}/#{params[:period]}/#{params[:time]}/", :rel=>"nofollow"
+              %li{:class => (params[:school] == "高中" ? "search-active" : nil)}
+                = link_to "高中","/filters/select/高中/all/#{params[:course]}/#{params[:sex]}/#{params[:period]}/#{params[:time]}/", :rel=>"nofollow"
+              %li{:class => (params[:school] == "艺术" ? "search-active" : nil)}
+                = link_to "艺术","/filters/select/艺术/#{params[:grade]}/all/#{params[:sex]}/#{params[:period]}/#{params[:time]}/", :rel=>"nofollow"
+              %li{:class => (params[:school] == "计算机" ? "search-active" : nil)}
+                = link_to "计算机","/filters/select/计算机/#{params[:grade]}/all/#{params[:sex]}/#{params[:period]}/#{params[:time]}/", :rel=>"nofollow"
+            -#
+              %ul.grade-div
+                - if params[:school] != "all" && params[:school] != nil 
+                  %li{:class =>  (params[:grade] == "all" ? "search-active" : nil)}
+                    = link_to "全部","/filters/select/#{params[:school]}/all/all/#{params[:sex]}/#{params[:period]}/#{params[:time]}/"
+                  %li{:class => (params[:grade] == "一年级" ? "search-active" : nil)}
+                    = link_to "一年级","/filters/select/#{params[:school]}/一年级/#{params[:course]}/#{params[:sex]}/#{params[:period]}/#{params[:time]}/"
+                  %li{:class => (params[:grade] == "二年级" ? "search-active": nil)}
+                    = link_to "二年级","/filters/select/#{params[:school]}/二年级/#{params[:course]}/#{params[:sex]}/#{params[:period]}/#{params[:time]}/"
+                  %li{:class => (params[:grade] == "三年级" ? "search-active" : nil)}
+                    = link_to "三年级","/filters/select/#{params[:school]}/三年级/#{params[:course]}/#{params[:sex]}/#{params[:period]}/#{params[:time]}/"
+                - if params[:school] != "all" && params[:school] !=nil && params[:school] == '小学'
+                  %li{:class => (params[:grade] == "四年级" ? "search-active" : nil)}
+                    = link_to "四年级","/filters/select/#{params[:school]}/四年级/#{params[:course]}/#{params[:sex]}/#{params[:period]}/#{params[:time]}/"
+                  %li{:class => (params[:grade] == "五年级" ? "search-active": nil)}
+                    = link_to "五年级","/filters/select/#{params[:school]}/五年级/#{params[:course]}/#{params[:sex]}/#{params[:period]}/#{params[:time]}/"
+                  %li{:class => (params[:grade] == "六年级" ? "search-active" : nil)}
+                    = link_to "六年级","/filters/select/#{params[:school]}/六年级/#{params[:course]}/#{params[:sex]}/#{params[:period]}/#{params[:time]}/"
+            - if params[:school] and params[:school] != "all" 
+              %ul.grade-div
+                %li{:class => (params[:course] == "all" ? "search-active" : nil)}
+                  = link_to "全部","/filters/select/#{params[:school]}/all/all/#{params[:sex]}/#{params[:period]}/#{params[:time]}/", :rel=>"nofollow"
+                - @subjects.each do |f|
+                  %li{:class => (params[:course].to_s() == f.subject.to_s() ? "search-active" : nil)}
+                    = link_to f.subject,"/filters/select/#{params[:school]}/#{params[:grade]}/#{f.subject}/#{params[:sex]}/#{params[:period]}/#{params[:time]}/", :rel=>"nofollow"
+        %tr
+          %td
+            家教性别:
+          %td
+            %ul 
+              %li{:class => (params[:sex] == "all" ? "search-active" : nil)}
+                = link_to "全部","/filters/select/#{params[:school]}/#{params[:grade]}/#{params[:course]}/all/#{params[:period]}/#{params[:time]}/", :rel=>"nofollow"
+              %li{:class => (params[:sex] == "1" ? "search-active" : nil)}
+                = link_to "男","/filters/select/#{params[:school]}/#{params[:grade]}/#{params[:course]}/1/#{params[:period]}/#{params[:time]}/", :rel=>"nofollow"
+              %li{:class => (params[:sex] == "2" ? "search-active" : nil)}
+                = link_to "女","/filters/select/#{params[:school]}/#{params[:grade]}/#{params[:course]}/2/#{params[:period]}/#{params[:time]}/", :rel=>"nofollow"
+        %tr
+          %td
+            授课时期:
+          %td
+            %ul
+              %li{:class => (params[:period] == "all" ? "search-active" : nil)}
+                = link_to "全部","/filters/select/#{params[:school]}/#{params[:grade]}/#{params[:course]}/#{params[:sex]}/all/#{params[:time]}", :rel=>"nofollow"
+              %li{:class => (params[:period] == "0" ? "search-active" : nil)}
+                = link_to "平时可以","/filters/select/#{params[:school]}/#{params[:grade]}/#{params[:course]}/#{params[:sex]}/0/#{params[:time]}", :rel=>"nofollow"
+              %li{:class => (params[:period] == "1" ? "search-active" : nil)}
+                = link_to "假期可以","/filters/select/#{params[:school]}/#{params[:grade]}/#{params[:course]}/#{params[:sex]}/1/#{params[:time]}", :rel=>"nofollow"
+
+        -#
+          %tr
+            %td
+              约课范围:
+            %td
+              %ul
+                %li{:class => (params[:place] == "all" ? "search-active" : nil)}
+                  = link_to "全部","/filters/select/#{params[:school]}/#{params[:grade]}/#{params[:course]}/#{params[:sex]}/all/#{params[:time]}/"
+                %li{:class => (params[:place] == "1" ? "search-active" : nil)}
+                  = link_to "船营区","/filters/select/#{params[:school]}/#{params[:grade]}/#{params[:course]}/#{params[:sex]}/1/#{params[:time]}/"
+                %li{:class => (params[:place] == "2" ? "search-active" : nil)}
+                  = link_to "昌邑区","/filters/select/#{params[:school]}/#{params[:grade]}/#{params[:course]}/#{params[:sex]}/2/#{params[:time]}/"
+                %li{:class => (params[:place] == "3" ? "search-active" : nil)}
+                  = link_to "丰满区","/filters/select/#{params[:school]}/#{params[:grade]}/#{params[:course]}/#{params[:sex]}/3/#{params[:time]}/"
+                %li{:class => (params[:place] == "4" ? "search-active" : nil)}
+                  = link_to "龙潭区","/filters/select/#{params[:school]}/#{params[:grade]}/#{params[:course]}/#{params[:sex]}/4/#{params[:time]}/"
+                %li{:class => (params[:place] == "5" ? "search-active" : nil)}
+                  = link_to "蛟河市","/filters/select/#{params[:school]}/#{params[:grade]}/#{params[:course]}/#{params[:sex]}/5/#{params[:time]}/"
+                %li{:class => (params[:place] == "6" ? "search-active" : nil)}
+                  = link_to "桦甸市","/filters/select/#{params[:school]}/#{params[:grade]}/#{params[:course]}/#{params[:sex]}/6/#{params[:time]}/"
+                %li{:class => (params[:place] == "7" ? "search-active" : nil)}
+                  = link_to "舒兰市","/filters/select/#{params[:school]}/#{params[:grade]}/#{params[:course]}/#{params[:sex]}/7/#{params[:time]}/"
+                %li{:class => (params[:place] == "8" ? "search-active" : nil)}
+                  = link_to "永吉区","/filters/select/#{params[:school]}/#{params[:grade]}/#{params[:course]}/#{params[:sex]}/8/#{params[:time]}/"
+                %li{:class => (params[:place] == "9" ? "search-active" : nil)}
+                  = link_to "磐石市","/filters/select/#{params[:school]}/#{params[:grade]}/#{params[:course]}/#{params[:sex]}/9/#{params[:time]}/"
+        %tr
+          %td
+            约课时间:
+          %td
+            %ul
+              %li{:class => (params[:time] == "all" ? "search-active" : nil )}
+                = link_to "全部", "/filters/select/#{params[:school]}/#{params[:grade]}/#{params[:course]}/#{params[:sex]}/#{params[:period]}/all/", :rel=>"nofollow"
+              %li{:class => (params[:time] == "1" ? "search-active" : nil )}
+                = link_to "周一", "/filters/select/#{params[:school]}/#{params[:grade]}/#{params[:course]}/#{params[:sex]}/#{params[:period]}/1/", :rel=>"nofollow"
+              %li{:class => (params[:time] == "2" ? "search-active" : nil )}
+                = link_to "周二", "/filters/select/#{params[:school]}/#{params[:grade]}/#{params[:course]}/#{params[:sex]}/#{params[:period]}/2/", :rel=>"nofollow"
+              %li{:class => (params[:time] == "3" ? "search-active" : nil )}
+                = link_to "周三", "/filters/select/#{params[:school]}/#{params[:grade]}/#{params[:course]}/#{params[:sex]}/#{params[:period]}/3/", :rel=>"nofollow"
+              %li{:class => (params[:time] == "4" ? "search-active" : nil )}
+                = link_to "周四", "/filters/select/#{params[:school]}/#{params[:grade]}/#{params[:course]}/#{params[:sex]}/#{params[:period]}/4/", :rel=>"nofollow"
+              %li{:class => (params[:time] == "5" ? "search-active" : nil )}
+                = link_to "周五", "/filters/select/#{params[:school]}/#{params[:grade]}/#{params[:course]}/#{params[:sex]}/#{params[:period]}/5/", :rel=>"nofollow"
+              %li{:class => (params[:time] == "6" ? "search-active" : nil )}
+                = link_to "周六", "/filters/select/#{params[:school]}/#{params[:grade]}/#{params[:course]}/#{params[:sex]}/#{params[:period]}/6/", :rel=>"nofollow"
+              %li{:class => (params[:time] == "0" ? "search-active" : nil )}
+                = link_to "周日", "/filters/select/#{params[:school]}/#{params[:grade]}/#{params[:course]}/#{params[:sex]}/#{params[:period]}/0/", :rel=>"nofollow"
+

@@ -1,0 +1,86 @@
+- provide(:title, t('.title'))
+
+= render "layouts/subbar_top"
+.wrapper.filter-top
+  - if parent_signed_in?
+    %h4.text-center.order_top_pad
+      - if @order.status == Setting.orders.status_trade_created
+        提交订单成功，请立即支付试讲费用
+      - elsif @order.status == Setting.orders.status_parent_paied
+        支付订单成功，请等待家教确认订单
+      - elsif @order.status == Setting.orders.status_teacher_paied
+        家教已确认订单，请等待家教联系您
+      - elsif @order.status == Setting.orders.status_trade_success
+        订单完成，试讲费用已打入家教的支付宝中
+      - elsif @order.status == Setting.orders.status_trade_failed
+        订单完成，试讲费用已退回到您的支付宝中，请注意查收
+  .order-infor-height
+    .order-split-line
+    .row
+      .col-xs-4.col-xs-offset-1
+        课程信息：
+      .col-xs-7
+        = "#{@course.name} - #{@course.teacher.name}"
+    - if [Setting.orders.status_teacher_paied, Setting.orders.status_trade_success, Setting.orders.status_trade_failed].include? @order.status
+      .order-split-line
+      .row
+        .col-xs-4.col-xs-offset-1
+          家教姓名：
+        .col-xs-7
+          = @order.teacher.name
+      .order-split-line
+      .row
+        .col-xs-4.col-xs-offset-1
+          家教电话：
+        .col-xs-7
+          = @order.teacher.phone
+    .order-split-line
+    .row
+      .col-xs-4.col-xs-offset-1
+        试讲日期：
+      .col-xs-7
+        = @order.appointments_time.strftime("%Y-%m-%d")
+    .order-split-line
+    .row
+      .col-xs-4.col-xs-offset-1
+        授课地址：
+      .col-xs-7
+        = @order.addr
+    .order-split-line
+    .row
+      .col-xs-4.col-xs-offset-1
+        联系电话：
+      .col-xs-7
+        = @order.phone
+    .order-split-line
+    .row
+      .col-xs-4.col-xs-offset-1
+        购买课时：
+      .col-xs-7
+        ="#{@order.hours} 小时"
+    .order-split-line
+    .row
+      .col-xs-4.col-xs-offset-1
+        应付金额：
+      .col-xs-7
+        - if @order.status == Setting.orders.status_trade_created
+          .money="￥#{@order.total}.00"
+        - else
+          ="￥#{@order.total}.00"
+    .order-split-line
+    .row
+      .col-xs-4.col-xs-offset-1
+        支付平台：
+      .col-xs-7
+        = radio_button_tag "approach", "alipay", true
+        %span.icon-bank-alipay
+    .order-split-line
+    - if @order.status == Setting.orders.status_trade_created
+      = link_to "立即付款", parent_pay_orders_path(:id=>@order.number), :class=>"btn btn-warning btn-block"
+    - else
+      .row
+        .col-xs-11.col-xs-offset-1
+          .money
+            已付预约费：
+            %span= "￥#{@order.total}.00"
+

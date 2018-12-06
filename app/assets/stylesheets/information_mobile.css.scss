@@ -1,0 +1,120 @@
+.infor-attr
+{
+  margin:4px 0;
+  background-color:white;
+}
+.infor-attr .visited
+{
+  background:#41b5e8;
+}
+.infor-attr a
+{
+  color:#ccc;
+  text-decoration:none;
+}
+.infor-category
+{
+  border-left:1px solid #ddd;
+  border-top:1px solid #ddd;
+}
+.infor-category-item 
+{
+  border-right:1px solid #ddd;
+  border-bottom:1px solid #ddd;
+  padding:3px 0;
+  text-align:center;
+}
+
+.btn-blue{
+  height:38px;
+  font-size:16px;
+  padding-top:8px;
+  margin:2px 0 6px 0
+}
+.btn-color{
+  background:#41b5e8;
+  color:white;
+  border-radius:0px;
+  -webkit-border-radius:0px;
+  -moz-border-radius:0px;
+  border:1px solid #fff;
+}
+a:hover.btn-color{
+  border:1px solid #41b5e8;
+  color:white;
+}
+.job-list{
+  height:35px;
+  background:#EAEAEA;
+}
+.job-all table
+{
+  background:white;
+}
+
+.information-show h2
+{
+  margin-top:2px;
+}
+.information-show .list-group-item
+{
+  padding-left:0px;
+}
+.information-show .info-list
+{
+  padding-top:22px;
+}
+
+.information-show .phone-font
+{
+  color:orange;
+  font-size:18px;
+  font-family:"Courier New";
+}
+
+.information-show .name-font
+{
+  font-style:oblique;
+  font-size:18px;
+}
+.information-show .code-bg
+{
+  margin-top:10px;
+  max-width:380px;
+  height:90px;
+  background:#EAEAEA;
+}
+.information-show .padding-icon
+{
+  padding:0 4px 0 10px;
+  font-size:14px;
+}
+.information-show .code-bg img
+{
+  padding:5px;
+}
+.information-show .code-bg h4
+{
+  padding-top:20px;
+  padding-left:122px;
+}
+.cui-ico-new{
+  position: absolute;
+  z-index: 1;
+  left: 610px;
+  top: -4px;
+  width: 24px;
+  height: 16px;
+  overflow: hidden;
+  background-position: 0 -95px;
+  background-image: url(un_header_footer20150317.png);
+  background-repeat: no-repeat;
+}
+.p-left-10
+{
+  padding-left:20px;
+}
+.info-title-menu
+{
+  margin:4px 0;
+}

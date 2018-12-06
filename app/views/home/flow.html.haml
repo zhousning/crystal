@@ -1,0 +1,35 @@
+- provide(:title, t('.title'))
+
+= render "layouts/subbar_top"
+= render "layouts/nav_menu"
+.apw_ctn
+  .apw_ctt
+    = link_to "家长注册", new_parent_registration_path, :class => "btn btn-primary btn-lg register_btn"
+
+  -#
+    %ul.apw_ul
+      %li
+        .apw_img.no1_img
+        .apw_int 
+          %p.apw_title 搜课程
+          %p 根据年级、科目等分类在家教呢平台搜索您需要的课程
+      %li
+        .apw_img.no2_img
+        .apw_int 
+          %p.apw_title 确定试讲时间
+          %p 选定自己需要的课程后，填写试讲地点并确定试讲时间
+      %li
+        .apw_img.no3_img
+        .apw_int 
+          %p.apw_title  支付试讲费用
+          %p 您需要支付首次试讲的试讲费用，如果您对试讲不满意，该费用将退回您的账户
+      %li
+        .apw_img.no4_img
+        .apw_int 
+          %p.apw_title 等待老师接单
+          %p 老师接单后，将发送给你试讲满意验证码，如果您对试讲不满意，请不要将反馈码告知家教，试讲费用将退回您的账户
+      %li
+        .apw_img.no5_img
+        .apw_int 
+          %p.apw_title 完成
+          %p 完成实地试讲，并对课程进行评价

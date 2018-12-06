@@ -1,0 +1,39 @@
+= form_for @order, :html=>{:class=>"form-horizontal"} do |f|
+  = form_error_messages!(@order)
+
+  = hidden_field_tag :course_id, @course.id
+
+  .form-group
+    = f.label "联系人", :class=>"col-md-2 control-label"
+    .col-md-3
+      = f.text_field :name, :class=>"form-control"
+
+  .form-group
+    = f.label "联系电话", :class=>"col-md-2 control-label"
+    .col-md-3
+      = f.text_field :phone, :class=>"form-control"
+
+  .form-group
+    = f.label "地址", :class => "col-md-2 control-label"
+    .col-md-3
+      - if @address
+        = f.text_field :addr,:value => get_address_province_string(@address.province)+get_address_city_string(@address.city) + get_address_district_string(@address.district) + get_address_details_string(@address.details), :class => "form-control", :id => "addr"
+      - else
+        = f.text_field :addr
+      %a#new_addr 地址添加  
+      %div#new_addr_div.order-addr-new
+        = fields_for :address, @order.address do |a|
+          = a.select :province,get_address_province,{:include_blank => '请选择所在省'}, :class => "form-control", :id =>"p1"
+          %br
+          = a.select :city,get_address_city,{:include_blank => '请选择所在市'}, :class => "form-control", :id => "c1"
+          %br
+          = a.select :district, get_address_district, {:include_blank => '请选择所在区'}, :class => "form-control", :id => "d1"
+          %br
+          = a.text_field :details, autofocus:true,:class => "form-control", :id => "d2"
+        %br
+        %a#new_addr_sure 确定
+        %a#new_addr_cancle 取消
+
+  .form-group
+    .col-md-3.col-md-offset-2
+      = f.submit '提交订单', :class=>"btn btn-success"

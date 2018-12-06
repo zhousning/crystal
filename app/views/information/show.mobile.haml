@@ -1,0 +1,61 @@
+- provide(:title, @information.title+' - '+t('.title'))
+= render "layouts/subbar_top"
+.filter-top
+  .information-show
+    .info-title-menu
+      -if @information.info_category
+        =link_to "家教呢 ",root_path
+        >
+        =link_to "校园信息 ",information_index_path
+        > 
+        =link_to @information.info_category.title,information_index_path(:infocategory=>@information.info_category_id)
+        >
+    .list-group
+      .list-group-item
+        .p-left-10
+          %h4
+            %strong= @information.title
+          .row
+            .col-xs-12
+              .col-xs-7.padding-none
+                %small
+                  更新时间：
+                  = @information.created_at.strftime("%Y-%m-%d")
+              .col-xs-5.padding-none
+                %small
+                  浏览次数：
+                  = @information.click_times
+      .list-group-item
+        .p-left-10
+          = format_string_newline(@information.content).html_safe
+          .code-bg
+            .col-xs-10.padding-none
+              %a{:href=>download_information_index_path(:id=>@information.number), :target=>"_blank"}
+                = image_tag @information.qrcode.thumb("240x80#").url
+            .col-xs-2.padding-icon
+              %h5 快下载转发给更多人吧
+          -if !@information.img.blank?
+            .row
+              .col-xs-12
+                = image_tag(@information.img,:width=>"200px")
+      .list-group-item
+        .p-left-10
+          .form-group
+            联系人：
+            %span.name-font=@information.name
+          .form-group
+            联系电话：
+            %span.phone-font= @information.phone
+          .form-group
+            QQ号码：
+            = @information.qq
+          .form-group
+            微信号码：
+            = @information.weixin
+          %strong 联系我时，请说是在家教呢上看到的。
+    .row
+      .col-xs-12
+        %a.btn.btn-block.btn-color.btn-blue{:href=>new_information_path}
+          %i.glyphicon.glyphicon-send
+          =t('information.send.information')
+      

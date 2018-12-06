@@ -1,0 +1,33 @@
+- provide(:title, t('.title'))
+.preg_cta
+  .reg_header
+    = '家长注册'
+  .preg_body
+    .body_left
+      = form_for resource, :as => resource_name, :url => registration_path(resource_name), :html=>{:class=>"form-horizontal"}, :validate => true do |f|
+        = devise_error_messages!
+      
+        .form-group.form-gro
+          = f.label "* 手机:", :class=>"control-label ce"
+          = f.text_field :phone, autofocus: true, :class=>"form-control form-con"
+      
+        .form-group.form-gro
+          = f.label "* 姓名:", :class=>" control-label ce"
+          = f.text_field :name, autofocus: true, :class=>"form-control form-con"
+      
+        .form-group.form-gro
+          = f.label "* 密码:", :class=>"control-label ce"
+          = f.password_field :password, autocomplete: "off", :class=>"form-control form-con"
+
+        .form-group.form-gro
+          = f.label "* 确认密码:",:class=>"control-label ce"
+          = f.password_field :password_confirmation, autocomplete: "off", :class=>"form-control form-con"
+        
+        .form-group.form-gro
+          .form-controls
+            = f.submit "注册", :class=>"btn btn-success id_item"
+            %span.login_btn
+              ="如果已有帐号，请"
+              = link_to  '登录',login_path
+    .pbody_pic
+/= render "parents/shared/links"

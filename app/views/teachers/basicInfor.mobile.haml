@@ -1,0 +1,71 @@
+=render "layouts/header"
+%ul.list-group
+  %li.list-group-item.disabled
+    %i.glyphicon.glyphicon-edit
+    基本信息
+  %a{:href => editinfo_basic_teachers_path, :class => "task-style"}
+    %li.list-group-item
+      -#%span.badge 1
+      -if @basic_degree == 0
+        %i.glyphicon.glyphicon-hand-right.pull-right
+      -else
+        -if current_teacher.status == Setting.teachers.status_edit_sql || current_teacher.status == Setting.teachers.status_notpass_sql
+          %i.text-info.glyphicon.glyphicon-time.pull-right
+        -else
+          %i.font-green.glyphicon.glyphicon-ok-circle.pull-right
+      基本信息
+      %br
+      %small
+        -if @basic_degree == 0 
+          需要填写内容包括：您的基本情况，个人简介，上传个人照片和学生证照片。基本信息填写完整后，我们会进行人工资格审核，审核通过后才能发布课程哦。
+        -else
+          -if current_teacher.status == Setting.teachers.status_edit_sql
+            您的信息已经提交，我们正在审核中，请过一段时间再来查看......
+          -elsif current_teacher.status == Setting.teachers.status_notpass_sql
+            .text-danger
+              您的信息未通过审核，是不是有什么遗漏的地方？请重新填写后再提交一下吧。
+          -else
+            .text-danger
+              恭喜你已经通过审核，快去完善其他信息，然后发布课程吧。
+  %li.list-group-item.disabled
+    %i.glyphicon.glyphicon-gift
+    包装自己
+  %a{:href => editinfo_study_teachers_path, :class => "task-style task1-bottom"}
+    %li.list-group-item
+      -#%span.badge 1
+      -if @study_degree == 0
+        %i.glyphicon.glyphicon-hand-right.pull-right
+      -else
+        %i.glyphicon.glyphicon-ok-circle.font-green.pull-right
+      学习成果
+      %br
+      %small  家长很关心家教自己的学习情况，请把你的各种成绩、各种获奖、各种闪光点都写上来，我就不信家长不找你，嘿嘿。
+  %a{:href => editinfo_experience_teachers_path, :class => "task-style"}
+    %li.list-group-item
+      -#%span.badge 2
+      -if @experience_degree == 0
+        %i.glyphicon.glyphicon-hand-right.pull-right
+      -else
+        %i.glyphicon.glyphicon-ok-circle.font-green.pull-right
+      教学经历
+      %br
+      %small  你的教学经历是对你个人能力的完美诠释，快写上你漂亮的经历，让家长了解一下你的个人能力吧。
+  %li.list-group-item.disabled
+    %i.glyphicon.glyphicon-road
+    发布课程
+  %a{:href => editinfo_plan_teachers_path, :class => "task-style"}
+    %li.list-group-item
+      -#%span.badge 1
+      -if @plan_degree == 0
+        %i.glyphicon.glyphicon-hand-right.pull-right
+      -else
+        %i.glyphicon.glyphicon-ok-circle.font-green.pull-right
+      授课时间
+      %br
+      %small   告诉家长你可以去上课的时间，学校的课程咱可不能逃，我说的好像也没有什么不对。
+  %a{:href => new_course_path, :class => "task-style"}
+    %li.list-group-item
+      %span.badge 2
+      发布课程
+      %br
+      %small   好激动哦，已经到最后一步了，发布自己擅长的课程，家长就可以约你喽，可以发布多个课程。

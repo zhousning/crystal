@@ -1,0 +1,28 @@
+%nav.navbar.navbar-default.navbar-fixed-top
+  .container
+    .row.head-search
+      .col-xs-3.logoimg
+        %a{:href => "/"}
+          =image_tag("logo.png", :width => "100%px")
+      .col-xs-6.padding-five
+        = form_tag filters_search_path  do |f|
+          #imaginary_container
+            .input-group.stylish-input-group
+              %input{:class => "form-control", :placeholder => "搜索课程", :name => "keywords"}
+              %span.input-group-addon.padding-none
+                %button{:type => "submit"}
+                  %span{:class => "glyphicon glyphicon-search"}
+      .col-xs-3.loginright
+        -if parent_signed_in?
+          %h5
+            =link_to current_parent.name, profile_parents_path, :class => "text-primary"
+        -elsif teacher_signed_in?
+          %h5
+            %a{:href=>show_menu_teachers_path}
+              %i.glyphicon.glyphicon-user
+              个人中心
+        -else
+          %h5
+            %a{:href=>login_path}
+              %i.glyphicon.glyphicon-user
+              登录 

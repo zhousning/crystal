@@ -1,0 +1,36 @@
+= nested_form_for current_teacher,:url=>updateInfor_teachers_path,:html => {:multipart => true,:method=>"post",:class=>"form-horizontal tpadding", :autocomplete => "off"}, :validate => true do |f| 
+  = render "layouts/header" 
+  #careers_content  
+  = f.fields_for :careers do |s|
+    .panel.panel-default.tpanel-titles.tpanel-ab.b-radius
+      .panel-heading.tpanel-titles.b-radius 
+        .tpadding
+          .row
+            .col-xs-10
+              = "我的学生"
+            .col-xs-2
+              = s.link_to_remove "", :data => { :confirm => "确定删除吗？" }, :class => "input-group btn-default glyphicon glyphicon-trash"
+      .panel-body
+        .col-xs-12
+          .form-group
+            .start-time
+              = s.text_field :start_time, :class => "form-control sel_time",  :'data-provide' => "datepicker", :'data-date-language' => "zh-CN", :'data-date-format' => "yyyy-mm-dd", :'data-date-autoclose' => "true", :'data-date-startView' => 1, :placeholder => "开始辅导时间"
+          .form-group
+            .end-time
+              = s.text_field :end_time, :class => "form-control sel_time", :'data-provide' => "datepicker", :'data-date-language' => "zh-CN", :'data-date-format' => "yyyy-mm-dd", :'data-date-autoclose' => "true", :'data-date-startView' => 1, :placeholder => "辅导结束时间"
+          .form-group
+            = s.text_field :child_name, :class => "form-control", :placeholder => "学生姓名"
+          .form-group
+            = s.text_field :school, :class => "form-control", :placeholder => "学生所在学校"
+          .form-group
+            = s.text_field :subject, :class => "form-control", :placeholder => "辅导科目"
+          .form-group
+            = s.text_area :content, :rows => 6, :class => "form-control", :placeholder => "请根据你对学生的辅导情况，谈谈辅导经验"
+          .form-group.tinfo-bottom.te-mgb
+            .col-md-2.col-xs-2.col-md-offset-9.col-xs-offset-9
+  = render "date"
+  .pull-right
+    = f.link_to_add "添加", :careers, :data => { :target => "#careers_content" }, :class => "btn btn-success"
+    %button{ :class => "btn btn-success" }
+      %span{ :class => "glyphicon glyphicon-floppy-save" }
+      保存信息

@@ -1,0 +1,25 @@
+- if @orders.empty?
+  .order-text-block 目前还没有接到订单
+- else
+  .qa-message-list.order-list#wallmessages
+    - @orders.each do |order|
+      .message-item#m16
+        %a{:href=>order.courses[0] ? teacher_orders_path(:id=>order.number) : nil}
+          .message-inner
+            .message-head.clearfix
+              %h5 
+                名称:
+                = order.courses[0] ? order.courses[0].name : "课程已删除"
+            .qa-message-content
+              .input-group
+                联系人:
+                = order.name
+              .input-group
+                订单状态:
+                = get_order_status_string(order.status)
+              .input-group
+                联系电话:
+                - if [Setting.orders.status_teacher_paied, Setting.orders.status_trade_success, Setting.orders.status_trade_failed].include? order.status
+                  = order.phone
+                - else
+                  = order.phone[0..6] + "xxxx"

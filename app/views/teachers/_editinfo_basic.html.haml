@@ -1,0 +1,120 @@
+-#
+  - provide(:title, t('.title'))
+= nested_form_for current_teacher,:url=>updateInfor_teachers_path,:html => {:multipart => true,:method=>"post",:class=>"form-horizontal tpadding",:role=>"form",:role=>"form",:autocomplete => "off"}, :validate => true do |f| 
+  =hidden_field_tag :info, :value => "basic"
+  .form-group.te-mgb
+    .col-md-12
+      .form-group
+        .tpadding
+          .col-md-12
+            .col-md-12.info-bottom
+              .col-md-8
+                %h4 
+                  1.资格认证
+                  %span.font-orange
+                    (*必填)
+              .col-md-2.col-md-offset-2
+                =f.submit "保存信息",:class=>" btn btn-success"
+            .col-md-11
+              = render "editinfo_timage"
+            .col-md-12.info-bottom
+              .col-md-4
+                %h4 
+                  2.个人基本信息
+                  %span.font-orange
+                    (*必填)
+            .col-md-11
+              .row
+                .col-md-4
+                  .form-group
+                    = f.label "姓名：", :class=> "col-md-5 control-label "
+                    .col-md-7
+                      = f.text_field :name, :class=> "form-control"
+                .col-md-4
+                  .form-group
+                    = f.label "年龄：", :class=> "col-md-5 control-label "
+                    .col-md-7
+                      = f.number_field :age, :min => "18", :class=> "form-control"
+                .col-md-4
+                  .form-group
+                    = f.label "性别：", :class=>"col-md-5 control-label"
+                    .col-md-7
+                      %label{:class => "radio-inline"}
+                        = f.radio_button(:sex,Setting.teachers.sex_man)
+                        = Setting.teachers.sex_man_string
+                      %label{:class => "radio-inline"}
+                        = f.radio_button(:sex,Setting.teachers.sex_women)
+                        =  Setting.teachers.sex_women_string
+            .col-md-11
+              .row
+                -if current_teacher.identity==1
+                  = fields_for :student_identity,current_teacher.student_identity do |i| 
+                    .col-md-4
+                      .form-group
+                        = i.label "学校：", :class=>"col-md-5 control-label"
+                        .col-md-7
+                          = i.text_field :school, :class=>"form-control"
+                    .col-md-4
+                      .form-group
+                        = i.label "年级：", :class=>"col-md-5 control-label"
+                        .col-md-7
+                          = i.text_field :grade, :class=>"form-control"
+                    .col-md-4
+                      .form-group
+                        = i.label "专业：", :class=>"col-md-5 control-label"
+                        .col-md-7
+                          = i.text_field :major, :class=>"form-control"
+                -if current_teacher.identity==2
+                  = fields_for :teacher_identity,current_teacher.teacher_identity do |i| 
+                    .col-md-4
+                      .form-group
+                        = i.label "学校：", :class=>"col-md-5 control-label"
+                        .col-md-7
+                          = i.text_field :school, :class=>"form-control"
+                    .col-md-4
+                      .form-group
+                        = i.label "任课年级：", :class=>"col-md-5 control-label"
+                        .col-md-7
+                          = i.text_field :grade, :class=>"form-control"
+                    .col-md-4
+                      .form-group
+                        = i.label "教学科目：", :class=>"col-md-5 control-label"
+                        .col-md-7
+                          = i.text_field :subject, :class=>"form-control"
+            .col-md-11
+              .row        
+                .col-md-4
+                  .form-group
+                    = f.label "教龄：", :class=>"col-md-5 control-label  "
+                    .col-md-7
+                      = f.number_field :teaching_age, :min => "0", :class=> "form-control"
+                .col-md-4
+                  .form-group
+                    = f.label "爱好：", :class=>"col-md-5 control-label"
+                    .col-md-7
+                      = f.text_field :hobby, :class=>"form-control"
+                .col-md-4
+                  .form-group
+                    = f.label "支付宝：", :class=>"col-md-5 control-label",:placeholder=>"完成转账功能必须填写项"
+                    .col-md-7
+                      = f.text_field :pay_num,:class=>"form-control"
+            .col-md-11
+              .col-md-12.te-right
+                = f.text_area :introduction,:rows=>8,:class=>"form-control",:placeholder => "请填写个人简介,可以详细的说明一下自己的学习，工作，性格，经验等，以便家长更好的了解你，加深自己在家长心中的印象，提高自己的竞争力。。。。。。"
+-#        
+  .form-group
+  .form-group
+    = f.label "教学理念：", :class=>"col-md-2 control-label"
+    .col-md-5
+      = f.text_field :quotes, :class=>"form-control"
+
+  .form-group
+  .form-group
+
+  .form-group
+  .form-group
+    = f.label "过往经历：", :class=>"col-md-2 control-label"
+    %p{:class => "form-control-static"} 例如：我的小学、我的初中、我的高中、社会实践经历等。
+    .col-md-8.col-md-offset-2
+      =f.text_area :experience,:rows=>6,:class=>"form-control"
+

@@ -1,0 +1,130 @@
+- provide(:title, t('.title'))
+
+= render "layouts/subbar_top"
+
+%div#menu
+  %div.wrapper
+    %div.menu-c-all
+      %a{:href => "/filters/index"} 全部课程
+    %div.menu-m
+      %ul
+        %li
+          %a{:class => "menu-m-active",:href => root_path} 首页
+        %li 
+          %a{:class=>"menu-m-active",:href => flow_path} 预约流程
+        %li
+          %a{:class=>"menu-m-active",:href => tflow_path} 家教入驻
+
+.vote_wrapper
+  .row
+    .col-md-12
+      .position-middle
+        = image_tag "vote.jpg", :width => "1000px", :class => "position-middle"
+    .col-md-12    
+      .row
+        .col-md-12
+          %p
+            %h2.text-center= '"最美家教"投票活动细则'
+            %p= "每一个来到大学的学生都渴望有一份工作来丰富自己的业余生活、学以致用、积累社会经验，另一方面也希望靠自己的力量来赚取零花钱、减轻家里负担。为鼓励大学生展示优秀的教学经验和教育理念、激发同学们当家教的积极性和热情、鼓励更多的同学加入勤工俭学的广大队伍中，在实践中增强自己的专业知识以及教学经验，我们现举办第一届东北电力大学“最美家教”网络评选活动。"
+        .col-md-12.rule-content
+          %p.rule-head= "[参与方式]"
+          %p= "参赛者需要登录“家教呢”网站，并注册完善个人信息，通过审核即可参加“最美家教”网络评选活动。"
+          %p.rule-head= "[投票规则]"
+          %p= "1、投票时间：2015年4月10日—2015年4月19日。"
+          %p= "2、投票范围为“最美家教”候选人，每人每次投票不多于5人。违反投票数量规定视为无效票，不能提交。"
+          %p= "3、单一IP地址，每天只能有效投票一次，如检测到恶意刷票行为主办方有权根据已刷票情节处于警告减票、中止投票、取消参与资格等处罚。"
+          %p= "4、本次投票坚持自愿投票原则，活动允许选手发送个人主页给朋友或分享至朋友圈为自己点赞拉票，严禁任何单位和个人包办等虚假行为。"
+          %p.rule-head= "[评选规则]"
+          %p= "本次比赛投票分两轮进行，最终总票数由两轮票数加权累计决定，第一轮票数占30%，第二轮占70%。"
+          %p.rule-head= "[奖项设置]"
+          %p= "一等奖一名，获得“家教呢”网站首页名师推荐资格，颁发获奖证书、奖杯，奖励罗技G100S套件一组、13000毫安充电宝一个。"
+          %p= "二等奖两名，颁发获奖证书，奖励牧之歌麦克或13000毫安充电宝一个及达尔优鼠标一个。"
+          %p= "三等奖三名，颁发获奖证书，奖励猎貂鼠标或飞利浦、微星耳麦一个及35元鼠标垫一个。"
+          %p= "感谢恒鑫科技为本次活动提供奖品！"
+
+  .row.margin-top-fifteen
+    .col-md-12
+      = form_for "", :url => nil, :html=>{:class=>"form-horizontal", :id => "vote_form"} do |f|
+        - @teachers.each do |t|
+          .col-md-3.vote-margin-bottom
+            .col-md-12.vote-border
+              %a{:href => detail_teachers_path(:id => t.number), :target => "_blank"}
+                .cuadro_intro_hover
+                  .row
+                    .col-md-12
+                      .vote-img
+                        = image_tag(t.image_url(:normal),:class=>"img-circle", :width => "120px", :height => "120px",:alt=>"老师头像")
+                    .col-md-12
+                      %p
+                        %h3.text-center
+                          %span.text-muted
+                            = t.name 
+                          %small
+                            = "ID:"
+                            = t.number
+                    .col-md-12
+                      %p
+                        %h4.text-center.text-muted
+                          - if t.identity == 1 and t.student_identity
+                            = t.student_identity.major
+                          -else
+                            = "东北电力大学"
+                          %small.font-orange
+                            = t.teaching_age.to_s + "年教龄"
+
+                  .caption
+                    .blur
+                    .caption-text
+                      .row
+                        .col-md-12.introduction-content
+                          %p.text-left
+                            = t.introduction
+                        .col-md-12.padding-intro
+                          %h4.text-center
+                            = "查看老师主页 >>"
+            .col-md-12.vote-bottom      
+              .row
+                .col-md-4
+                  %button{:type => "button",:class => "btn btn-default", :'data-toggle' => "modal",:'data-target' => "#loginModal",:'data-backdrop'=>"true", :onclick => "check_radio(this)"}
+                    点赞
+                    %i.glyphicon.glyphicon-thumbs-up
+                  -#
+                    %button{ :type => "button", :class => "btn btn-default", :onclick => "vote_submit(this)" }
+                    点赞
+                    %i.glyphicon.glyphicon-thumbs-up
+                  = radio_button("teacher","number", t.number,:class => "sr-only")
+                -if (t.votes.size > 3)
+                  .col-md-8.ticket-wraper
+                    %p
+                      %h4.text-center.font-orange
+                        = t.votes.size.to_s + "票"
+                -else
+                  .col-md-5.ticket-wraper
+                    %p
+                      %h4.text-center.ticket
+                        = t.votes.size.to_s + "票"
+                  .col-md-3.padding-left-none
+                    %p
+                      %h4.text-left
+                        %i.glyphicon.glyphicon-stats
+
+  <script type="text/javascript">
+  document.write('<a style="display:none!important" id="tanx-a-mm_25868218_9434193_31722276"></a>');
+  tanx_s = document.createElement("script");
+  tanx_s.type = "text/javascript";
+  tanx_s.charset = "gbk";
+  tanx_s.id = "tanx-s-mm_25868218_9434193_31722276";
+  tanx_s.async = true;
+  tanx_s.src = "http://p.tanx.com/ex?i=mm_25868218_9434193_31722276";
+  tanx_h = document.getElementsByTagName("head")[0];
+  if(tanx_h)tanx_h.insertBefore(tanx_s,tanx_h.firstChild);
+  </script>
+
+-#
+  %br
+  %br
+  <script type="text/javascript">
+  var cpro_id = "u2043707";
+  </script>
+  <script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+

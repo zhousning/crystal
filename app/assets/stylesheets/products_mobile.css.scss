@@ -1,0 +1,21 @@
+.font-green{
+  color:green;
+}
+.detail-comment-tips ul {
+  float: left;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+.detail-comment-tips .ful > li.stuff {
+  background-position: left -240px;
+}
+.detail-comment-tips .ful > li {
+  padding: 0;
+  display: inline-block;
+  width: 16px;
+  height: 20px;
+  background: url('sprite-iconspic.png') no-repeat;
+  background-position: left -214px;
+  border: 0;
+}

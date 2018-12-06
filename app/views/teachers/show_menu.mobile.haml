@@ -1,0 +1,106 @@
+.row
+  .show-menu
+    .show-menu-top
+      .col-xs-2
+        =image_tag("photo.jpg",:class=>"img-circle")
+      .col-xs-8.col-xs-offset-1
+        -if current_teacher
+          %p
+            您好，
+            =current_teacher.name
+            家教
+            -if current_teacher.status==Setting.teachers.status_pass_sql
+              %span.badge.font-green=get_teacher_status_string(current_teacher.status)
+            -else
+              %span.badge.font-red=get_teacher_status_string(current_teacher.status)
+          %p 注册通过后就可以发布课程信息了!
+    %ul.list-group
+      %li.list-group-item.text-muted.title
+        我的信息
+      %a{:href=>editinfo_basic_teachers_path}
+        %li.list-group-item
+          %span.glyphicon.glyphicon-user
+          %span.glyphicon.glyphicon-chevron-right.pull-right
+          =t('teachers.menu.editinfo_basic')
+      %a{:href=>editinfo_study_teachers_path}
+        %li.list-group-item
+          %span.glyphicon.glyphicon-gift
+          %span.glyphicon.glyphicon-chevron-right.pull-right
+          =t('teachers.menu.editinfo_study')
+      %a{:href=>editinfo_experience_teachers_path}
+        %li.list-group-item
+          %span.glyphicon.glyphicon-road
+          %span.glyphicon.glyphicon-chevron-right.pull-right
+          =t('teachers.menu.editinfo_experience')
+      %a{:href=>editinfo_plan_teachers_path}
+        %li.list-group-item
+          %span.glyphicon.glyphicon-time
+          %span.glyphicon.glyphicon-chevron-right.pull-right
+          =t('teachers.menu.editinfo_plan')
+      %a{:href=>messages_teachers_path}
+        %li.list-group-item
+          %span.glyphicon.glyphicon-envelope
+          %span.glyphicon.glyphicon-chevron-right.pull-right
+          =t('teachers.menu.messages')
+      %a{:href=>gallery_teachers_path}
+        %li.list-group-item
+          %span.glyphicon.glyphicon-camera
+          %span.glyphicon.glyphicon-chevron-right.pull-right
+          =t('teachers.menu.gallery')
+      %a{:href=>edit_teacher_registration_path}
+        %li.list-group-item
+          %span.glyphicon.glyphicon-wrench
+          %span.glyphicon.glyphicon-chevron-right.pull-right
+          =t('teachers.menu.edit')
+      %li.list-group-item.text-muted.title
+        我的课程
+      %a{:href=>new_course_path}
+        %li.list-group-item
+          %span.glyphicon.glyphicon-open
+          %span.glyphicon.glyphicon-chevron-right.pull-right
+          =t('courses.menu.new')
+      %a{:href=>courses_path}
+        %li.list-group-item
+          %span.glyphicon.glyphicon-paperclip
+          %span.glyphicon.glyphicon-chevron-right.pull-right
+          =t('courses.menu.index')
+      %li.list-group-item.text-muted.title
+        我的订单
+      %a{:href=>order_all_teachers_path}
+        %li.list-group-item
+          %span.glyphicon.glyphicon-cog
+          %span.glyphicon.glyphicon-chevron-right.pull-right
+          =t('teachers.menu.order_all')
+      %a{:href=>order_unpay_teachers_path}
+        %li.list-group-item
+          %span.glyphicon.glyphicon-pushpin
+          %span.glyphicon.glyphicon-chevron-right.pull-right
+          =t('teachers.menu.order_unpay')
+      %a{:href=>order_reserving_teachers_path}
+        %li.list-group-item
+          %span.glyphicon.glyphicon-refresh
+          %span.glyphicon.glyphicon-chevron-right.pull-right
+          =t('teachers.menu.order_transfer')
+      %a{:href=>order_transfer_teachers_path}
+        %li.list-group-item
+          %span.glyphicon.glyphicon-info-sign
+          %span.glyphicon.glyphicon-chevron-right.pull-right
+          =t('teachers.menu.order_reserving')
+
+%button.btn.btn-default.btn-block{:"data-toggle"=>"modal",:"data-target"=>".bs-example-modal-sm"}
+  退出帐号
+      
+.modal.fade.bs-example-modal-sm{:tabindex=>"1",:role=>"dialog",:"aria-labelledby"=>"mySmallModalLabel",:"aria-hidden"=>"true"}
+  .modal-dialog.modal-sm
+    .modal-content
+      %p
+        %h4.text-center 退出帐号
+        %p.text-center.text-muted 确定要退出帐号?
+      .modal-footer
+        .col-xs-6
+          %p.center
+            %button.btn.btn-default.btn-block{:"data-dismiss"=>"modal"} 取消 
+        .col-xs-6
+          %button.btn.btn-default.btn-block 
+            %a{:href => destroy_teacher_session_path,:"data-method" => "delete"}
+              退出

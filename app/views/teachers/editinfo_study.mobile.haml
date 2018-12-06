@@ -1,0 +1,154 @@
+= nested_form_for current_teacher,:url=>updateInfor_teachers_path,:html => {:multipart => true,:method=>"post",:class=>"form-horizontal tpadding ", :autocomplete => "off"}, :validate => true do |f| 
+  = render "layouts/header"
+  .panel-group{ :id => "accordion", :role => "tablist", :"aria-multiselectable" => "true" }
+    .form-group
+      .col-md-12.col-xs-12
+        .panel.panel-default.tpanel-ab.b-radius
+          .panel-heading.tpanel-titles{ :id => "headingOne",:role => "tab" }
+            .form-group.te-mgb
+              .col-xs-8
+                %h4{ :class => "panel-title" }
+                  %a{ :"data-toggle" => "collapse", :"data-parent" => "#accordion", :href => "#collapseOne", :"aria-expanded" => "true", :"aria-controls" => "collapseOne"}
+                    我的成绩单
+                  %span{ :class => "caret"}
+              .col-xs-4
+                %h4{ :class => "panel-title" }
+                  = f.link_to_add  "添加", :scores, :data => { :target => "#scores_content" }
+                  %span{ :class => "glyphicon glyphicon-pencil"}
+          .panel-collapse.collapse.in{ :id => "collapseOne", :role => "tabpanel", :"aria-labelledby" => "headingOne" }
+            .panel-body
+              #scores_content  
+                = f.fields_for :scores do |s|
+                  .panel.panel-default.tpanel-border.tpanel-ab
+                    .panel-heading
+                      .form-group.te-mgb
+                        .col-xs-2.pull-right
+                          %h4{ :class => "panel-title" }
+                            = s.link_to_remove "", :class => " input-group btn-default glyphicon glyphicon-trash"
+                    .panel-body
+                      .tpadding
+                        .form-group
+                          = f.label "科目：", :class => "control-label col-xs-4 tp-left"
+                          .col-xs-8
+                            .btn-group
+                              = s.text_field :title, :class => "form-control ctg-title", :list => "subject_category"
+                              %datalist{ :id =>"subject_category" }
+                                %option{ :value => "高考" }
+                                %option{ :value=>"英语四级" }
+                                %option{ :value=>"英语六级" }
+                        .form-group
+                          = f.label "成绩：", :class => "control-label col-xs-4 tp-left"
+                          .col-xs-8
+                            = s.text_field :content, :class => "form-control"
+    .form-group
+      .col-md-12.col-xs-12
+        .panel.panel-default.tpanel-border.tpanel-ab
+          .panel-heading{ :id => "headingTwo",:role => "tab" }
+            .form-group.te-mgb
+              .col-xs-8
+                %h4{ :class => "panel-title" }
+                  %a.collapsed{ :"data-toggle" => "collapse", :"data-parent" => "#accordion", :href => "#collapseTwo", :"aria-expanded" => "false", :"aria-controls" => "collapseTwo"}
+                    我的荣誉单
+                  %span{ :class => "caret"}
+              .col-xs-4
+                %h4{ :class => "panel-title" }
+                  = f.link_to_add "添加", :honors, :data => { :target => "#honors_content" }
+                  %span{ :class => "glyphicon glyphicon-pencil"}
+          .panel-collapse.collapse{ :id => "collapseTwo", :role => "tabpanel", :"aria-labelledby" => "headingTwo" }
+            .panel-body
+              .tpadding
+                .form-group.tmid
+                  #honors_content  
+                    = f.fields_for :honors do |s|
+                      .panel.panel-default.tpanel-border.tpanel-ab
+                        .panel-heading
+                          .form-group.te-mgb
+                            .col-xs-2.pull-right
+                              %h4{ :class => "panel-title" }
+                                = s.link_to_remove "", :data => { :confirm => "确认删除荣誉单吗？" }, :class => " input-group btn-default glyphicon glyphicon-trash"
+                        .panel-body.tp-left.te-bottom
+                          .tpadding
+                            .form-group
+                              .col-xs-12
+                                .btn-group
+                                  = s.text_field :title, :class => "form-control ctg-title", :list => "honor_category" 
+                                  %datalist{ :id => "honor_category" }
+                                    %option{ :value => "荣誉" }
+                                    %option{ :value => "奖学金" }
+                                    %option{ :value => "资格证书" }
+                                    %option{ :value => "政治面貌" }
+                                    %option{ :value => "计算机等级" }
+                          .tpadding
+                            .form-group.te-mgb
+                              .col-md-12.col-xs-12.tp-lefts
+                                = s.text_area :content, :rows => "6", :cols => "10", :class => "form-control"
+    .form-group
+      .col-md-12.col-xs-12
+        .panel.panel-default.tpanel-titles.tpanel-ab
+          .panel-heading.tpanel-titles{ :id => "headingThree",:role => "tab" }
+            .tpadding
+              .form-group.te-mgb
+                .col-xs-8
+                  %h4{ :class => "panel-title" }
+                    %a.collapsed{ :"data-toggle" => "collapse", :"data-parent" => "#accordion", :href => "#collapseThree", :"aria-expanded" => "false", :"aria-controls" => "collapseThree"}
+                      上传成绩单和荣誉单
+                .col-xs-4
+                  %h4{ :class => "panel-title" }
+                    = f.link_to_add "添加", :pictures, :data => { :target => "#pictures_content" }
+                    %span{ :class => "glyphicon glyphicon-pencil"}
+          .panel-collapse.collapse{ :id => "collapseThree", :role => "tabpanel", :"aria-labelledby" => "headingThree" }
+            .panel-body
+              .tpadding
+                .form-group.tmid
+                  #pictures_content  
+                    .form-group.hidden
+                      = f.fields_for :pictures do |s|
+                        .panel.panel-default.tpanel-border.tpanel-ab
+                          .panel-heading
+                            .form-group.te-mgb
+                              .col-xs-2.pull-right
+                                %h4{ :class => "panel-title" }
+                                  = s.link_to_remove "", :class => " input-group btn-default glyphicon glyphicon-trash"
+                          .panel-body
+                            .tpadding
+                              .form-group
+                                = s.label "标题", :class => "control-label col-xs-3 tp-left"
+                                .col-md-9.col-xs-9
+                                  .btn-group
+                                    = s.text_field :title, :class => "form-control  ctg-title", :list => "img_category" 
+                                    %datalist{ :id => "img_category" }
+                                      %option{ :value => "高考成绩单" }
+                                      %option{ :value => "英语四级" }
+                                      %option{ :value => "英语六级" }
+                                      %option{ :value => "奖学金证书" }
+                                      %option{ :value => "荣誉证书" }
+                              .form-group
+
+                                = s.label "图片", :class => "control-label col-xs-3 tp-left"
+                                .col-md-9.col-xs-9.te-flow
+                                  = s.hidden_field :id
+                                  = s.file_field :honors_image
+                  
+                .form-group.tmid
+                  -current_teacher.pictures.each_with_index do |p,n|
+                    -if p.honors_image_url
+                      .col-xs-10.col-xs-offset-1
+                        .tpadding
+                          .form-group
+                            .panel.panel-default.tpanel-border.tpanel-ab
+                              .panel-heading
+                                .form-group.te-mgb
+                                  .col-md-10.col-xs-10.te-right.tleft
+                                    = p.title
+                                  .col-md-2.col-xs-2.tp-left.te-zero
+                                    %label.te-bottom.te-top.cursor-pointer{ :onclick => "change_color(this)" }
+                                      =check_box_tag "remove_honors_image[]", n, checked = false, :class => "sr-only" 
+                                      %span{ :class => "glyphicon glyphicon-remove-circle" }
+                              .panel-body.tp-left.te-bottom.te-top
+                                .thumbnail.honor-img2.te-mgb
+                                  .img-h
+                                    =image_tag(p.honors_image_url(:normal), width:"100%", height:"170px")
+    
+  %button{ :class => "btn btn-success btn-block" }
+    %span{ :class => "glyphicon glyphicon-floppy-save" }
+      保存信息

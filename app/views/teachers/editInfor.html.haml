@@ -1,0 +1,30 @@
+- provide(:title, t('.title'))
+
+= render "layouts/header"
+.p_main
+  .p_wrapper
+    = render :partial => "profile"
+    .p_content.bg_color.te-relative.te-min
+      .p_block
+        -#
+          %div.p_block_title.p_content_block_title
+            %h4
+              = image_tag("xxxg.png",class:"icont")
+              个人信息
+              %span.p_titlexg 信息完整才能通过认证，并发布课程哟！
+
+      .editinfo-nav-wrap
+        %ul.nav_back.nav.nav-tabs.editinfo-nav-tabs{:role=>"tablist"}
+          %li.nav_no.active.nav_text= link_to "基本信息", "#tbasic-info", :role=>"tab", "data-toggle"=>"tab"
+          %li.nav_no.nav_text= link_to "学习成果", "#tstudy-result", :role=>"tab", "data-toggle"=>"tab"
+          %li.nav_no.nav_text= link_to "教学经历", "#teach-experience", :role=>"tab", "data-toggle"=>"tab"
+          %li.nav_no.nav_text= link_to "教学计划", "#teach-plan", :role=>"tab", "data-toggle"=>"tab"
+      .tab-content.editinfo-content
+        .tab-pane.fade.in.active#tbasic-info
+          = render "editinfo_basic" 
+        .tab-pane.fade#tstudy-result
+          = render "editinfo_study"
+        .tab-pane.fade#teach-experience                                                               
+          = render "editinfo_experience"
+        .tab-pane.fade#teach-plan                                                             
+          = render "editinfo_plan"

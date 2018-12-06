@@ -1,0 +1,28 @@
+- provide(:title, t('.title'))
+=render "layouts/header"
+.list-group
+  .list-group-item
+    .row
+      .col-xs-4
+        姓 名
+      .col-xs-6
+        =current_parent.name
+  .list-group-item
+    .row
+      .col-xs-4
+        手机号:
+      .col-xs-6
+        =current_parent.phone
+  .list-group-item
+    .row
+      .col-xs-4
+        支付宝:
+      .col-xs-6
+        =current_parent.pay_num
+  .list-group-item
+    .row
+      .col-xs-4
+        住 址:
+      .col-xs-6
+        - if @address
+          %p=get_address_province_string(@address.province) + get_address_city_string(@address.city) + get_address_district_string(@address.district) + @address.details

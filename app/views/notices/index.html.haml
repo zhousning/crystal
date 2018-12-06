@@ -1,0 +1,36 @@
+- provide(:title, "教育讲堂")
+
+= render "layouts/subbar_top"
+= render "layouts/nav_menu"
+.wrapper
+  .info-title-menu
+    =link_to "家教呢 ",root_path
+    >
+    =link_to "教育讲堂 ",notices_path
+  .report
+    .col-md-2.report-category
+      %ul.report-cat-list
+        %a{:href=>notices_path}
+          -if @category
+            %li 全部文章
+          -else
+            %li.active 全部文章
+        -@notices_category.each do |p|
+          %a{:href=>list_notices_path(:id=>p)}
+            -if (@category&&p.id==@category.id)
+              %li.active
+                =p.title
+            -else
+              %li
+                =p.title
+    .col-md-8.report-list
+      %ul.list
+        - @notices.each_with_index do |notice,i|
+          %li
+            = link_to notice.title, notice_path(:id=>notice.number)
+            %span.date= notice.created_at.strftime("%m-%d %H:%M")
+          -if((i%5==0)&&(i!=0))
+            %li.uline 
+
+    = paginate @notices
+

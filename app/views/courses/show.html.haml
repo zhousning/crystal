@@ -1,0 +1,108 @@
+- provide(:title, t('.title'))
+
+%div#p_header
+  %div.p_wrapper
+    %div.p_logo
+      %a{:href => root_path}
+        =image_tag('logo.png',:class => "header-logo-img2")
+    %img.p_title_img{:src => "https://account.xiaomi.com/static/img/passport/photo.jpg"}
+    %div.p_title
+      个人主页
+%div.p_main
+  %div.p_wrapper
+    = render :partial => "teachers/profile"
+    %div.p_content
+      %div.p_block
+        %div.p_block_title.p_content_block_title
+          %h4
+            %i.glyphicon.glyphicon-user
+              课程信息
+      %div.p_block
+        %div.t_main
+          %div.t_right
+            %div.show
+              %div.panel-body
+                = form_for @course, :html=>{:class=>"form-horizontal"} do |f|
+                  .form-group
+                    = f.label "课程名称", :class=>"col-md-2 col-xs-2 control-label"
+                    .col-md-4.col-xs-4
+                      %p.form-control= @course.name
+
+                  .form-group
+                    = f.label "科目分类", :class=>"col-md-2 col-xs-2 control-label"
+                    .col-md-4.col-xs-4
+                      %p.form-control="#{@course.category.second} / #{@course.category.third} / #{@course.category.subject}"
+
+                  -#
+                    .form-group
+                      = f.label "授课时期", :class=>"col-md-2 control-label"
+                      .col-md-4.col-xs-4
+                        %label.radio-inline
+                          = f.radio_button :period, Setting.courses.period_normal, :disabled=>true
+                          = Setting.courses.period_normal_string
+                        %label.radio-inline
+                          = f.radio_button :period, Setting.courses.period_vacation, :disabled=>true
+                          = Setting.courses.period_vacation_string
+                        %label.radio-inline
+                          = f.radio_button :period, Setting.courses.period_all, :disabled=>true
+                          = Setting.courses.period_all_string
+
+                    .form-group
+                      = f.label "授课经验", :class=>"col-md-2 control-label"
+                      .col-md-4.col-xs-4
+                        %p.form-control= @course.experence
+                      = f.label "年", :class=>"form-control-static"
+                
+                    .form-group
+                      = f.label "授课模式", :class=>"col-md-2 control-label"
+                      .col-md-4.col-xs-4
+                        %p.form-control= @course.mode
+                
+                    .form-group
+                      = f.label "授课时长", :class=>"col-md-2 control-label"
+                      .col-md-4.col-xs-4
+                        %p.form-control= @course.length
+                      = f.label "小时", :class=>"form-control-static"
+                
+                  .form-group
+                    = f.label "课时费用", :class=>"col-md-2 col-xs-2 control-label"
+                    .col-md-4.col-xs-4
+                      %p.form-control= @course.price
+                    = f.label "元 / 时", :class=>"form-control-static"
+                
+                  -#
+                    .form-group
+                      = f.label "预约时间", :class=>"col-md-2 control-label"
+                      .col-md-7
+                        %table.table.table-bordered
+                          %tr
+                            %td
+                              ="星期一"
+                              = check_box_tag "appointments_pos[]",1,@appointments_pos.include?(1)
+                            %td
+                              ="星期二"
+                              = check_box_tag "appointments_pos[]",2,@appointments_pos.include?(2)
+                            %td
+                              ="星期三"
+                              = check_box_tag "appointments_pos[]",3,@appointments_pos.include?(3)
+                            %td
+                              ="星期四"
+                              = check_box_tag "appointments_pos[]",4,@appointments_pos.include?(4)
+                            %td
+                              ="星期五"
+                              = check_box_tag "appointments_pos[]",5,@appointments_pos.include?(5)
+                            %td
+                              ="星期六"
+                              = check_box_tag "appointments_pos[]",6,@appointments_pos.include?(6)
+                            %td
+                              ="星期日"
+                              = check_box_tag "appointments_pos[]",7,@appointments_pos.include?(7)
+                  
+                  .form-group
+                    .col-md-6.col-xs-6.col-md-offset-2.col-xs-offset-2
+                      = link_to '编辑', edit_course_path(@course), :class=>"btn btn-primary"
+                      &nbsp;
+                      = link_to '删除', @course, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class=>"btn btn-danger"
+                      &nbsp;
+                      = link_to '返回',courses_path,:class=>"btn btn-default"
+

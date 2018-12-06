@@ -1,0 +1,34 @@
+- provide(:title, t('.title'))
+
+=render "layouts/header"
+
+.p_block.p_modify_info
+  = form_for @parent,:url => {:controller => "parents",:action => "modify_info_changed"}, :html=>{:class=>"form-horizontal"}, :validate => true do |f|
+    .panel.panel-info
+      .panel-heading
+        %h5.panel-title
+          =t('parents.menu.modify_info')
+      .panel-body
+        .col-xs-12
+          .form-group
+            = f.text_field :name,:class=>"form-control p_modify_info_text",:placeholder=>"用户姓名"
+        .col-xs-12
+          .form-group
+            =f.text_field :pay_num,:class=>"form-control p_modify_info_text",:placeholder=>"支付宝帐号"
+        = fields_for :address,@parent.address do |a|
+          .col-xs-12
+            .form-group
+              = a.select :province,get_address_province,{:include_blank => '请选择所在省'}, :class => "form-control p_modify_info_text", :id =>"p_province",:placeholder=>"所在省份"
+          .col-xs-12
+            .form-group
+              = a.select :city,get_address_city,{:include_blank => '请选择所在市'}, :class =>"form-control p_modify_info_text", :id => "p_city",:placeholder=>"请选择所在城市"
+          .col-xs-12
+            .form-group
+              = a.select :district,get_address_district,{:include_blank => '请选择所在区'}, :class =>"form-control p_modify_info_text", :id => "p_district"
+          .col-xs-12
+            .form-group
+              = a.text_field :details,:class =>"form-control p_modify_info_text2",:placeholder=>"详细地址"
+    .col-xs-6
+      = f.submit "保存",:class => "btn btn-success btn-block"
+    .col-xs-6
+      = link_to "取消", modify_info_parents_path,:class => "btn btn-warning btn-block"

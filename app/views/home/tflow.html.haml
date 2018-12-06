@@ -1,0 +1,8 @@
+- provide(:title, t('.title'))
+
+= render "layouts/subbar_top"
+= render "layouts/nav_menu"
+
+.apw_ctn
+  .teacher_ctt
+    = link_to "家教注册", new_teacher_registration_path, :class => "btn btn-primary btn-lg  register_t_btn"

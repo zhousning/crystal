@@ -1,0 +1,87 @@
+.p_menu
+  %div.p_block
+    %div.p_block_title
+      %h4 我的信息
+  %div.p_block
+    %ul.nav
+      %li
+        %a{:href => basicInfor_teachers_path,:class => (action_name == "basicInfor" ? "p_active" : nil)}
+          = image_tag("jbxx.png",class:"iconm")
+          用户中心
+      %li
+        %a{:href => editinfo_basic_teachers_path,:class => (action_name == "editinfo_basic" ? "p_active" : nil)}
+          %span.pnav-left
+            基本信息
+      %li
+        %a{:href => editinfo_study_teachers_path,:class => (action_name == "editinfo_study" ? "p_active" : nil)}
+          %span.pnav-left
+            学习成果
+      %li
+        %a{:href => editinfo_experience_teachers_path,:class => (action_name == "editinfo_experience" ? "p_active" : nil)}
+          %span.pnav-left
+            教学经历
+      %li
+        %a{:href => editinfo_plan_teachers_path,:class => (action_name == "editinfo_plan" ? "p_active" : nil)}
+          %span.pnav-left
+            教学计划
+
+      -#  
+        %li
+          %a{:href => editInfor_teachers_path,:class => (action_name == "editInfor" ? "p_active" : nil)}
+            = image_tag("xxxg.png",class:"iconm")
+            个人信息
+        %li
+          %a{:href => paper_teachers_path,:class => (action_name == "paper" ? "p_active" : nil)}
+            = image_tag("zgrz.png",class:"iconm")
+            资格认证
+    %ul.nav
+      %li
+        %a{:href => messages_teachers_path, :class => ((action_name=="messages" or action_name=="msg") ? "p_active" : nil)}
+          %i.glyphicon.glyphicon-envelope
+          我的消息
+      %li
+        %a{:href => gallery_teachers_path,:class => (action_name == "gallery" ? "p_active" : nil)}
+          %i.glyphicon.glyphicon-camera
+          我的相册
+      %li
+        %a{:href => edit_teacher_registration_path, :class => (request.path == edit_teacher_registration_path ? "p_active" : nil)}
+          %i.glyphicon.glyphicon-asterisk
+          密码修改
+  %div.p_block
+    %div.p_block_title
+      %h4 我的课程
+  %div.p_block
+    %ul.nav
+      -if current_teacher.status!=Setting.teachers.status_pass_sql
+        %li
+          %a{:href => new_course_path,:class => (action_name == "new" ? "p_active" : nil)}
+            %i.glyphicon.glyphicon-circle-arrow-up
+            我要发布
+      -else
+        %li
+          %a{:href => new_course_path,:class => (action_name == "new" ? "p_active" : nil)}
+            %i.glyphicon.glyphicon-circle-arrow-up
+            我要发布
+      %li
+        %a{:href => courses_path,:class => (action_name == "index" ? "p_active" : nil)}
+          = image_tag("qbkc.png",class:"iconm")
+          已经发布
+  %div.p_block
+    %div.p_block_title
+      %h4 我的订单
+  %div.p_block
+    %ul.nav
+      %li
+        %a{:href => order_all_teachers_path, :class => (action_name == "order_all" ? "p_active" : nil)}
+          %i.glyphicon.glyphicon-align-justify
+          全部订单
+        %a{:href => order_unpay_teachers_path, :class => (action_name == "order_unpay" ? "p_active" : nil)}
+          = image_tag("dzf.png",class:"iconm")
+          待确认的订单
+        %a{:href => order_reserving_teachers_path, :class => (action_name == "order_reserving" ? "p_active" : nil)}
+          = image_tag("yyz.png",class:"iconm")
+          预约中的订单
+        %a{:href => order_transfer_teachers_path, :class => (action_name == "order_transfer" ? "p_active" : nil)}
+          = image_tag("dkz.png",class:"iconm")
+          打款中的订单
+  %div.p_block

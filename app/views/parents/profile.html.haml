@@ -1,0 +1,43 @@
+- provide(:title, t('.title'))
+
+= render "layouts/header"
+%div.p_main
+  %div.p_wrapper
+    = render :partial => "profile"
+    %div.p_content
+      %div.p_block
+        %div.p_block_title.p_content_block_title
+          %h4
+            = image_tag("jbxx.png",class:"icont")
+            我的信息
+      %div.p_block
+        %div.p_content_img
+          = image_tag("photo.jpg")
+        %div.p_content_info
+          %div.p_content_t
+            %span #{current_parent.name}
+          %table.table
+            %tr
+              %td.p_content_td
+                手机号:
+              %td
+                %p=current_parent.phone
+            %tr
+              %td.p_content_td
+                住&nbsp;址:
+              %td
+                - if @address
+                  %p=get_address_province_string(@address.province) + get_address_city_string(@address.city) + get_address_district_string(@address.district) + @address.details
+        %div.p_block
+          %div.p_block_title.p_content_block_title2
+            %h4
+              %i.glyphicon-color.glyphicon.glyphicon-align-justify
+              我的订单
+        %div.p_block
+          = render "order_list"
+        -#
+          %div.p_block
+            %div.p_block_title.p_content_block_title2
+              %h4
+                %i.glyphicon.glyphicon-star
+                我的收藏

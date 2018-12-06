@@ -1,0 +1,81 @@
+- provide(:title, t('.title'))
+=render "layouts/subbar_top"
+= render "layouts/nav_menu"
+.wrapper
+  .m-top-10
+    =image_tag("gkcc.gif",:width=>"100%")
+  .school
+    .col-md-9.padding-none
+      .course-list
+        %a{:href=>"http://item.taobao.com/item.htm?id=45435882440"}
+          =image_tag("primary_school_card.jpg")
+          .school-price
+            %span.price-ico ￥
+            %span.now-price 120
+            元
+            .cheaper
+              6.0折
+            .old-price 原价：200
+      .course-list
+        %a{:href=>"http://item.taobao.com/item.htm?id=45482853215"}
+          =image_tag("middle_school_card.jpg")
+          .school-price
+            %span.price-ico ￥
+            %span.now-price 140
+            元
+            .cheaper
+              5.0折
+            .old-price 原价：280
+
+      .course-list
+        %a{:href=>"http://item.taobao.com/item.htm?id=45435726727"}
+          =image_tag("senior_school_card.jpg")
+          .school-price
+            %span.price-ico ￥
+            %span.now-price 180
+            元
+            .cheaper
+              5.0折
+            .old-price 原价：360
+
+      .course-list
+        %a{:href=>"http://item.taobao.com/item.htm?id=45404765723"}
+          =image_tag("primary_school.jpg")
+          .school-price
+            %span.price-ico ￥
+            %span.now-price 2800
+            元
+          -#  .cheaper
+              2.3折
+            .old-price 原价：1099
+
+      .course-list
+        %a{:href=>"http://item.taobao.com/item.htm?id=45329211076"}
+          =image_tag("middle_school.jpg")
+          .school-price
+            %span.price-ico ￥
+            %span.now-price 3300
+            元
+          -#  .cheaper
+              2.3折
+            .old-price 原价：1099
+
+      .course-list
+        %a{:href=>" http://item.taobao.com/item.htm?id=45403401712"}
+          =image_tag("senior_school.jpg")
+          .school-price
+            %span.price-ico ￥
+            %span.now-price 3600
+            元
+          -#  .cheaper
+              2.3折
+            .old-price 原价：1099
+  -#
+    .col-md-3.list-logo
+      =image_tag("listad01.jpg")
+      =image_tag("listad02.jpg")
+      =image_tag("listad03.gif")
+      =image_tag("listad05.gif")
+      =image_tag("listad06.jpg")
+      =image_tag("listad07.jpg")
+      =image_tag("listad08.jpg")

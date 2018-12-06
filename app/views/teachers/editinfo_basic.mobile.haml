@@ -1,0 +1,131 @@
+- provide(:title, t('.title'))
+
+= render "layouts/header" 
+.p_block
+  .panel-body
+    = nested_form_for current_teacher,:url=>updateInfor_teachers_path,:html => {:multipart => true,:method=>"post",:class=>"form-inline",:role=>"form",:autocomplete => "off"},:validate => true do |f| 
+      %ul.list-group
+        %li.list-group-item.active.glyphicon.glyphicon-user{:onclick=>"toggleInfo()"}
+          1.个人基本信息
+        %span.edit-basic-info
+          %li.list-group-item
+            .row
+              .col-xs-12
+                .form-group
+                  = f.label "姓名：", :class=>"sr-only",:for=>"Name"
+                .input-group
+                  .input-group-addon
+                    姓名
+                  = f.text_field :name, :class=> "form-control",:id=>"Name",:placeholder=>"姓名"
+            .row
+              .col-xs-12
+                .form-group
+                  =f.label "性别",:class=>"sr-only"
+                .input-group
+                  .input-group-addon
+                    性别
+                  %label.radio-inline.m-left
+                    = f.radio_button(:sex,Setting.teachers.sex_man)
+                    = Setting.teachers.sex_man_string
+                  %label.radio-inline
+                    = f.radio_button(:sex,Setting.teachers.sex_women)
+                    =  Setting.teachers.sex_women_string
+            .row
+              .col-xs-12
+                .form-group
+                  =f.label "教龄",:class=>"sr-only",:for=>"teaching_age"
+                .input-group
+                  .input-group-addon
+                    教龄
+                  = f.text_field :teaching_age,:min=>"1",:class=> "form-control",:id=>"teaching_age",:placeholder=>"教龄"
+                  .input-group-addon
+                    年
+            .row
+              .col-xs-12
+                .form-group
+                  = f.label "年龄：", :class=>"sr-only",:for=>"age"
+                .input-group
+                  .input-group-addon
+                    年龄
+                  = f.text_field :age,:min=>"19",:class=> "form-control",:id=>"age",:placeholder=>"年龄"
+                  .input-group-addon
+                    岁
+            .row
+              .col-xs-12
+                .form-group
+                  = f.label "支付宝",:class=>"sr-only",:for=>"pay_num"
+                .input-group
+                  .input-group-addon
+                    支付宝
+                  = f.text_field :pay_num,:class=>"form-control",:placeholder=>"完成支付功能必填项",:id=>"pay_num"
+            .row
+              -if current_teacher.identity==2
+                = fields_for :teacher_identity,current_teacher.teacher_identity do |i| 
+                  .col-md-12
+                    .form-group
+                      = i.label "学校：", :class=>"sr-only"
+                  .input-group
+                    .input-group-addon
+                      任职学校
+                      = i.text_field :school, :class=>"form-control",:placeholder=>"任职学校"
+                  .col-md-12
+                    .form-group
+                      = i.label "任课年级：", :class=>"sr-only"
+                    .input-group
+                      .input-group-addon
+                        任课年级
+                      = i.text_field :grade, :class=>"form-control",:placeholder=>"任课年级"
+                  .coldd-md-12
+                    .form-group
+                      = i.label "教学科目：", :class=>"sr-only"
+                    .input-group
+                      .input-group-addon
+                        教学科目
+                      = i.text_field :subject, :class=>"form-control",:placeholder=>"教学科目"
+              -if current_teacher.identity==1
+                = fields_for :student_identity,current_teacher.student_identity do |i| 
+                  .col-md-12
+                    .form-group
+                      = i.label "学校：", :class=>"sr-only"
+                    .input-group
+                      .input-group-addon
+                        学校名称
+                      = i.text_field :school, :class=>"form-control",:placeholder=>"学校名称"
+                  .col-md-12
+                    .form-group
+                      = i.label "所在年级：", :class=>"sr-only"
+                    .input-group
+                      .input-group-addon
+                        所在年级
+                      = i.text_field :grade, :class=>"form-control",:placeholder=>"所在年级"
+                  .col-md-12
+                    .form-group
+                      = i.label "所学专业：", :class=>"sr-only"
+                    .input-group
+                      .input-group-addon
+                        所学专业
+                      = i.text_field :major, :class=>"form-control",:placeholder=>"所学专业"
+            .row
+              .col-xs-12
+                .form-group
+                  = f.label "爱好：",:class=>"sr-only"
+                .input-group
+                  .input-group-addon
+                    个人爱好
+                  = f.text_field :hobby, :class=>"form-control"
+            .row
+              .col-xs-12
+                .form-group
+                  = f.label "个人简介",:class=>"sr-only"
+                .input-group
+                  = f.text_area :introduction,:rows=>8,:class=>"form-control",:placeholder => "请填写个人简介,可以详细的说明一下自己的学习，工作，性格，经验等，以便家长更好的了解你，加深自己在家长心中的印象，提高自己的竞争力。。。。。。"
+      %ul.list-group
+        %li.list-group-item.active
+          .glyphicon.glyphicon-camera
+            2.资格认证
+      .edit-basicImg-info
+        = render "editinfo_timage"
+    
+    
+    
+    

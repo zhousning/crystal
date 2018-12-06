@@ -1,0 +1,44 @@
+- provide(:title, t('.title'))
+
+= render "layouts/header"
+%div.p_main
+  %div.p_wrapper
+    = render :partial => "parents/profile"
+    %div.p_content
+      %div.p_block
+        %div.p_block_title.p_content_block_title
+          %h4
+            %i.glyphicon.glyphicon-asterisk.greay
+            密码修改
+      %div.p_block
+        .p_block_password
+          = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class:"form-horizontal",method: :put }) do |f| 
+            -#
+              = devise_error_messages!
+              - if devise_mapping.confirmable? && resource.pending_reconfirmation? 
+                %div
+                  = "Currently waiting confirmation for:" 
+                  = resource.unconfirmed_email 
+
+            .form-group
+              = f.label "当前密码:", :class => "col-md-2 control-label"
+              .col-md-4
+                = f.password_field :current_password, autocomplete: "off", :class => "form-control"
+            
+  
+            .form-group
+              = f.label "新密码:", :class =>"col-md-2 control-label"
+              .col-md-4
+                = f.password_field :password, autocomplete: "off", :class => "form-control"
+                
+            .form-group
+              = f.label "确认密码:", :class => "col-md-2 control-label"
+              .col-md-4
+                = f.password_field :password_confirmation, autocomplete: "off", :class => "form-control"
+            
+            .form-group
+              .col-sm-offset-2.col-sm-10.col-md-4
+                = f.submit "提交", :class => "btn btn-success form-control"
+            
+
+

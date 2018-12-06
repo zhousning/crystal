@@ -1,0 +1,71 @@
+%div#product
+  %div.wrapper
+    -#
+      %div.course-nav-div
+        %ul
+          %li
+            %a
+              综合排序
+    %div.course-list-div
+      - if @teachers.count == 0
+        %center
+          没有找到相关的课程
+      - @teachers.each do |teacher|
+        %div.course-list-box
+          %a{:href => detail_teachers_path(:id => teacher.number), :target=>"_blank"}
+            %div.course-list-box-left
+              -#
+                - if teacher.courses[0].period == 0
+                  = image_tag("jb3.png",class:"course-list-box-left-jb1",alt:"平时可以上课")
+                - elsif teacher.courses[0].period == 1
+                  = image_tag("jb1.png",class:"course-list-box-left-jb1",alt:"假期可以上课")
+                - else
+                  %div.course-list-box-left-jb2
+                %div.course-list-box-left-title
+                  = teacher.courses[0].name
+              %div.course-list-box-left-header
+                = image_tag(teacher.image_url(:normal), :alt=>"家教老师头像")
+          %div.course-list-box-middle
+            %div.course-list-box-middle-name
+              %span= teacher.name
+              &nbsp;
+              - if teacher.sex == 1
+                男
+              - else
+                女
+              &nbsp;
+              = teacher.age.to_s() +"岁"
+            %div.course-list-box-middle-check
+              = image_tag("xlrz.png",:class => "course-list-box-middle-check-rz",:title => "学历认证")
+              = image_tag("sfrz.png",:class => "course-list-box-middle-check-rz",:title => "身份认证")
+              - if teacher.signcount and teacher.signcount > 0
+                = image_tag("signin.png",:class => "course-list-box-middle-check-rz",:title => "活跃用户")
+            %div.course-list-box-middle-line
+              - if teacher.identity == 1
+                - if teacher.student_identity
+                  = teacher.student_identity.school
+                  \-
+                  = teacher.student_identity.major
+                  \-
+                  = teacher.student_identity.grade
+            %div.course-list-box-middle-line
+              教学科目：
+              = teacher.courses.map{|course| course.category.second[0]+course.category.third[0]+course.category.subject}.join(", &nbsp;").html_safe
+            %div.course-list-box-middle-line
+              授课经验：
+              = teacher.teaching_age.to_s() +"年"
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              授课方式：
+              = "一对一教学"
+            %div.course-list-box-middle-line
+              个人简介:
+              &nbsp;
+              = truncate(teacher.introduction)
+
+          %div.course-list-box-right
+            %div.course-list-box-right-money
+              = "￥ #{get_min_price(teacher.courses)}元"
+            %div.course-list-box-right-detail
+              = link_to "查看详情",detail_teachers_path(:id => teacher.number),:class => "btn btn-success", :target=>"_blank"
+          %div.course-list-box-line
+

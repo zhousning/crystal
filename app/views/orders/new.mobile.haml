@@ -1,0 +1,66 @@
+- provide(:title, t('.title'))
+
+= render "layouts/subbar_top"
+.filter-top
+.order-title
+  %h1
+    %i.glyphicon.glyphicon-shopping-cart
+    填写订单
+= form_for @order, :html=>{:class=>"form-horizontal"}, :validate => true do |f|
+  = hidden_field_tag :course_id, @course.id
+  .qa-message-list#wallmessages
+    .message-item#m16
+      .message-inner
+        .message-head.clearfix
+          %h5 预约课程信息
+        .qa-message-content
+          %h5
+            = @course.teacher.name
+            %small
+              - if @course.teacher.identity ==Setting.teachers.identity_student
+                - if @course.teacher.student_identity
+                  = @course.teacher.student_identity.school
+              -else
+                - if @course.teacher.teacher_identity
+                  = @course.teacher.teacher_identity.school
+          %h5=@course.name
+          = "￥#{@course.price} / 小时"
+    .message-item#m16
+      .message-inner
+        .message-head.clearfix
+          %h5 填写联系方式
+        .qa-message-content
+          .input-group
+            %span.input-group-addon  &nbsp;联 系 人
+            = f.text_field :name, :value=>@current_parent.name, :class=>"form-control"
+          .input-group.m-top-10
+            %span.input-group-addon 联系电话
+            = f.text_field :phone, :value=>@current_parent.phone, :class=>"form-control"
+          .input-group.m-top-10
+            %span.input-group-addon 授课地址
+            = f.text_field :addr, :class => "form-control", :id => "addr"
+    .col-xs-12
+    .message-item#m16
+      .message-inner
+        .message-head.clearfix
+          %h5 选择授课时间
+        .qa-message-content
+          .input-group
+            %span.input-group-addon 试讲日期
+            .appointment-time
+              = f.text_field :appointments_time, :class=>"form-control"
+
+          .input-group.m-top-10
+            %span.input-group-addon 购买课时
+            = f.number_field :hours, :class=>"form-control hours-value", :onchange => "input_hours(#{@course.price})"
+            %span.input-group-addon 小时
+
+      = render "date"
+  .row
+    .col-xs-6.col-xs-offset-2
+      %p#course
+        %h5
+          应付总额:
+          %span.order-submit-footer-number.font-orange= "￥#{@course.price * @order.hours}"
+    .col-xs-4
+      = f.submit '提交订单', :class=>"btn btn-warning"

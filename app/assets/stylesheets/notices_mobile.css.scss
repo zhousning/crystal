@@ -1,0 +1,38 @@
+// Place all the styles related to the messages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.report-title
+{
+  background:rgba(75, 72, 72, 0.33);
+  color:white;
+  padding-left:15px;
+  height:30px;
+  line-height:30px;
+  font-size:18px;
+}
+.report-list ul
+{
+  margin-left:-30px;
+  margin-right:15px;
+  margin-top:10px;
+}
+.report-list ul li
+{
+
+  padding-left:8px;
+  height:30px;
+  line-height:30px;
+  list-style: none;
+  background:white;
+  border-bottom:1px solid #ddd;
+  font-size:16px;
+}
+.report-list ul li a
+{
+  font-family: "宋体";
+  color: currentcolor;
+}
+.m-bottom-10
+{
+  margin-bottom:10px;
+}

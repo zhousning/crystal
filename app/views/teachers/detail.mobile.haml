@@ -1,0 +1,264 @@
+- if @teacher.identity == 1 and @teacher.student_identity
+  - provide(:title, "吉林-" + @teacher.name + "-" + @teacher.student_identity.school + "-" + @teacher.courses.map {|course| course.category.second[0]+course.category.third[0]+course.category.subject}.join(", "))
+- else
+  - provide(:title, "吉林-" + @teacher.name + "-" + @teacher.courses.map {|course| course.category.second[0]+course.category.third[0]+course.category.subject}.join(", "))
+= render "layouts/subbar_top"
+
+.row.form-group.filter-top
+  .col-xs-12.back-white
+    .row.header-padding
+      .col-xs-3.m-top-10
+        = image_tag(@teacher.image_url(:normal),:class => "img-circle", :width => "50px", :height => "50px")
+      .col-xs-9
+        %h4
+          = @teacher.name 
+          %small 
+            - if @teacher.identity == Setting.teachers.identity_student
+              - if @teacher.student_identity
+                =t('teachers.detail.student')
+            - else 
+              - if @teacher.teacher_identity
+                =t('teachers.detail.teacher')
+        .row
+          .col-xs-5
+            = @teacher.teaching_age.to_s() + t('teachers.infor.teaching_age')
+          .col-xs-7
+            - if @teacher.identity == Setting.teachers.identity_student
+              =t('teachers.infor.major')+@teacher.student_identity.major
+            - else 
+              =t('teachers.infor.subject')+@teacher.teacher_identity.subject
+          
+    .row.border-btm.border-shadow
+      .tabbable-panel
+        .tabbable-line
+          %ul{:class => "nav nav-tabs", :role => "tablist" }
+            %li.active.col-xs-4    
+              %a{:href => "#idcard", :'data-toggle' => "tab"}
+                = t('teachers.infor.idcard')
+            %li.col-xs-4
+              %a{:href => "#result", :'data-toggle' => "tab"}
+                = t('teachers.infor.results')
+            %li.col-xs-4
+              %a{:href => "#experience", :'data-toggle' => "tab"}
+                = t('teachers.infor.experience')
+.row.form-group               
+  .col-xs-12
+    .tab-content
+      .tab-pane.active#idcard
+        .panel.bd-radius.border.panel-top
+          .panel-heading.panel-heading-padding
+            .row{:onclick => "togglecontent(this)"}
+              .col-xs-10
+                %h4
+                  基本信息 
+              .col-xs-2
+                %h4
+                  %i{:class => "glyphicon glyphicon-chevron-down"}
+          .panel-body.padding-top-none.display-none
+            .row
+              .col-xs-6
+                姓名:
+                = @teacher.name
+              .col-xs-6  
+                年龄:
+                = @teacher.age.to_s() +"岁"
+              .col-xs-12
+                现居地点:
+                - if @teacher.address
+                  = get_address_province_string(@teacher.address.province) + get_address_city_string(@teacher.address.city) + get_address_district_string(@teacher.address.district) + get_address_details_string(@teacher.address.details)
+                - else
+                  吉林省吉林市
+              .col-xs-12    
+                个人爱好:
+                = @teacher.hobby
+
+        .panel.bd-radius.border.panel-top
+          .panel-heading.panel-heading-padding
+            .row{:onclick => "togglecontent(this)"}
+              .col-xs-10
+                %h4
+                  个人简介
+              .col-xs-2
+                %h4
+                  %i{:class => "glyphicon glyphicon-chevron-down"}
+          .panel-body.padding-top-none.display-none
+            %p= format_string_newline(@teacher.introduction).html_safe
+        .panel.bd-radius.border
+          .panel-heading.panel-heading-padding
+            .row{:onclick => "togglecontent(this)"}
+              .col-xs-10
+                %h4
+                  我的评价
+              .col-xs-2
+                %h4
+                  %i{:class => "glyphicon glyphicon-chevron-down"}
+          .panel-body.padding-top-none.display-none
+            .row
+              .col-xs-12
+                %ul.list-inline
+                  %li= "好评 (#{@good_num})"
+                  %li= "中评 (#{@medium_num})"
+                  %li= "差评 (#{@bad_num})"
+              .col-xs-12
+                %ul.list-group
+                  - @comments.each do |comment|
+                    %Li.list-group-item.padding-none
+                      .well.well-sm.border-shadow-none.border-none.back-white.bd-radius.margin-zero
+                        .row
+                          .col-xs-3.text-center
+                            = image_tag("head.png", :class=>"img-circle", :width => "60px", :height => "60px", :alt=>"小学老师")
+                          .col-xs-9.section-box
+                            .row
+                              .col-xs-4
+                                %p
+                                  = comment.parent.name
+                            -#
+                              .col-xs-12
+                                = comment.content
+                            %hr
+                            .row.rating-desc
+                              .col-xs-12
+                                - if comment.total == Setting.comments.total_good
+                                  %span.glyphicon.glyphicon-star
+                                  %span.glyphicon.glyphicon-star
+                                  %span.glyphicon.glyphicon-star
+                                  %span.glyphicon.glyphicon-star
+                                  %span.glyphicon.glyphicon-star
+                                - elsif comment.total == Setting.comments.total_medium
+                                  %span.glyphicon.glyphicon-star
+                                  %span.glyphicon.glyphicon-star
+                                  %span.glyphicon.glyphicon-star
+                                  %span.glyphicon.glyphicon-star-empty
+                                  %span.glyphicon.glyphicon-star-empty
+                                - else
+                                  %span.glyphicon.glyphicon-star
+                                  %span.glyphicon.glyphicon-star-empty
+                                  %span.glyphicon.glyphicon-star-empty
+                                  %span.glyphicon.glyphicon-star-empty
+                                  %span.glyphicon.glyphicon-star-empty
+
+        .panel.bd-radius.border.panel-top
+          .col-xs-12.padding-none
+            %ul.list-group.bd-radius.modal-height
+              - @teacher.courses.each_with_index do |course,n|
+                %li.list-group-item.bd-radius
+                  .row
+                    .col-xs-9
+                      = course.name
+                    .col-xs-3.font-orange
+                      = "￥" + course.price
+          .col-xs-12.back-white.border
+            .row
+              .col-xs-12
+                %p
+                  %h4
+                    上课时间
+            .row
+              .col-xs-12
+                #appointment-time
+      .tab-pane#result
+        .col-xs-12.padding-none
+          %ul.list-group.bd-radius
+            %li.list-group-item.bd-radius
+              .row
+                .col-xs-9
+                  我的成绩单
+            - @teacher.scores.each_with_index do |s,i|
+              %li.list-group-item.bd-radius
+                .row
+                  .col-xs-4
+                    .text-center
+                      = i+1
+                  .col-xs-4
+                    .text-center
+                      = s.title
+                  .col-xs-4
+                    .text-center
+                      = s.content
+        .col-xs-12.padding-none
+          %ul.list-group.bd-radius
+            %li.list-group-item.bd-radius
+              .row
+                .col-xs-9
+                  我的荣誉单
+            - @teacher.honors.each do |s|
+              %li.list-group-item.bd-radius
+                .row
+                  .col-xs-4
+                    = s.title
+                  .col-xs-8
+                    = s.content
+      .tab-pane#experience
+        .col-xs-12.padding-none
+          %ul.list-group.bd-radius
+            %li.list-group-item.bd-radius
+              .row
+                .col-xs-9
+                  我的教学经历
+            - @careers.each do |c|
+              %li.list-group-item.padding-eight.bd-radius
+                - if c.start_time and c.end_time
+                  %p
+                    %h4.font-orange
+                      = c.start_time.strftime("%Y-%m")+' 到 '+c.end_time.strftime("%Y-%m") + ' 辅导 : '+c.subject 
+                  %p  
+                    = c.content
+                  
+%button.btn.btn-block.btn-warning{:"data-toggle"=>"modal",:"data-target"=>"#allcourses"}
+  预约课程
+  = render "date"
+
+.modal.fade#allcourses
+  .modal-dialog.modal-sm
+    .modal-content
+      .modal-header
+        %button.close{:"data-dismiss"=>"modal",:"aria-label"=>"Close"}
+          %span{:"aria-hidden"=>"true"}
+            &times;
+        %h4.modal-title 课程列表
+      = form_tag new_order_path, :method=>:get, :html=>{:class=>"form-horizontal"} do |f|
+        .modal-body.modal-height 
+          - @teacher.courses.each_with_index do |course,n|
+            .row
+              .col-xs-2
+                -if n == 0
+                  = radio_button("course","id", course.id, :checked => "checked")
+                -else
+                  = radio_button("course","id", course.id)
+              .col-xs-6
+                = course.name
+              .col-xs-2.font-orange
+                = "￥" + course.price
+            %hr
+        .modal-footer
+          %button.btn.btn-default{:"data-dismiss"=>"modal"}
+            取消订单
+          = submit_tag "预约课程", :class=>"btn btn-warning "
+.modal{:class=>"fade",:id=>"loginModal",:tabindex=>"-1",:role=>"dialog",:'aria-labelledby'=>"myModalLabel",:'aria-hidden'=>"true"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button{:type=>"button",:class=>"close",:'data-dismiss'=>"modal"}
+          %span{:'aria-hidden'=>"true",:class=>"glyphicon glyphicon-remove"}
+          %span{:class=>"sr-only"}= "Close"
+        %h5{:class=>"modal-title",:id=>"myModalLabel"}
+          = "家长登录"
+      .modal-body
+        = form_for @parent, :url=>parent_session_path, :html=>{:class=>"form-horizontal"} do |f|
+          /= devise_error_messages!
+          .form-group
+            .col-xs-12
+              .error_message
+          .form-group
+            .col-xs-12
+              = f.text_field :phone, autofocus: true, :class=>"form-control bd-radius", :placeholder => "请输入手机号"
+          .form-group  
+            .col-xs-12
+              = f.password_field :password, autocomplete: "off", :class=>"form-control bd-radius", :placeholder => "请输入密码"
+          .form-group  
+            .col-xs-12
+              %input{:type => "button",:value => "登录", :class=>"bd-radius btn btn-lg btn-block btn-warning",:onclick => "parent_validate()"}
+          .form-group  
+            .col-xs-12
+              = link_to "家长注册", new_parent_registration_path, :class=>"bd-radius btn btn-lg btn-warning btn-block"
+

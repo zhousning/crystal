@@ -1,0 +1,188 @@
+defaults: &defaults
+  teachers:
+    identity_student: 1
+    identity_teacher: 2
+    identity_student_string: 在校学生
+    identity_teacher_string: 专职教师
+    status_none_sql: 0
+    status_edit_sql: 1
+    status_notpass_sql: 2
+    status_pass_sql: 3
+    status_none: 未定义
+    status_edit: 待验证
+    status_not_pass: 未通过
+    status_pass: 通过
+    item_img_paper: 1
+    item_img_basic: 2
+    item_img_gallery: 3
+    sex_man: 1
+    sex_women: 2
+    sex_man_string: 男
+    sex_women_string: 女
+    sex_none_string: 未定义
+    join_status_none: 0
+    join_status_sec_vote: 1
+
+  comments:
+    category_public: 0
+    total_good: 0
+    total_medium: 1
+    total_bad: 2
+
+  appointments:
+    weekday_monday: 1
+    weekday_tuesday: 2
+    weekday_wednesday: 3
+    weekday_thursday: 4
+    weekday_friday: 5
+    weekday_saturday: 6
+    weekday_sunday: 7
+    time_morning: 1
+    time_afternoon: 2
+    time_evening: 3
+    weekday_monday_string: 周一
+    weekday_tuesday_string: 周二
+    weekday_wednesday_string: 周三
+    weekday_thursday_string: 周四
+    weekday_friday_string: 周五
+    weekday_saturday_string: 周六
+    weekday_sunday_string: 周日
+    time_morning_string: 上午
+    time_afternoon_string: 下午
+    time_evening_string: 晚上
+
+  orders:
+    status_none: 0
+    status_trade_created: 1
+    status_parent_paied: 2
+    status_teacher_paied: 3
+    status_trade_success: 7
+    status_trade_failed: 8
+    status_none_string: 未定义
+    status_trade_created_string: 已创建
+    status_parent_paied_string: 家长已支付
+    status_teacher_paied_string: 家教已接受
+    status_trade_success_string: 订单成功
+    status_trade_failed_string: 订单失败
+
+    #status_none: 0
+    #status_trade_created: 1
+    #status_parent_paied: 2
+    #status_teacher_paied: 3
+    #status_teacher_rejected: 4
+    #status_feedback_right: 5
+    #status_feedback_timeout: 6
+    #status_trade_success: 7
+    #status_trade_failed: 8
+    #status_none_string: 未定义
+    #status_trade_created_string: 已创建
+    #status_parent_paied_string: 家长已支付
+    #status_teacher_paied_string: 家教已支付
+    #status_teacher_rejected_string: 家教已拒绝
+    #status_feedback_right_string: 反馈码正确
+    #status_feedback_timeout_string: 反馈码超时
+    #status_trade_success_string: 交易成功
+    #status_trade_failed_string: 交易失败
+
+  trades:
+    category_parent: parent
+    category_teacher: teacher
+    price_parent_pay: 10
+    price_teacher_pay: 10
+   
+  addresses:
+    province_jilin: 1
+    city_jilin: 1
+    district_jilin_cy: 1
+    district_jilin_cq: 2
+    district_jilin_fm: 3
+    district_jilin_lt: 4
+    district_jilin_jh: 5
+    district_jilin_hd: 6
+    district_jilin_ss: 7
+    district_jilin_yj: 8
+    district_jilin_ps: 9
+    province_jilin_string: 吉林省
+    city_jilin_string: 吉林市
+    district_jilin_cy_string: 船营区 
+    district_jilin_cq_string: 昌邑区
+    district_jilin_fm_string: 丰满区
+    district_jilin_lt_string: 龙潭区
+    district_jilin_jh_string: 蛟河市
+    district_jilin_hd_string: 桦甸市
+    district_jilin_ss_stirng: 舒兰市
+    district_jilin_yj_string: 永吉县
+    district_jilin_ps_string: 磐石市
+
+  courses:
+    school_small: 1
+    school_middle: 2
+    school_high: 3
+    school_other: 4
+    school_small_string: 小学
+    school_middle_string: 初中
+    school_high_string: 高中
+    school_other_string: 其他
+    status_none: 0
+    status_none_string: 未定义
+    period_normal: 0
+    period_vacation: 1
+    period_all: 2
+    period_normal_string: 平时可以
+    period_vacation_string: 假期可以
+    period_all_string: 都可以
+
+  messages:
+    category_public: 0
+    category_parent_public: 1
+    category_teacher_public: 2
+    category_parent: 3
+    category_teacher: 4
+    category_public_string: 公共
+    category_parent_public_string: 家长公共
+    category_teacher_public_string: 家教公共
+    category_parent_string: 家长
+    category_teacher_string: 家教
+    status_created: 0
+    status_unread: 1
+    status_read: 2
+    status_outdate: 3
+    status_created_string: 创建
+    status_unread_string: 未读
+    status_read_string: 已读
+    status_outdate_string: 过期
+
+  notices:
+    category_news: 0
+    category_news_string: 新闻
+
+  colors:
+    courses_yw: 语文
+    courses_yw_color: '#787bf4'
+    courses_sx: 数学
+    courses_sx_color: '#f47878'
+    courses_yy: 英语
+    courses_yy_color: '#7a96ae'
+    courses_wl: 物理
+    courses_wl_color: '#5eb9a9'
+    courses_hx: 化学
+    courses_hx_color: '#79b67f'
+    courses_sw: 生物
+    courses_sw_color: '#41B5E8'
+    courses_zz: 政治
+    courses_zz_color: '#E54A58'
+    courses_ls: 历史
+    courses_ls_color: '#E28140'
+    courses_dl: 地理
+    courses_dl_color: '#cec667'
+    courses_ls: 其他
+    courses_qt_color: '#45BB61'
+    
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

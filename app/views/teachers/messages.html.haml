@@ -1,0 +1,37 @@
+- provide(:title, t('.title'))
+
+= render "layouts/header"
+%div.p_main
+  %div.p_wrapper
+    = render :partial => "profile"
+    %div.p_content
+      %div.p_block
+        %div.p_block_title.p_content_block_title
+          %h4
+            %i.glyphicon.glyphicon-envelope.greay
+            我的消息
+      %div.p_block
+        .p_block_messages
+          %table.table.table-hover
+            %thead
+              %tr
+                %th{:width=>"65%"} 标题
+                %th{:width=>"25%"} 时间
+                %th{:width=>"10%"} 类型
+            %tbody
+              - @public_messages.each do |message|
+                %tr
+                  %td{:class=>(message.status == Setting.messages.status_unread ? "message-title-unread" : "message-title-read")}= link_to message.title, msg_teachers_path(:message=>message.id)
+                  %td= message.created_at.strftime("%Y-%m-%d %H:%M:%S")
+                  %td 公告
+              - @group_messages.each do |message|
+                %tr
+                  %td{:class=>(message.status == Setting.messages.status_unread ? "message-title-unread" : "message-title-read")}= link_to message.title, msg_teachers_path(:message=>message.id)
+                  %td= message.created_at.strftime("%Y-%m-%d %H:%M:%S")
+                  %td 公告
+              - @messages.each do |message|
+                %tr
+                  %td{:class=>(message.status == Setting.messages.status_unread ? "message-title-unread" : "message-title-read")}= link_to message.title, msg_teachers_path(:message=>message.id)
+                  %td= message.created_at.strftime("%Y-%m-%d %H:%M:%S")
+                  %td 我的
+

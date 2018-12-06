@@ -1,0 +1,69 @@
+- provide(:title, t('.title'))
+
+= render "layouts/subbar_top"
+
+#menu
+  .wrapper
+    .menu-c-all
+      = link_to "全部课程","/filters/index"
+    .menu-m
+      %ul
+        %li
+          %a{:class => "menu-m-active", :href=>root_path} 首页
+        %li 
+          %a{:class=>"menu-m-active",:href => flow_path} 预约流程
+        %li
+          %a{:class=>"menu-m-active",:href => tflow_path} 家教入驻
+
+#comment-div
+  .wrapper
+    .comment-title
+      评价老师
+
+    .teacher-info
+      .teacher-image
+        = link_to (image_tag(@teacher.image_url(:normal),:class=>"img-circle")), detail_teachers_path(:id => @teacher.number)
+      .teacher-name
+        = @teacher.name
+
+    .comment-content
+      = form_for @comment, :html=>{:class=>"form-horizontal"}, :validate => true do |f|
+        = form_error_messages!(@comment)
+
+        = hidden_field_tag :teacher_id, @teacher.id
+      
+        .comment-total
+          .radio-inline
+            = radio_button("comment", "total", Setting.comments.total_good, :checked=>true)
+            好评
+          .radio-inline
+            = radio_button("comment", "total", Setting.comments.total_medium)
+            中评
+          .radio-inline
+            = radio_button("comment", "total", Setting.comments.total_bad)
+            差评
+
+        -#
+          .form-group
+            = f.label "描述相符", :class=>"col-md-2 control-label"
+            .col-md-2
+              = f.number_field :desc, :class=>"form-control"
+
+          .form-group
+            = f.label "教学态度", :class=>"col-md-2 control-label"
+            .col-md-2
+              = f.number_field :attitude, :class=>"form-control"
+
+          .form-group
+            = f.label "响应速度", :class=>"col-md-2 control-label"
+            .col-md-2
+              = f.number_field :speed, :class=>"form-control"
+
+        .form-group
+          .col-md-12
+            = f.text_area :content, :rows=>8, :placeholder=>"表达一下与该老师的上课经历吧，包括上课情况、课程内容以及你的感受哦", :class=>"form-control"
+      
+        .form-group
+          .col-md-2.col-md-offset-2
+            = f.submit '发表评价', :class=>"btn btn-warning"
+

@@ -1,0 +1,11 @@
+.row.bd-bottom.head-search
+  .col-xs-3.logoimg
+    %a{:href => "/"}
+      =image_tag("logo.png", :width => "100%px")
+  .col-xs-9
+    %h4.text-center
+      - if request.path == login_path
+        登录家教呢
+      - else
+        注册家教呢
+

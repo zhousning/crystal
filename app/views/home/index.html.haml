@@ -1,0 +1,450 @@
+- provide(:title, t('.title'))
+
+= render "layouts/subbar_top"
+= render "layouts/nav_menu"
+
+%div#banner
+  %div.wrapper
+    %div.category
+      %ul
+        %li#category1
+          %div.category-title
+            -#
+              = image_tag('c.png',:class => "category-icon", :alt=>"小学")
+            %span{:class => "glyphicon glyphicon-th-list font-descend"}
+            &nbsp;小学
+          %div.category-subject
+            = link_to "数学","/subject/1/"
+            = link_to "语文","/subject/2/"
+            = link_to "英语","/subject/3/"
+            = link_to "作文","/subject/4/"
+        %li#category2
+          %div.category-title
+            -#
+              = image_tag('c.png',:class => "category-icon", :alt=>"初中")
+            %span{:class => "glyphicon glyphicon-th-list font-descend"}
+            &nbsp;初中
+          %div.category-subject
+            = link_to "数学","/subject/11/"
+            = link_to "语文","/subject/12/"
+            = link_to "物理","/subject/15/"
+            = link_to "化学","/subject/16/"
+            = link_to "英语","/subject/13/"
+            = link_to "历史","/subject/18/"
+            = link_to "政治","/subject/17/"
+            = link_to "生物","/subject/14/"
+            /= link_to "数理化","/subject/19/"
+        %li#category3
+          %div.category-title
+            -#
+              = image_tag('c.png',:class => "category-icon", :alt=>"高中")
+            %span{:class => "glyphicon glyphicon-th-list font-descend"}
+            &nbsp;高中
+          %div.category-subject
+            = link_to "数学","/subject/21/"
+            = link_to "语文","/subject/22/"
+            = link_to "物理","/subject/25/"
+            = link_to "化学","/subject/26/"
+            = link_to "英语","/subject/23/"
+            = link_to "历史","/subject/28/"
+            = link_to "政治","/subject/27/"
+            = link_to "生物","/subject/24/"
+            /= link_to "数理化","/subject/29/"
+        %li#category4
+          %div.category-title
+            -#
+              = image_tag('c.png',:class => "category-icon", :alt=>"艺术")
+            %span{:class => "glyphicon glyphicon-th-list font-descend"}
+            &nbsp;&nbsp;艺术
+          %div.category-subject.category-subject-end
+            = link_to "音乐",nil
+            = link_to "舞蹈",nil
+            = link_to "美术",nil
+            = link_to "体育",nil
+        %li#category5
+          %div.category-title
+            -#
+              = image_tag('c.png',:class => "category-icon", :alt=>"计算机")
+            %span{:class => "glyphicon glyphicon-th-list font-descend"}
+            &nbsp;&nbsp;计算机
+          %div.category-subject.category-subject-end
+            = link_to "Java","/subject/51/"
+            = link_to "网页制作","/subject/56/"
+            = link_to "办公软件","/subject/58/"
+  -#
+    .notice
+      .notice-news
+        = render "message"
+      .notice-login
+        .notice-login-info
+          - if parent_signed_in?
+            .notice-login-image
+              = link_to image_tag("head.png",:class=>"img-circle"), profile_parents_path, :rel=>"nofollow"
+            .notice-login-name.text-muted
+              = "hi，#{current_parent.name}"
+              %p 欢迎来到家教呢
+            %table.user-table
+              %tr
+                %td.user-table-td1{:align=>"center"}
+                  %span 
+                    = link_to @num_dzf, order_unpay_parents_path, :rel=>"nofollow"
+                  %span 待支付
+                %td.user-table-td1{:align => "center"}
+                  %span
+                    = link_to @num_dsk, order_reserving_parents_path, :rel=>"nofollow"
+                  %span 待上课
+                %td.user-table-td2{:align => "center"}
+                  %span 0
+                  %span 待评价
+          - elsif teacher_signed_in?
+            .notice-login-image
+              -if current_teacher.image_url(:normal)
+                = link_to image_tag(current_teacher.image_url(:normal),:class=>"img-circle"), basicInfor_teachers_path, :rel=>"nofollow"
+              -else 
+                = link_to image_tag('head.png',:class=>"img-circle"), basicInfor_teachers_path, :rel=>"nofollow"
+            .notice-login-name
+              = "hi，#{current_teacher.name}"
+              %p 欢迎来到家教呢
+            %table.user-table
+              %tr
+                %td.user-table-td1{:align => "center"}
+                  %span 
+                    = link_to @num_dqr, order_unpay_teachers_path, :rel=>"nofollow"
+                  %span 新订单              
+                %td.user-table-td1{:align => "center"}
+                  %span
+                    = link_to @num_dsk, order_reserving_teachers_path, :rel=>"nofollow"
+                  %span 待上课
+                %td.user-table-td2{:align => "center"}
+                  %span 
+                    = link_to current_teacher.courses.count, courses_path, :rel=>"nofollow"
+                  %span 全部课程
+          - else
+            .notice-login-image
+              = link_to image_tag("head.png",:class=>"img-circle"), login_path, :rel=>"nofollow"
+            .notice-login-name
+              = "hi，"
+              %p 欢迎来到家教呢
+            .notice-login-button
+              = link_to "登录", login_path, :class=>"btn btn-sm btn-success notice-login-button-margin", :rel=>"nofollow"
+              = link_to "家长注册", new_parent_registration_path, :class=>"btn btn-sm btn-warning notice-login-button-margin", :rel=>"nofollow"
+              = link_to "家教注册", new_teacher_registration_path, :class=>"btn btn-sm btn-warning notice-login-button-margin", :rel=>"nofollow"
+.carstyle
+  .introduce
+    = render "carousel"
+.contact-bar
+  %ul.list-group
+    -#
+      %li.list-group-item.pos-relative.list-message
+        .contact-title
+          %p
+            有问题，请联系我们
+        =image_tag("wxlogo.jpg")
+        .contact-content
+        .qrcode-img
+          =image_tag("weixin.jpg", width:"100%")
+        .link-message
+          %h4.margin-none.text-muted
+            微信找老师
+    %li.list-group-item.pos-relative.list-message
+      .contact-content
+        .qrtitle
+          %p
+            %h4.text-muted.text-center
+              %strong QQ在线客服
+        %a{:target => "_blank", :href => "http://wpa.qq.com/msgrd?v=3&uin=201207619&site=qq&menu=yes"}
+          .qrcode-img
+            =image_tag("qq.jpg", width:"100%")
+          .link-message
+            %img{:border => "0", :src => "http://wpa.qq.com/pa?p=2:201207619:51", :alt => "欢迎咨询家教呢客服", :title => "欢迎咨询家教呢客服"}
+    -#
+      %li.list-group-item.pos-relative.list-message
+      .contact-title.weibo
+        =image_tag("wblogo.jpg")
+      .contact-content
+        %a{:target => "_blank", :href => "http://weibo.com/p/1006065482985414/album?from=page_100606&mod=TAB#place"}
+          .qrcode-img
+            =image_tag("weibo.png", width:"100%")
+          .link-message
+            %h4.margin-none.text-muted
+              关注新浪微博
+
+.wrapper.beautystyle
+  .row
+    .col-md-12
+      .col-md-12.floor-title
+        %span.gtitle
+          %span.floor-style
+            1F
+          最新入驻
+    .col-md-12
+      .scrollleft
+        %ul
+          -@new_teachers.each do |teacher|
+            %li
+              = link_to image_tag(teacher.image_url(:normal)), detail_teachers_path(:id=>teacher.number), :target=>"_blank",:class=>"pull-left"
+              %h5= teacher.name
+              -if teacher.identity==Setting.teachers.identity_student and teacher.student_identity
+                .badge= teacher.student_identity.major
+                %div= "#{teacher.teaching_age}年教龄"
+                %div=(teacher.student_identity.school).to_s[0,6]
+              -elsif teacher.identity==Setting.teachers.identity_teacher and teacher.teacher_identity
+                .badge= teacher.teacher_identity.subject
+                %div= "#{teacher.teaching_age}年教龄"
+                %div=(teacher.teacher_identity.school).to_s[0,6]
+-#
+  %div#explain-div
+  %div.wrapper
+    %div.explain-title
+      %div.explain-title-left
+      预约流程
+      %div.explain-title-right
+    %ul
+      %li
+        = image_tag('i1.png',:class=> "explain-icon")
+        %h4
+          1.选择家教
+        %p
+          根据年级、科目等条件选择您需要预约的家教和课程
+      %li
+        = image_tag('i2.png',:class=> "explain-icon")
+        %h4
+          2.确定试讲时间
+        %p
+          选定需要的家教后，请填写试讲时间和地点，系统会自动为您创建订单
+      %li
+        = image_tag('i3.png',:class=> "explain-icon")
+        %h4
+          3.支付试讲费用
+        %p
+          支付家教试讲所需费用，如果您对试讲结果不满意，该费用将退回您的账户
+      %li
+        = image_tag('i4.png',:class=> "explain-icon")
+        %h4
+          4.家教上门试讲
+        %p
+          家教确认订单信息后，将主动和您取得联系，随后家教会如约上门试讲
+      %li
+        = image_tag('i5.png',:class=> "explain-icon")
+        %h4
+          5.课程评价
+        %p
+          家教完成上门试讲后，请您如实地评价家教的试讲效果，以便家教日后改进
+
+.wrapper
+  .row
+    .col-md-12
+      .col-md-12.floor-title
+        %span.gtitle
+          %span.floor-style
+            2F
+          小初高教育
+        %a{:href => "/filters/select/小学/all/all/all/all/all/", :class => " btn btn-primary btn-round-lg btn-lg btn-outlined floor-item"}
+          小学
+        %a{:href => "/filters/select/初中/all/all/all/all/all/", :class => " btn btn-primary btn-round-lg btn-lg btn-outlined floor-item"}
+          初中
+        %a{:href => "/filters/select/高中/all/all/all/all/all/", :class => " btn btn-primary btn-round-lg btn-lg btn-outlined floor-item"}
+          高中
+.wrapper.tusstyle
+  .row
+    .col-md-12
+      - @normal_teachers.each do |f|
+        - next if f.courses[0] and f.courses[0].category and f.courses[0].category.second == "计算机"
+        - @count += 1
+        - break if @count == 11
+        .tinfo-container
+          %a{:href => detail_teachers_path(:id => f.number), :target=>"_blank"}
+            .col-md-12.teacher-index
+              .vote-img.photo-pos
+                = image_tag(f.image_url(:normal),:class=>"img-circle", :width => "120px", :height => "120px", :alt=>"老师头像")
+              .col-md-12
+                %p
+                  %h4.text-center.text-muted.photo-pos
+                    = f.name
+              .col-md-12.age-border
+                .row
+                  .col-md-8.form-group.detail-comment-tips
+                    %ul.ful
+                      %li.stuff &nbsp;
+                      %li.stuff &nbsp;
+                      %li.stuff &nbsp;
+                      %li.stuff &nbsp;
+                      %li.stuff &nbsp;
+                  .col-md-4.text-muted
+                    %P
+                      5分
+                  .col-md-7.text-muted
+                    - if f.courses[0] and f.courses[0].category
+                      = f.courses[0].category.second+f.courses[0].category.subject
+                  .col-md-5
+                    %small.font-orange
+                      = f.teaching_age.to_s + "年教龄"
+              .col-md-12.pdmg
+                %p.font-all.text-muted
+                  - if f.identity == 1 and f.student_identity
+                    = f.student_identity.major
+                  -else
+                    = "东北电力大学"
+              .top-message
+                .col-md-12.tintro
+                  = truncate(f.introduction, :length => 50)
+
+.wrapper
+  .row
+    .col-md-12
+      .col-md-12.floor-title
+        %span.gtitle
+          %span.floor-style
+            3F
+          专业教育
+        %a{:href => "/filters/select/计算机/all/all/all/all/all/", :class => " btn btn-primary btn-round-lg btn-lg btn-outlined floor-item"}
+          计算机
+        %a{:href => "/filters/select/英语/all/all/all/all/all/", :class => " btn btn-primary btn-round-lg btn-lg btn-outlined floor-item"}
+          英语
+        %a{:href => "/filters/select/艺术/all/all/all/all/all/", :class => " btn btn-primary btn-round-lg btn-lg btn-outlined floor-item"}
+          艺术
+.wrapper.tusstyle
+  .row
+    .col-md-12.tinfopd
+      - @profess_teachers.each do |f|
+        .tinfo-container
+          %a{:href => detail_teachers_path(:id => f.number), :target=>"_blank"}
+            .col-md-12.teacher-index
+              .vote-img.photo-pos
+                = image_tag(f.image_url(:normal),:class=>"img-circle", :width => "120px", :height => "120px", :alt=>"老师头像")
+              .col-md-12
+                %p
+                  %h4.text-center.text-muted.photo-pos
+                    = f.name
+              .col-md-12.age-border
+                .row
+                  .col-md-8.form-group.detail-comment-tips
+                    %ul.ful
+                      %li.stuff &nbsp;
+                      %li.stuff &nbsp;
+                      %li.stuff &nbsp;
+                      %li.stuff &nbsp;
+                      %li.stuff &nbsp;
+                  .col-md-4.text-muted
+                    %P
+                      5分
+                  .col-md-7.text-muted
+                    - if f.courses[0] and f.courses[0].category
+                      = f.courses[0].category.subject
+                  .col-md-5
+                    %small.font-orange
+                      = f.teaching_age.to_s + "年教龄"
+              .col-md-12.pdmg
+                %p.font-all.text-muted
+                  - if f.identity == 1 and f.student_identity
+                    = f.student_identity.major
+                  -else
+                    = "东北电力大学"
+              .top-message
+                .col-md-12.tintro
+                  = truncate(f.introduction, :length => 50)
+.wrapper.usstyle
+  .row
+    .col-md-12
+      %p.gtitle2.text-muted.text-center
+        我们更可靠
+    .col-md-3
+      .col-md-12
+        .col-md-12.text-center
+          =image_tag("c1.png")
+        .col-md-12
+          %p
+            %h3.text-center
+              身份认证
+        .col-md-12
+          全面认证入驻老师身份背景，确保老师资料真实可信。
+
+    .col-md-3
+      .col-md-12
+        .col-md-12.text-center
+          =image_tag("c2.png")
+        .col-md-12
+          %p
+            %h3.text-center
+              平台保障
+        .col-md-12
+          平台托管学费，上课满意后确认付款，零顾虑零风险。
+    .col-md-3
+      .col-md-12
+        .col-md-12.text-center
+          =image_tag("c3.png")
+        .col-md-12
+          %p
+            %h3.text-center
+              隐私保密
+        .col-md-12
+          全球领先云加密技术，保护家教和家长的隐私安全。 
+    .col-md-3
+      .col-md-12
+        .col-md-12.text-center
+          =image_tag("c4.png")
+        .col-md-12
+          %p
+            %h3.text-center
+              专业服务
+        .col-md-12
+          知名教育从业团队，保障服务第一，用户利益至上。
+
+.wrapper.usstyle
+  .row
+    .col-md-12
+      %p.gtitle2.text-muted.text-center
+        我们更贴心
+    .col-md-3
+      .col-md-12
+        .col-md-12.text-center
+          =image_tag("b5.png")
+        .col-md-12
+          %p
+            %h4.text-center.mtten
+              家长放心 家教省心
+        .col-md-12
+          家长家教零距离接触，省去中介环节，沟通效率更高。
+
+    .col-md-3
+      .col-md-12
+        .col-md-12.text-center
+          =image_tag("b8.png")
+        .col-md-12
+          %p
+            %h4.text-center.mtten
+              本地名师 想挑就挑
+        .col-md-12
+          本地优秀名师任您挑选，总能找到您满意的老师。
+    .col-md-3
+      .col-md-12
+        .col-md-12.text-center
+          =image_tag("b7.png")
+        .col-md-12
+          %p
+            %h4.text-center.mtten
+              在线预约 老师上门
+        .col-md-12
+          电脑手机在线挑选，网上下单和支付，老师上门授课。
+    .col-md-3
+      .col-md-12
+        .col-md-12.text-center
+          =image_tag("b6.png")
+        .col-md-12
+          %p
+            %h4.text-center.mtten
+              客观评价 真实水平
+        .col-md-12
+          家长客观评价家教授课情况，真实反映家教教学水平。
+
+-#
+  .logo-div
+  .logo-wraper
+    = image_tag("tx.png");
+    = image_tag("tb.png");
+    = image_tag("sh.png");
+    = image_tag("xl.png");
+    = image_tag("yk.png" );
+    = image_tag("td.png");
+
+

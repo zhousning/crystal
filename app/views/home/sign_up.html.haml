@@ -1,0 +1,10 @@
+- provide(:title, t('.title'))
+
+.reg_cnt
+  .preg_img
+    = image_tag('pword.png',:class=>"pword")
+    = link_to "家长注册",new_parent_registration_path, :class=>"btn btn-lg btn-success preg_btn" 
+  .split_line
+  .treg_img
+    = image_tag('tword.png',:class=>"tword")
+    = link_to "家教注册",new_teacher_registration_path, :class=>"btn btn-lg btn-success reg_btn"

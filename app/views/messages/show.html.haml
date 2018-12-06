@@ -1,0 +1,28 @@
+- provide(:title, t('.title'))
+
+= render "layouts/subbar_top"
+
+%div#menu
+  %div.wrapper
+    %div.menu-c-all
+      %a{:href => "/filters/index"} 全部课程
+    %div.menu-m
+      %ul
+        %li
+          %a{:class => "menu-m-active",:href => root_path} 首页
+        %li 
+          %a{:class=>"menu-m-active",:href => flow_path} 预约流程
+        %li
+          %a{:class=>"menu-m-active",:href => tflow_path} 家教入驻
+
+.apw_ctn
+  .msg_wrapper
+    .msg_main
+      .msg_header
+        %h2.msg_title
+          = "[公告] #{@message.title}"
+        %h4.msg_time
+          = "时间:  #{@message.created_at.strftime("%Y-%m-%d")}"
+      .msg_content
+        %p
+          = format_string_newline(@message.content).html_safe

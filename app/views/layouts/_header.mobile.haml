@@ -1,0 +1,23 @@
+- provide(:title, t('.title'))
+.menu-main
+  %header{:role=>"banner",:class=>"navbar navbar-fixed-top navbar-bg"}
+    .navbar-header
+      -if current_teacher
+        %a{:class=>"pull-left btn-lg",:href=>show_menu_teachers_path}
+          %span.glyphicon.glyphicon-user
+      -elsif current_parent
+        %a{:class=>"pull-left btn-lg",:href=>show_menu_parents_path}
+          %span.glyphicon.glyphicon-user
+      %a{:href=>root_path}
+        =image_tag('logo.png',:class => "header-logo-img2 pull-left")
+      %h4
+        =t("#{controller_name}.menu.#{action_name}")
+        -if current_teacher
+          %button.btn.btn-primary.btn-xs.signin
+            %span.badge 
+              - if current_teacher.signdate.last == Time.now.strftime("%Y%m%d")
+                连续签到
+                = link_to "#{current_teacher.signcount}", nil
+                天
+              - else
+                = link_to "签到", sign_today_teachers_path

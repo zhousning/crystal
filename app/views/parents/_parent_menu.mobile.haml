@@ -1,0 +1,57 @@
+
+- provide(:title, t('.title'))
+
+.menu-main
+  .p_wrapper
+    %header{:role=>"banner",:class=>"navbar navbar-fixed-top navbar-bg"}
+      .navbar-header
+        %a{:"data-toggle"=>"collapse-side",:"data-target"=>".side-collapse",:"data-target-2"=>".side-collapse-container",:class=>"pull-left btn-lg"}
+          %span.glyphicon.glyphicon-list
+        %a{:href=>root_path}
+          =image_tag('logo.png',:class => "header-logo-img2 pull-left")
+        %h4.text-center
+          =t("#{controller_name}.menu.#{action_name}")
+      .side-collapse.in
+        %nav{:role=>"navigation",:class=>"navbar-collapse"}
+          %ul.nav.navbar-nav
+            %li
+              %a{:href=>profile_parents_path}
+                %span.glyphicon.glyphicon-user
+                =t('parents.menu.profile')
+            %li.divider
+            %li
+              %a{:href=>modify_info_parents_path}
+                %span.glyphicon.glyphicon-cog
+                =t('parents.menu.modify_info')
+            %li.divider
+            %li
+              %a{:href=>edit_parent_registration_path}
+                %i.glyphicon.glyphicon-asterisk
+                =t('parents.menu.edit')
+            %li.divider
+            %li
+              %a{:href=>messages_parents_path}
+                %i.glyphicon.glyphicon-envelope
+                =t('parents.menu.messages')
+            %li.divider
+            %li
+              %a{:href=>order_all_parents_path}
+                %i.glyphicon.glyphicon-align-justify
+                =t('parents.menu.order_all')
+            %li.divider
+            %li
+              %a{:href=>order_unpay_parents_path}
+                %i.glyphicon.glyphicon-warning-sign
+                =t('parents.menu.order_unpay')
+            %li.divider
+            %li
+              %a{:href=>order_reserving_parents_path}
+                %i.glyphicon.glyphicon-sort-by-attributes
+                =t('parents.menu.order_reserving')
+            %li.divider
+            %li
+              %a{:href=>order_refund_parents_path}
+                %i.glyphicon.glyphicon-share-alt
+                =t('parents.menu.order_refund')
+.m-top-00
+

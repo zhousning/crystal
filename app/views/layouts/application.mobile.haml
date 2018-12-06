@@ -1,0 +1,60 @@
+!!! 5
+%html{:lang=>"zh-cn"}
+  %head
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    - if controller_name == "home" and action_name == "index"
+      %title= "#{yield(:title)}"      
+    - else
+      %title= "#{yield(:title)} - #{t('.site_title')}"
+    = stylesheet_link_tag "mobile", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+    = include_gon
+    <meta name="keywords", content="家教呢,家教,家教网,补课,辅导,托管,考试,中考,高考,吉林,吉林市" />
+    <meta name="description", content="家教呢汇集优秀的大学生家教,让您找家教省时省力." />
+
+  %body
+
+    .container
+      .row
+        .col-xs-12
+          -#
+            = render "layouts/navbar_top"
+          
+          - unless request.path == root_path
+            = render "layouts/flash_messages"
+          = yield
+
+    -#
+      - if request.path == activities_beauty2_path
+        <br>
+        <script type="text/javascript">
+        var cpro_id = "u2043811";
+        </script>
+        <script src="http://cpro.baidustatic.com/cpro/ui/cm.js" type="text/javascript"></script>
+        <br>
+
+    - if request.path == activities_beauty_path or request.path == activities_beauty2_path
+      <br>
+      <script type="text/javascript">
+      tanx_c = window.tanx_c || {};
+      tanx_c.mm_25868218_9434193_31634878 = {widthEl:'PARENT',response:'TRUE'};
+      document.write('<a style="display:none!important" id="tanx-a-mm_25868218_9434193_31634878"></a>');
+      tanx_s = document.createElement("script");
+      tanx_s.type = "text/javascript";
+      tanx_s.charset = "gbk";
+      tanx_s.id = "tanx-s-mm_25868218_9434193_31634878";
+      tanx_s.async = true;
+      tanx_s.src = "http://p.tanx.com/ex?i=mm_25868218_9434193_31634878&m=1";
+      tanx_h = document.getElementsByTagName("head")[0];
+      if(tanx_h)tanx_h.insertBefore(tanx_s,tanx_h.firstChild);
+      </script>
+      <br>
+
+    .container
+      .row
+        .col-xs-12
+          = render "layouts/footer"
+

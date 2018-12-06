@@ -1,0 +1,61 @@
+- provide(:title, t('.title'))
+
+.reg_cta
+  .reg_header
+    = '家教注册'
+  .reg_body
+    .body_left
+      = form_for resource, :as=>resource_name, :url=>registration_path(resource_name), :html=>{:class=>"form-horizontal"}, :validate => true do |f|
+        = devise_error_messages!
+      
+        .form-group.form-gr
+          = f.label "* 手机:", :class=>" control-label cl"
+          = f.text_field :phone, autofocus: true, :class=>"form-control fc"
+      
+        .form-group.form-gr
+          = f.label "* 姓名:", :class=>" control-label cl"
+          = f.text_field :name, autofocus: true, :class=>"form-control fc"
+
+        .form-group.form-gr
+          = f.label "* 密码:", :class=>" control-label cl"
+          = f.password_field :password, autocomplete: "off", :class=>"form-control fc"
+      
+        .form-group.form-gr
+          = f.label "* 确认密码:",:class=>" control-label cl"
+          = f.password_field :password_confirmation, autocomplete: "off", :class=>"form-control fc"
+
+        .form-group.form-gr  
+          = f.label "* 选择身份:",:class=>"col-md-2 control-label cl"
+          .form-controls
+            %label
+              .id_item
+                = radio_button("teacher","identity",Setting.teachers.identity_student,:checked=>true,:onclick=>"identity_select('1')")
+                = label_tag Setting.teachers.identity_student_string
+                &nbsp;&nbsp;
+                = radio_button("teacher","identity",Setting.teachers.identity_teacher,:onclick=>"identity_select('2')")
+                = label_tag Setting.teachers.identity_teacher_string
+
+        .form-group.form-gr
+          .form-controls
+            = f.submit "注册", :class=>"btn btn-success id_item"
+            %span.login_btn
+              ="如果已有帐号，请"
+              = link_to  '登录',login_path
+    .body_pic  
+/= render "teachers/shared/links"
+
+
+<script>
+function identity_select(id){
+if(id=='1')
+{
+$("#teacher").hide();
+$("#student").show();
+}
+else
+{
+$("#teacher").show();
+$("#student").hide();
+}
+}
+</script>

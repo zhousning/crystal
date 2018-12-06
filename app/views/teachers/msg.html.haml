@@ -1,0 +1,19 @@
+- provide(:title, t('.title'))
+
+= render "layouts/header"
+%div.p_main
+  %div.p_wrapper
+    = render :partial => "profile"
+    %div.p_content
+      %div.p_block
+        %div.p_block_title.p_content_block_title
+          %h4
+            %i.glyphicon.glyphicon-envelope.greay
+            我的消息
+      %div.p_block
+        .p_block_msg
+          .message-bar
+            .message-title= @message.title
+            .message-time= "时间: #{@message.created_at.strftime("%Y-%m-%d %H:%M:%S")}"
+          .message-content= format_string_newline(@message.content).html_safe
+

@@ -1,0 +1,53 @@
+%div.p_menu
+  %div.p_block
+    %div.p_block_title
+      %h4 我的信息
+  %div.p_block
+    %ul.nav
+      %li
+        %a{:href => profile_parents_path,:class => (action_name == "profile" ? "p_active" : nil)}
+          = image_tag("jbxx.png",class:"iconm")
+          基本信息
+      %li
+        %a{:href => modify_info_parents_path,:class => (action_name == "modify_info" ? "p_active" : nil)}
+          = image_tag("xxxg.png",class:"iconm")
+          信息修改
+      %li
+        %a{:href => edit_parent_registration_path, :class => (action_name == "edit" ? "p_active" : nil)}
+          %i.glyphicon.glyphicon-asterisk
+          密码修改
+      %li
+        %a{:href => messages_parents_path, :class => ((action_name=="messages" or action_name=="msg") ? "p_active" : nil)}
+          %i.glyphicon.glyphicon-envelope
+          我的消息
+  %div.p_block
+    %div.p_block_title
+      %h4 我的订单
+  %div.p_block
+    %ul.nav
+      %li
+        %a{:href => order_all_parents_path, :class => (action_name == "order_all" ? "p_active" : nil)}
+          %i.glyphicon.glyphicon-align-justify
+          全部订单
+      %li
+        %a{:href => order_unpay_parents_path, :class => (action_name == "order_unpay" ? "p_active" : nil)}
+          = image_tag("dzf.png",class:"iconm")
+          待支付的订单
+      %li
+        %a{:href => order_reserving_parents_path, :class => (action_name == "order_reserving" ? "p_active" : nil)}
+          = image_tag("yyz.png",class:"iconm")
+          预约中的订单
+      %li
+        %a{:href => order_refund_parents_path, :class => (action_name == "order_refund" ? "p_active" : nil)}
+          = image_tag("dkz.png",class:"iconm")
+          退款中的订单
+  -#
+    %div.p_block
+      %div.p_block_title
+        %h4 我的收藏
+    %div.p_block
+      %ul.nav
+        %li
+          %a{:href => nil,:class => (action_name == "favorite" ? "p_active" : nil)}
+            %i.glyphicon.glyphicon-star
+            关注的课程

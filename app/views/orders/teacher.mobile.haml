@@ -1,0 +1,76 @@
+- provide(:title, t('.title'))
+
+= render "layouts/subbar_top"
+.wrapper.filter-top
+  - if teacher_signed_in?
+    %h4.text-center.order_top_pad
+      - if @order.status == Setting.orders.status_trade_created
+        提交订单成功，请立即支付试讲费用
+      - elsif @order.status == Setting.orders.status_parent_paied
+        收到家长订单，请点击确认接受订单
+      - elsif @order.status == Setting.orders.status_teacher_paied
+        您确认了该订单，请尽快与家长联系
+      - elsif @order.status == Setting.orders.status_trade_success
+        订单完成，试讲费用已打入您的支付宝中，请注意查收
+      - elsif @order.status == Setting.orders.status_trade_failed
+        订单完成，家长因不满意申请了退款，试讲费用已退回到家长的支付宝中
+  .order-infor-height
+    .order-split-line
+    .row
+      .col-xs-4.col-xs-offset-1
+        课程信息：
+      .col-xs-7
+        = "#{@course.name} - #{@course.teacher.name}"
+    .order-split-line
+    .row
+      .col-xs-4.col-xs-offset-1
+        试讲日期：
+      .col-xs-7
+        = @order.appointments_time.strftime("%Y-%m-%d")
+    .order-split-line
+    .row
+      .col-xs-4.col-xs-offset-1
+        授课时长：
+      .col-xs-7
+        ="#{@order.hours} 小时"
+    .order-split-line
+    .row
+      .col-xs-4.col-xs-offset-1
+        已付金额：
+      .col-xs-7
+        .money="￥#{@order.total}.00"
+    .order-split-line
+    .row
+      .col-xs-4.col-xs-offset-1
+        家长姓名：
+      .col-xs-7
+        = @order.parent.name
+    - if [Setting.orders.status_teacher_paied, Setting.orders.status_trade_success, Setting.orders.status_trade_failed].include? @order.status
+      .order-split-line
+      .row
+        .col-xs-4.col-xs-offset-1
+          家长电话：
+        .col-xs-7
+          .money= @order.phone
+    - else
+      .order-split-line
+      .row
+        .col-xs-4.col-xs-offset-1
+          家长电话：
+        .col-xs-7
+          = @order.phone[0..6] + "xxxx"
+    .order-split-line
+    .row
+      .col-xs-4.col-xs-offset-1
+        授课地址：
+      .col-xs-7
+        = @order.addr
+    .order-split-line
+    - if @order.status == Setting.orders.status_parent_paied
+      = link_to "确认订单", teacher_pay_orders_path(:id=>@order.number), :class=>"btn btn-warning btn-block"
+    - elsif [Setting.orders.status_teacher_paied, Setting.orders.status_trade_success, Setting.orders.status_trade_failed].include? @order.status
+      .row
+        .col-xs-11.col-xs-offset-1
+          .money
+            您已确认该订单
+

@@ -1,0 +1,64 @@
+- provide(:title, t('.title'))
+
+= render "layouts/header"
+%div.p_main
+  %div.p_wrapper
+    = render :partial => "profile"
+    %div.p_content
+      %div.p_block
+        %div.p_block_title.p_content_block_title
+          %h4
+            = image_tag("xxxg.png",class:"icont")
+            信息修改
+
+      %div.p_block.p_modify_info
+        = form_for @parent,:url => {:controller => "parents",:action => "modify_info_changed"}, :html=>{:class=>"form-horizontal"}, :validate => true do |f|
+          %table.table
+            %tr
+              %td{:align => "right",:class => "p_modify_info_label"}
+                姓名
+              %td
+                = f.text_field :name,:class=>"form-control p_modify_info_text"
+              %td
+            %tr
+              %td{:align => "right",:class => "p_modify_info_label"}
+                支付宝
+              %td
+                =f.text_field :pay_num,:class=>"form-control p_modify_info_text"
+                %p 请正确填写支付宝帐号，试讲失败预约费用将退回此帐号！
+              %td
+          = fields_for :address,@parent.address do|a|
+            %table.table.p_table2
+              %tr
+                %td{:align => "right",:class => "p_modify_info_label"}
+                  所在省
+                %td
+                  = a.select :province,get_address_province,{:include_blank => '请选择所在省'}, :class => "form-control p_modify_info_text", :id =>"p_province"
+                %td
+              %tr
+                %td{:align => "right"}
+                  所在市
+                %td
+                  = a.select :city,get_address_city,{:include_blank => '请选择所在市'}, :class =>"form-control p_modify_info_text", :id => "p_city"
+                %td
+              %tr
+                %td{:align => "right"}
+                  所在区
+                %td
+                  = a.select :district,get_address_district,{:include_blank => '请选择所在区'}, :class =>"form-control p_modify_info_text", :id => "p_district"
+                %td
+              %tr
+                %td{:align => "right"}
+                  详细地址
+                %td
+                  = a.text_field :details,:class => "form-control p_modify_info_text2"
+                %td
+          %table.table
+            %tr
+              %td{:class => "p_modify_info_label"}
+
+              %td
+                = f.submit "保存",:class => "btn btn-success"
+                &nbsp;&nbsp;
+                = link_to "取消", modify_info_parents_path,:class => "btn btn-warning"
+              %td

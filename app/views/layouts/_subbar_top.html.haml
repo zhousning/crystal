@@ -1,0 +1,11 @@
+%div#header.autowidth
+  %div.wrapper
+    %div.header-search
+      = form_tag filters_search_path do |f|
+        %div.header-search-form
+          %i.glyphicon.glyphicon-search
+          %input.header-search-input{:placeholder => "搜索你想学的课程试试",:name => "keywords"}
+          = submit_tag "搜索",:class => "header-search-btn"
+    %div.header-logo
+      %a{:href => root_path}
+        =image_tag('logo.png',:class => "header-logo-img",:alt=>"家教呢")

@@ -1,0 +1,51 @@
+- provide(:title, t('.title'))
+
+%div#p_header
+  %div.p_wrapper
+    %div.p_logo
+      %a{:href => root_path}
+        =image_tag('logo.png',:class => "header-logo-img2")
+    %img.p_title_img{:src => "https://account.xiaomi.com/static/img/passport/photo.jpg"}
+    %div.p_title
+      个人主页
+%div.p_main
+  %div.p_wrapper
+    = render :partial => "teachers/profile"
+    %div.p_content
+      %div.p_block
+        %div.p_block_title.p_content_block_title
+          %h4
+            = image_tag("qbkc.png",class:"icont")
+            已发布课程
+        %div.p_block
+          %br       
+          - @courses.each_slice(3) do |slice|
+            .row
+              .col-md-12
+                - slice.each do |course|
+                  .container1
+                    .qa-message-list#wallmessages
+                      .message-item#md16
+                        .message-inner
+                          .clearfix
+                            %table.col-md-12#c_table
+                              %tr.c_header
+                                %td{:colspan=>4}
+                                  %span="发布时间"
+                                  %span="| #{course.updated_at.strftime("%Y-%m-%d %H:%M:%S")}"
+                              %tr.c_content
+                    
+                                %td.black-link.col-md-3
+                                  = link_to course.name,course_path(course)
+                                %td.col-md-3
+                                  = "授课时长: #{course.length} 小时"
+                                %td.col-md-3
+                                  = "试讲费用: #{course.price} 元"
+                                %td.col-md-3
+                                  = link_to '删除',course,:method=>:delete,:data=>{:confirm=>"确认删除课程吗？"},:class=>"btn btn-danger"
+                                  = link_to '修改',edit_course_path(course),:class => "btn btn-info"
+          
+
+
+
+

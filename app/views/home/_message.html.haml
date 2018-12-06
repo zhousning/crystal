@@ -1,0 +1,49 @@
+%div{:role=>"tabpanel"}
+  %ul.nav.nav-tabs{:role=>"tablist"}
+    %li.active{:role=>"presentation"}
+      %a{:href=>"#message", "aria-controls"=>"message", :role=>"tab", "data-toggle"=>"tab"} 通知
+    %li{:role=>"presentation"}
+      %a{:href=>"#notice", "aria-controls"=>"notice", :role=>"tab", "data-toggle"=>"tab"} 新闻
+
+  .tab-content
+    %div.tab-pane.active#message{:role=>"tabpanel"}
+      .notice-messages
+        %ul
+          - if parent_signed_in?
+            - @public_messages.each do |message|
+              %li.public-message= link_to "[公告] #{message.title}", msg_parents_path(:message=>message.id), :target=>"_blank"
+              %li.pull-right
+                =message.updated_at.strftime("%m-%d")
+            - @group_messages.each do |message|
+              %li.public-message= link_to "[公告] #{message.title}", msg_parents_path(:message=>message.id), :target=>"_blank"
+              %li.pull-right
+                =message.updated_at.strftime("%m-%d")
+            - @messages.each do |message|
+              %li.message= link_to "[我的] #{message.title}", msg_parents_path(:message=>message.id), :target=>"_blank"
+              %li.pull-right
+                =message.updated_at.strftime("%m-%d")
+          - elsif teacher_signed_in?
+            - @public_messages.each do |message|
+              %li.public-message= link_to "[公告] #{message.title}", msg_teachers_path(:message=>message.id), :target=>"_blank"
+              %li.pull-right
+                =message.updated_at.strftime("%m-%d")
+            - @group_messages.each do |message|
+              %li.public-message= link_to "[公告] #{message.title}", msg_teachers_path(:message=>message.id), :target=>"_blank"
+              %li.pull-right
+                =message.updated_at.strftime("%m-%d")
+            - @messages.each do |message|
+              %li.message.pull-left= link_to "[我的] #{message.title}", msg_teachers_path(:message=>message.id), :target=>"_blank"
+              %li.pull-right
+                =message.updated_at.strftime("%m-%d")
+          - else
+            - @public_messages.each do |message|
+              %li.public-message= link_to "[公告] #{message.title}", message, :target=>"_blank"
+              %li.pull-right
+                =message.updated_at.strftime("%m-%d")
+
+    %div.tab-pane#notice{:role=>"tabpanel"}
+      .notice-messages
+        %ul
+          - @notices.each do |notice|
+            %li.public-message= link_to "[新闻] #{notice.title}", notice, :target=>"_blank"
+

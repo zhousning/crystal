@@ -1,0 +1,215 @@
+- provide(:title, t('.title'))
+
+= render "layouts/subbar_top" 
+
+.row.filter-top.form-group
+  = render "carousel" 
+  
+.row.bd-bottom.border-shadow 
+  .col-xs-12.user-details 
+    .user-info-block 
+      %Ul.row.navigation 
+        %li.col-xs-2
+          = link_to "全部", "/filters/index",  :class => "decoration-none col-xs-12"
+        %li.col-xs-2.active
+          %a{ :'data-toggle' => "tab", :href => "#primary", :class => "decoration-none col-xs-12"}
+            小学
+        %li.col-xs-2
+          %a{ :'data-toggle' => "tab", :href => "#junior", :class => "decoration-none col-xs-12"}
+            初中
+        %li.col-xs-2
+          %a{ :'data-toggle' => "tab", :href => "#high", :class => "decoration-none col-xs-12"}
+            高中
+        -#
+          %li.col-xs-2
+            %a{ :'data-toggle' => "tab", :href => "#art", :class => "decoration-none col-xs-12"}
+              艺术
+        %li.col-xs-4
+          %a{ :'data-toggle' => "tab", :href => "#compute", :class => "decoration-none col-xs-12"}
+            计算机
+      .user-body
+        .tab-content
+          .tab-pane.active#primary
+            .row
+              .col-xs-12
+                %ul{:class => "list-inline margin-zero"}
+                  %li
+                    = link_to "数学","/subject/1/", :class => "decoration-none"
+                  %li
+                    = link_to "语文","/subject/2/", :class => "decoration-none"
+                  %li
+                    = link_to "英语","/subject/3/", :class => "decoration-none"
+                  %li
+                    = link_to "作文","/subject/4/", :class => "decoration-none"
+          .tab-pane#junior
+            .row
+              .col-xs-12
+                %ul{:class => "list-inline margin-zero"}
+                  %li
+                    = link_to "数学","/subject/11/", :class => "decoration-none"
+                  %li
+                    = link_to "语文","/subject/12/", :class => "decoration-none"
+                  %li
+                    = link_to "物理","/subject/15/", :class => "decoration-none"
+                  %li
+                    = link_to "化学","/subject/16/", :class => "decoration-none"
+                  %li
+                    = link_to "英语","/subject/13/", :class => "decoration-none"
+                  %li
+                    = link_to "历史","/subject/18/", :class => "decoration-none"
+                  %li
+                    = link_to "政治","/subject/17/", :class => "decoration-none"
+                  %li
+                    = link_to "生物","/subject/14/", :class => "decoration-none"
+          .tab-pane#high
+            .row
+              .col-xs-12
+                %ul{:class => "list-inline margin-zero"}
+                  %li
+                    = link_to "数学","/subject/21/", :class => "decoration-none"
+                  %li
+                    = link_to "语文","/subject/22/", :class => "decoration-non"
+                  %li
+                    = link_to "物理","/subject/25/", :class => "decoration-none"
+                  %li
+                    = link_to "化学","/subject/26/", :class => "decoration-none"
+                  %li
+                    = link_to "英语","/subject/23/", :class => "decoration-none"
+                  %li
+                    = link_to "历史","/subject/28/", :class => "decoration-none"
+                  %li
+                    = link_to "政治","/subject/27/", :class => "decoration-none"
+                  %li
+                    = link_to "生物","/subject/24/", :class => "decoration-none"
+          -#
+            .tab-pane#art
+            .row
+              .col-xs-12
+                %ul{:class => "list-inline margin-zero"}
+                  %li
+                    = link_to "音乐", nil, :class => "decoration-none"
+                  %li
+                    = link_to "舞蹈", nil, :class => "decoration-none"
+                  %li
+                    = link_to "美术", nil, :class => "decoration-none"
+                  %li
+                    = link_to "体育", nil, :class => "decoration-none"
+          .tab-pane#compute
+            .row
+              .col-xs-12
+                %ul{:class => "list-inline margin-zero"} 
+                  %li
+                    = link_to "Java","/subject/51/", :class => "decoration-none"
+                  %li
+                    = link_to "网页制作","/subject/56/", :class => "decoration-none"
+                  %li
+                    = link_to "办公软件","/subject/58/", :class => "decoration-none"
+.row.bd-bottom
+  .col-xs-12.margin-zero
+    .row
+      .col-xs-12
+        %P
+          %h5
+            小初高教育 
+  %ul.col-xs-12.padding-none.margin-zero
+    - @normal_teachers.each_with_index do |f,i|
+      - next if f.courses[0] and f.courses[0].category and f.courses[0].category.second == "计算机"
+      - @count += 1
+      - break if @count == 11
+      %li.col-xs-6.topt
+        %a{:href => detail_teachers_path(:id => f.number)}
+          .col-xs-12
+            %P.text-center
+              = image_tag(f.image_url(:normal),:class=>"img-circle", :width => "80px", :height => "80px", :alt=>"老师")
+            %P
+              %h4.text-center.text-muted
+                = f.name
+            .col-xs-12.form-group.detail-comment-tips
+              %ul.ful
+                %li.stuff &nbsp;
+                %li.stuff &nbsp;
+                %li.stuff &nbsp;
+                %li.stuff &nbsp;
+                %li.stuff &nbsp;
+            %p.text-muted
+              - if f.courses[0] and f.courses[0].category
+                = f.courses[0].category.second+f.courses[0].category.subject
+              &nbsp;
+              &nbsp;
+              %small.font-orange
+                = f.teaching_age.to_s() + "年教龄"
+            %P
+              %h4.text-left.text-muted
+                - if f.identity == 1 and f.student_identity
+                  = f.student_identity.major
+                -else
+                  = "东北电力大学"
+    -#              
+        - if f.period == 0
+          = image_tag("jb3.png")
+        - elsif f.period == 1
+          = image_tag("jb1.png")
+        - if f.identity == 1 and f.student_identity
+          = "\-"
+          %span= f.student_identity.school
+.row.bd-bottom
+  .col-xs-12.margin-zero
+    .row
+      .col-xs-12
+        %P
+          %h5
+            专业教育
+  %ul.col-xs-12.padding-none.margin-zero
+    - @profess_teachers.each_with_index do |f,i|
+      %li.col-xs-12.newt
+        %a{:href => detail_teachers_path(:id => f.number)}
+          .col-xs-4
+            %P
+              = image_tag(f.image_url(:normal),:class=>"img-circle", :width => "80px", :height => "80px", :alt=>"老师")
+          .col-xs-8
+            %P
+              %h4.text-muted
+                = f.name
+                &nbsp;
+                &nbsp;
+                %small.font-orange
+                  = f.teaching_age.to_s() + "年教龄"
+            %P.text-muted
+              - if f.identity == 1 and f.student_identity
+                = f.student_identity.major
+              -else
+                = "东北电力大学"
+            %p.text-muted
+              - if f.courses[0] and f.courses[0].category
+                = f.courses[0].category.subject
+
+-#
+  .row.bd-bottom
+  .col-xs-12.margin-zero
+    .row
+      .col-xs-3
+        %P
+          %h5
+            最新入驻
+  %ul.col-xs-12.padding-none.margin-zero
+    - @new_teachers.each_with_index do |f,i|
+      %li.col-xs-12.newt
+        %a{:href => detail_teachers_path(:id => f.number)}
+          .col-xs-4
+            %P
+              = image_tag(f.image_url(:normal),:class=>"img-circle", :width => "80px", :height => "80px", :alt=>"老师")
+          .col-xs-8
+            %P
+              %h4.text-muted
+                = f.name
+                &nbsp;
+                &nbsp;
+                %small.font-orange
+                  = f.teaching_age.to_s() + "年教龄"
+            %P.text-muted
+              - if f.identity == 1 and f.student_identity
+                = f.student_identity.major
+              -else
+                = "东北电力大学"
+            %p.text-muted
+              = f.courses[0,3].map{|course| course.category.second[0]+course.category.third[0]+course.category.subject}.join(",").html_safe

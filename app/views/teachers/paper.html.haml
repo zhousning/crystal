@@ -1,0 +1,92 @@
+- provide(:title, t('.title'))
+
+= render "layouts/header"
+%div.p_main
+  %div.p_wrapper
+    = render :partial => "profile"
+    %div.p_content
+      %div.p_block
+        %div.p_block_title.p_content_block_title
+          %h4
+            = image_tag("zgrz.png",class:"icont")
+            资格认证
+            %span.p_titlexg 认证通过才能发布课程呦！
+      %div.p_block
+        .t_right
+        = form_for current_teacher,:url=>upload_teachers_path,:html => {:multipart => true,:method=>'post'} do |f|
+          = hidden_field_tag "item_img",Setting.teachers.item_img_paper
+          .t_basic_info
+            .cosl-md-12
+            %h5身份认证
+            .t_pass
+              .sf
+                个人身份认证
+              .zs
+                家教网老师必须为通过通过身份认证的真实老师！
+                <input type="button" onclick="pass(0)" value="认证" class="btn btn-primary">
+            .t_pass_00
+              .t_pass_inf
+                = image_tag("example.png",class:"img-thumbnail",width:"100px",height:"100px") 
+                .t_prompt
+                  参考示例
+                  %br
+                  1 照片放大后，身份证上的文字信息与身份证号清楚可见
+                  %br
+                  2 大小不要超过5M
+                .clf
+              .t_pass_inf
+                -if current_teacher.paper_id_img.blank?
+                  = image_tag("photo.jpg",class:"img-thumbnail",width:"100px",height:"100px")  
+                -else
+                  = image_tag(current_teacher.paper_id_img_url(:normal),class:"img-thumbnail",width:"100px",height:"100px")  
+                .t_prompt  
+                  = f.file_field :paper_id_img
+                .clf
+            %h5资质认证
+            .t_pass
+              .sf
+                学历认证
+              .zs
+                学历认证可以提高个人认证的可信度！(在校生可用学生证代替)
+                <input type="button" onclick="pass(1)" value="认证" class="btn btn-primary">
+            .t_pass_01
+              .t_pass_inf
+                -if current_teacher.paper_img.blank?
+                  = image_tag("photo.jpg",class:"img-thumbnail",width:"100px",height:"100px")  
+                -else
+                  = image_tag(current_teacher.paper_img_url(:normal),class:"img-thumbnail",width:"100px",height:"100px")  
+                .t_prompt  
+                  = f.file_field :paper_img
+                .clf
+            .t_pass
+              .sf
+                教师证认证
+              .zs
+                可以提升学生对家教专业技能的信任度！(在校学生可不用上传)
+                <input type="button" onclick="pass(2)" value="认证" class="btn btn-primary">
+            .t_pass_02
+              .t_pass_inf
+                -if current_teacher.teacher_paper.blank?
+                  = image_tag("photo.jpg",class:"img-thumbnail",width:"100px",height:"100px")  
+                -else
+                  = image_tag(current_teacher.teacher_paper_url(:normal),class:"img-thumbnail",width:"100px",height:"100px")  
+                .t_prompt  
+                  = f.file_field :teacher_paper
+                .clf
+            .t_pass
+              .sf
+                专业资质认证
+              .zs
+                可以提升学生对家教专业技能的信任度！
+                <input type="button" onclick="pass(3)" value="认证" class="btn btn-primary">
+            .t_pass_03
+              .t_pass_inf
+                -if current_teacher.professional_paper.blank?
+                  = image_tag("photo.jpg",class:"img-thumbnail",width:"100px",height:"100px")  
+                -else
+                  = image_tag(current_teacher.professional_paper_url(:normal),class:"img-thumbnail",width:"100px",height:"100px")  
+                .t_prompt  
+                  = f.file_field :professional_paper
+                .clf
+          =f.submit "提交",:class=>"btn btn-success t_btn"
+

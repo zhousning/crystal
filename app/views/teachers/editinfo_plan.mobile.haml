@@ -1,0 +1,53 @@
+
+- provide(:title, t('.title'))
+
+= render "layouts/header" 
+= nested_form_for current_teacher,:url=>updateInfor_teachers_path,:html => {:multipart => true,:method=>"post",:class=>"form-horizontal tpadding "}, :validate => true do |f| 
+  .panel.panel-default
+    .panel-heading
+      %h4.panel-title
+        授课时间
+    .panel-body
+      %label.radio-inline
+        = f.radio_button :period, Setting.courses.period_normal
+        = Setting.courses.period_normal_string
+      %label.radio-inline
+        = f.radio_button :period, Setting.courses.period_vacation
+        = Setting.courses.period_vacation_string
+      %label.radio-inline
+        = f.radio_button :period, Setting.courses.period_all
+        = Setting.courses.period_all_string
+  .panel.panel-default
+    .panel-heading
+      %h4.panel-title
+        预约时间
+        %small 家长将根据你填写的时间预约您
+    %ul.list-group
+      %li.list-group-item
+        .row
+          .col-xs-4
+            = check_box_tag "appointments_pos[]",1,@appointments_pos.include?(1)
+            ="星期一"
+          .col-xs-4
+            = check_box_tag "appointments_pos[]",2,@appointments_pos.include?(2)
+            ="星期二"
+          .col-xs-4
+            = check_box_tag "appointments_pos[]",3,@appointments_pos.include?(3)
+            ="星期三"
+      %li.list-group-item
+        .row
+          .col-xs-4
+            = check_box_tag "appointments_pos[]",4,@appointments_pos.include?(4)
+            ="星期四"
+          .col-xs-4
+            = check_box_tag "appointments_pos[]",5,@appointments_pos.include?(5)
+            ="星期五"
+          .col-xs-4
+            = check_box_tag "appointments_pos[]",6,@appointments_pos.include?(6)
+            ="星期六"
+      %li.list-group-item
+        = check_box_tag "appointments_pos[]",0,@appointments_pos.include?(0)
+        ="星期日"
+  %button{ :class => "btn btn-success btn-block" }
+    %span{ :class => "glyphicon glyphicon-floppy-save" }
+    保存信息

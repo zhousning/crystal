@@ -1,0 +1,43 @@
+- provide(:title, t('.title'))
+= render "layouts/subbar_top"
+.filter-top
+.row  
+  .col-xs-12
+    .new-job-title
+      = form_for @information, :html => {:class=>"form-horizontal"},:validate=>true do |f|
+        .panel.panel-success
+          .panel-heading
+            %strong 温馨提示: 
+            请仔细填写各项信息，方便别人找到你。
+          .panel-body
+            .form-group
+              .col-xs-12
+                =f.select(:info_category_id,InfoCategory.all.collect {|p| [ p.title, p.id ] }, { include_blank: false },:class=>"form-control")
+            .form-group
+              .col-xs-12
+                = f.text_field :title,:id=>"title",:class=>"form-control",:placeholder=>"准确描述信息的标题，3~20个字"
+  
+            .form-group
+              .col-xs-12
+                = f.text_area :content,:class=>"form-control",:id=>"content",:placeholder=>"20~2000个字之间，不能填写电话、QQ号等联系方式",:rows=>8
+            .form-group
+              .col-xs-12
+                = f.text_field :name,:id=>"name",:class=>"form-control",:placeholder=>"联系人"
+            .form-group
+              .col-xs-12
+                = f.text_field :phone,:class=>"form-control",:id=>"phone",:placeholder=>"联系电话"
+            .form-group
+              .col-xs-12
+                = f.text_field :qq,:class=>"form-control",:id=>"qq",:placeholder=>"qq号码"
+            .form-group
+              .col-xs-12
+                = f.text_field :weixin,:class=>"form-control",:id=>"weixin",:placeholder=>"微信号码"
+            .form-group
+              .col-xs-12
+                =f.file_field :img,:class=>"control-label",:placeholder=>"相关图片"
+            %hr
+            .form-group
+              .col-xs-8
+                = f.button_tag "发布信息",:class=>"btn btn-warning btn-block"
+              .col-xs-4
+                = link_to "返回",information_index_path,:method=>"get",:class=>"btn btn-default btn-block"

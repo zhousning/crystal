@@ -1,0 +1,19 @@
+- provide(:title, params[:school] + params[:course] + t('.title'))
+
+= render "layouts/subbar_top"
+
+%div#menu
+  %div.wrapper
+    %div.menu-c-all
+      = link_to "全部课程","/filters/index"
+    %div.menu-m
+      %ul
+        %li
+          %a{:class => "menu-m-active", :href=>root_path} 首页
+        %li 
+          %a{:class=>"menu-m-active",:href => flow_path} 预约流程
+        %li
+          %a{:class=>"menu-m-active",:href => tflow_path} 家教入驻
+
+= render "filter"
+= render "index"

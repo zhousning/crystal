@@ -1,0 +1,40 @@
+= nested_form_for current_teacher,:url=>upload_teachers_path,:html => {:multipart => true,:method=>'post',:role=>"form",:autocomplete=>"off"},:validate=>true do |t|
+  .panel.panel-default.basicpanel-height.b-radius
+    .panel-heading.b-radius
+      %strong个人头像
+    .panel-body
+      .row
+        .col-xs-6
+          -if current_teacher.image.blank?
+            =image_tag("user.png",:class=>"img-circle",:width=>"120px")
+          -else
+            = image_tag(current_teacher.image_url(:normal),:width=>"95px",:height=>"95px",:class=>"img-circle")
+        .col-xs-6
+          %P
+            1.请使用近期照片   
+          %p
+            2.照片不大于3M 
+      .m-top-10
+        = t.file_field :image
+  .panel.panel-default.basicpanel-height.b-radius
+    .panel-heading.b-radius
+      %strong个人证件(*必填，否则无法发布课程)
+    .panel-body.text-danger
+      .row
+        .col-xs-5
+          -if current_teacher.paper_img.blank?
+            =image_tag("paper.jpg",:class=>"img-circle",:width=>"90")
+          -else
+            = image_tag(current_teacher.paper_img_url(:normal),:width=>"95px",:height=>"95px",:class=>"img-circle")
+        .col-xs-7
+          %p
+            1.学生使用需学生证
+          %p
+            2.家教使用教师资格证
+          %p
+            3.认证通过才能发布课程
+      .m-top-10
+        = t.file_field :paper_img
+  =t.submit "保存信息",:class=>"btn btn-success btn-block",:onclick=>"updateBasicInfo(this)"
+
+

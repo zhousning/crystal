@@ -1,0 +1,21 @@
+- if @orders.empty?
+  .order-text-block 目前还没有接到订单
+- else
+  %table.table.table-hover
+    %thead
+      %th 课程名称
+      %th 家教姓名
+      %th 试讲日期
+      %th 试讲费用
+      %th 状态
+      %th 操作
+
+    - @orders.each do |order|
+      %tr
+        %td= order.courses[0].name if order.courses.size > 0
+        %td= order.courses[0].teacher.name if order.courses.size > 0
+        %td= order.appointments_time.strftime("%Y-%m-%d")
+        %td= "￥#{order.total}.00"
+        %td= get_order_status_string(order.status)
+        %td= link_to get_parent_order_button_string(order.status), parent_orders_path(:id=>order.number), :class=>"btn btn-sm #{get_parent_order_button_type(order.status)}"
+

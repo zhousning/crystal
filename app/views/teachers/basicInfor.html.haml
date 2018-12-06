@@ -1,0 +1,349 @@
+- provide(:title, t('.title'))
+
+= render "layouts/header"
+%div.p_main
+  %div.p_wrapper
+    = render :partial => "profile"
+    %div.p_content
+      %div.p_block
+        %div.p_block_title.p_content_block_title
+          %h4
+            = image_tag("jbxx.png",class:"icont")
+            我的信息
+      %div.p_block
+        %div.p_content_info.info-mgb2
+          %div.p_content_t
+            %span= "#{current_teacher.name}"
+            %span= "(ID:#{current_teacher.number})"
+            %span= "(状态:#{get_teacher_status_string(current_teacher.status)})"
+          %table.p_content_table
+            %tr
+              %td.p_content_td
+                手机号:
+              %td
+                =current_teacher.phone
+            %tr
+              %td.p_content_td
+                年&nbsp;龄：
+              %td
+                =current_teacher.age
+            %tr
+              %td
+                性&nbsp;别：
+              %td
+                -if current_teacher.sex==Setting.teachers.sex_man
+                  =Setting.teachers.sex_man_string
+                -elsif current_teacher.sex==Setting.teachers.sex_women
+                  =Setting.teachers.sex_women_string
+                -else
+                  =Setting.teachers.sex_none_string
+
+            -if current_teacher.identity==Setting.teachers.identity_student
+              %tr
+                %td.p_content_td
+                  所在院校:
+                %td
+                  = current_teacher.student_identity.school if current_teacher.student_identity
+              %tr
+                %td.p_content_td
+                  所在年级:
+                %td
+                  =current_teacher.student_identity.grade if current_teacher.student_identity
+              %tr
+                %td.p_content_td
+                  所学专业:
+                %td
+                  =current_teacher.student_identity.major if current_teacher.student_identity
+            -elsif current_teacher.identity==Setting.teachers.identity_teacher
+              %tr
+                %td.p_content_td
+                  任课院校:
+                %td
+                  = current_teacher.teacher_identity.school if current_teacher.teacher_identity
+              %tr
+                %td.p_content_td
+                  任课年级:
+                %td
+                  =current_teacher.teacher_identity.grade if current_teacher.teacher_identity
+              %tr
+                %td.p_content_td
+                  教学科目:
+                %td
+                  =current_teacher.teacher_identity.subject if current_teacher.teacher_identity
+        %div.t_content_img
+          -if current_teacher.image.blank?
+            = image_tag("photo.jpg",class:"img-thumbnail",width:"100px",height:"100px")  
+          -else
+            = image_tag(current_teacher.image_url(:normal),:class=>"img-circle",width:"120px",:height=>"120px")
+        %div.t_signin_button
+          - if current_teacher.signdate.last == Time.now.strftime("%Y%m%d")
+            .have_signin= link_to "已连续签到 #{current_teacher.signcount} 天", nil, :class=>"btn btn-info btn-lg"
+          - else
+            .have_not_signin= link_to "我要签到", sign_today_teachers_path, :class=>"btn btn-info btn-lg"
+
+          -#
+            %table.p_content_table2
+              %tr
+                %td.p_content_td
+                  教学科目:
+                %td
+                  =current_teacher.my_categories
+              %tr
+                %td.p_content_td
+                  教学理念:
+                %td
+                  =current_teacher.quotes
+        .p_block
+          .col-md-12.col-xs-12.margin-task
+            .col-md-12.col-xs-12
+              %p
+                %h3.font-orange.text-center
+                  只需要完成三个任务家长就能约你了！亲，约吗？
+            .col-md-12.col-xs-12.task-wrap-padding
+              .col-md-12.col-xs-12
+                %p
+                  %h3.text-center
+                    第一步：基本信息
+              .col-md-12.col-xs-12
+                %a{:href => editinfo_basic_teachers_path, :class => "task-style"}
+                  .col-md-1.col-xs-1
+                    %P
+                      %h1
+                        -if @basic_degree == 0
+                          %i.glyphicon.glyphicon-hand-right
+                        -else
+                          -if current_teacher.status == Setting.teachers.status_edit_sql || current_teacher.status == Setting.teachers.status_notpass_sql
+                            %i.text-info.glyphicon.glyphicon-time
+                          -else
+                            %i.font-green.glyphicon.glyphicon-ok-circle
+                  .col-md-10.col-xs-10
+                    .col-md-12.col-xs-12
+                      %P
+                        %h4
+                          基本信息
+                    .col-md-12.col-xs-12
+                      %P
+                        %h5
+                          -if @basic_degree == 0 
+                            需要填写内容包括：您的基本情况，个人简介，上传个人照片和学生证照片。基本信息填写完整后，我们会进行人工资格审核，审核通过后才能发布课程哦。
+                          -else
+                            -if current_teacher.status == Setting.teachers.status_edit_sql
+                              您的信息已经提交，我们正在审核中，请过一段时间再来查看......
+                            -elsif current_teacher.status == Setting.teachers.status_notpass_sql
+                              .text-danger
+                                您的信息未通过审核，是不是有什么遗漏的地方？请重新填写后再提交一下吧。
+                            -else
+                              .text-danger
+                                恭喜你已经通过审核，快去完善其他信息，然后发布课程吧。
+                  .col-md-1.col-xs-1.padding-none
+                    %p
+                      %h1
+                        %i.glyphicon.glyphicon-chevron-right
+              .col-md-12.col-xs-12
+                %p
+                  %h3.text-center
+                    第二步：包装自己
+              .col-md-12.col-xs-12
+                %a{:href => editinfo_study_teachers_path, :class => "task-style task1-bottom"}
+                  .col-md-1.col-xs-1
+                    %P
+                      %h1
+                        -if @study_degree == 0
+                          %i.glyphicon.glyphicon-hand-right
+                        -else
+                          %i.glyphicon.glyphicon-ok-circle.font-green
+                  .col-md-10.col-xs-10
+                    .col-md-12.col-xs-12
+                      %P
+                        %h4
+                          学习成果
+                    .col-md-12.col-xs-12
+                      %P
+                        %h5
+                          家长很关心家教自己的学习情况，请把你的各种成绩、各种获奖、各种闪光点都写上来，我就不信家长不找你，嘿嘿。
+                  .col-md-1.col-xs-1
+                    %p
+                      %h1
+                        %i.glyphicon.glyphicon-chevron-right
+              .col-md-12.col-xs-12
+                %a{:href => editinfo_experience_teachers_path, :class => "task-style"}
+                  .col-md-1.col-xs-1
+                    %P
+                      %h1
+                        -if @experience_degree == 0
+                          %i.glyphicon.glyphicon-hand-right
+                        -else
+                          %i.glyphicon.glyphicon-ok-circle.font-green
+                  .col-md-10.col-xs-10
+                    .col-md-12.col-xs-12
+                      %P
+                        %h4
+                          教学经历
+                    .col-md-12.col-xs-12
+                      %P
+                        %h5
+                          你的教学经历是对你个人能力的完美诠释，快写上你漂亮的经历，让家长了解一下你的个人能力吧。
+                  .col-md-1.col-xs-1
+                    %p
+                      %h1
+                        %i.glyphicon.glyphicon-chevron-right
+              .col-md-12.col-xs-12
+                %p
+                  %h3.text-center
+                    第三步：发布课程
+              .col-md-12.col-xs-12
+                %a{:href => editinfo_plan_teachers_path, :class => "task-style"}
+                  .col-md-1.col-xs-1
+                    %P
+                      %h1
+                        -if @plan_degree == 0
+                          %i.glyphicon.glyphicon-hand-right
+                        -else
+                          %i.glyphicon.glyphicon-ok-circle.font-green
+                  .col-md-10.col-xs-10
+                    .col-md-12.col-xs-12
+                      %P
+                        %h4
+                          授课时间
+                    .col-md-12.col-xs-12
+                      %P
+                        %h5
+                          告诉家长你可以去上课的时间，学校的课程咱可不能逃，我说的好像也没有什么不对。
+                  .col-md-1.col-xs-1
+                    %p
+                      %h1
+                        %i.glyphicon.glyphicon-chevron-right
+              .col-md-12.col-xs-12
+                %a{:href => new_course_path, :class => "task-style"}
+                  .col-md-1.col-xs-1
+                    %P
+                      %h1
+                        %i.glyphicon.glyphicon-hand-right
+                  .col-md-10.col-xs-10
+                    .col-md-12.col-xs-12
+                      %P
+                        %h4
+                          发布课程
+                    .col-md-12.col-xs-12
+                      %P
+                        %h5
+                          好激动哦，已经到最后一步了，发布自己擅长的课程，家长就可以约你喽，可以发布多个课程。
+                  .col-md-1.col-xs-1
+                    %p
+                      %h1
+                        %i.glyphicon.glyphicon-chevron-right
+
+          -#
+            .row.info-mgb2
+              .col-md-3.col-md-offset-1.infoset
+                .row
+                  .col-md-6
+                    %p.text-center
+                      %h3
+                        基本信息 
+                  .col-md-2
+                    %h3
+                  .col-md-4
+                      -if @basic_degree == 0
+                        %span{:class => "font-orange glyphicon glyphicon-info-sign"}
+                      -else
+                        -if current_teacher.status == Setting.teachers.status_none_sql || current_teacher.status == Setting.teachers.status_edit_sql || current_teacher.status == Setting.teachers.status_notpass_sql
+                          %span{:class => "text-info glyphicon glyphicon-time"}
+                        -else
+                          %span{:class => "font-green glyphicon glyphicon-ok-sign"}
+                    %p.text-center
+                      %h3
+                        =link_to "编辑", editinfo_basic_teachers_path, :class => "font-grey linkhover edit-bc"
+
+
+                -if @basic_degree == 0
+                  %span
+                    请完善基本信息，以便进行资格审核,审核通过才能发布课程
+                -else
+                  -if current_teacher.status == Setting.teachers.status_edit_sql
+                    %span{:class => "text-info glyphicon glyphicon-time"}
+                      审核进行中，请耐心等待......
+                  -elsif current_teacher.status == Setting.teachers.status_notpass_sql
+                    %span{:class => "text-danger glyphicon glyphicon-time"}
+                      审核未通过，请认真填写基本信息
+              .col-md-1
+                .row
+                  .col-md-12
+                    %p
+                      %h1
+                        %i.glyphicon.glyphicon-arrow-right.direction-font
+              .col-md-3.infoset
+                .row
+                  .col-md-6
+                    %p.text-center
+                      %h3
+                        学习成果 
+                  .col-md-2
+                    %h3
+                      -if @study_degree == 0
+                        %span{:class => "font-orange glyphicon glyphicon-info-sign"}
+                      -else
+                        %span{:class => "font-green glyphicon glyphicon-ok-sign"}
+                  .col-md-4
+                    %p.text-center
+                      %h3
+                        =link_to "编辑", editinfo_study_teachers_path, :class => "font-grey linkhover edit-bc"
+                      
+
+            .row.info-mgb2
+              .col-md-3.col-md-offset-1.infoset
+                .row
+                  .col-md-6
+                    %p.text-center
+                      %h3
+                        教学经历 
+                  .col-md-2
+                    %h3
+                      -if @experience_degree == 0
+                        %span{:class => "font-orange glyphicon glyphicon-info-sign"}
+                      -else
+                        %span{:class => "font-green glyphicon glyphicon-ok-sign"}
+                  .col-md-4
+                    %p.text-center
+                      %h3
+                        =link_to "编辑", editinfo_experience_teachers_path, :class => "font-grey linkhover edit-bc"
+              .col-md-3.col-md-offset-1.infoset
+                .row
+                  .col-md-6
+                    %p.text-center
+                      %h3
+                        教学计划 
+                  .col-md-2
+                    %h3
+                      -if @plan_degree == 0
+                        %span{:class => "font-orange glyphicon glyphicon-info-sign"}
+                      -else
+                        %span{:class => "font-green glyphicon glyphicon-ok-sign"}
+                  .col-md-4
+                    %p.text-center
+                      %h3
+                        =link_to "编辑", editinfo_plan_teachers_path, :class => "font-grey linkhover edit-bc"
+            .row.info-mgb2
+              .col-md-12
+                %blockquote
+                  %p.text-center
+                    %h4.text-muted
+                      请认真填写基本信息，审核通过才能发布课程
+                  %p.text-center.text-success
+                    %h4.text-muted
+                      基本信息请不要重复提交，避免多次审核，耽误您发课的时间
+                      
+
+
+        %div.p_block
+          %div.p_block_title.p_content_block_title2
+            %h4
+              %i.glyphicon-color.glyphicon.glyphicon-align-justify
+              我的订单
+        %div.p_block
+          = render "order_list"
+        %div.p_block
+          %div.p_block_title.p_content_block_title2
+            %h4
+              = image_tag("qbkc.png",class:"icont")
+              我的课程

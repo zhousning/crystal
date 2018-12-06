@@ -1,0 +1,35 @@
+// Place all the styles related to the institutions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.school .course-all
+{
+  background:white;
+  border-bottom:1px solid #ccc;
+  margin:10px 0;
+  padding-top:10px;
+}
+
+.school .course-list img
+{
+  width:100%;
+}
+.name-price
+{
+  margin-top:10px;
+  height:30px;
+}
+.course-name
+{
+  color:rgb(48, 46, 46);
+  font-size: 16px;
+  float:left;
+  padding-left:4px;
+}
+.course-price
+{
+  float:right;
+  padding-right:4px;
+  font-size: 16px;
+  color: #f60;
+}

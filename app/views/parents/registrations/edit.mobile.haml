@@ -1,0 +1,20 @@
+- provide(:title, t('.title'))
+
+= render "layouts/header"
+= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class:"form-horizontal",method: :put }) do |f| 
+  .form-group
+    .col-md-4
+      = f.password_field :current_password, autocomplete: "off", :class => "form-control",:placeholder=>"当前密码"
+  .form-group
+    .col-md-4
+      = f.password_field :password, autocomplete: "off", :class => "form-control",:placeholder=>"最新密码"
+  .form-group
+    .col-md-4
+      = f.password_field :password_confirmation, autocomplete: "off", :class => "form-control",:placeholder=>"确认密码"
+  
+  .form-group
+    .col-sm-offset-2.col-sm-10.col-md-4
+      = f.submit "提交", :class => "btn btn-success form-control"
+  
+
+

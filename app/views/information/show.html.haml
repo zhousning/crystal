@@ -1,0 +1,79 @@
+- provide(:title, @information.title+' - '+t('.title'))
+= render "layouts/subbar_top"
+= render "layouts/nav_menu"
+.wrapper
+  .information-show
+    .info-title-menu
+      -if @information.info_category
+        =link_to "家教呢 ",root_path
+        >
+        =link_to "校园信息 ",information_index_path
+        > 
+        =link_to @information.info_category.title,information_index_path(:infocategory=>@information.info_category_id)
+        >
+    .row
+      .col-md-8
+        .list-group
+          .list-group-item
+            %h4
+              %strong= @information.title
+            %small.pull-left
+              更新时间:
+              ="#{@information.created_at.strftime('%Y-%m-%d %H:%M')}"
+            %small.pull-left.p-both
+              浏览次数:
+              = "#{@information.click_times}"
+              &nbsp;&nbsp;
+              %span 分享到:
+            = social_share_button_tag(@information.title,:class=>"share-icon")
+          .list-group-item
+            .row
+              .col-md-12
+                = simple_format(@information.content)
+            .code-bg
+              .col-md-8.padding-none
+                %a{:href=>@information.qrcode.url}
+                  = image_tag @information.qrcode.thumb("240x80#").url
+              .col-md-4.padding-icon
+                %h5 快下载二维码转发给更多人看吧！
+          -if !@information.img.blank?
+            .list-group-item
+              .alert-message.alert-message-default
+                %h4 相关图片
+                = image_tag(@information.img,:width=>"200px")
+          .list-group-item
+            .row.form-group
+              .col-md-6
+                联系人:
+                %span.name-font=@information.name
+              .col-md-6
+                联系电话：
+                %span.phone-font= @information.phone
+            .row.form-group
+              .col-md-6
+                QQ号码：
+                = @information.qq
+              .col-md-6
+                微信号码：
+                = @information.weixin
+            %h5
+              %strong 联系我时，请说是在家教呢上看到的。
+        
+      .col-md-3
+        .row
+          .col-md-11
+            %a.btn.btn-block.btn-color.btn-blue{:href=>new_information_path}
+              %i.glyphicon.glyphicon-send
+              =t('information.send.information')
+            .list-group.same-info
+              .list-group-item.disabled
+                %i.glyphicon.glyphicon-hand-up
+                同类信息
+              -@information_list.each_with_index do |t,i|
+                .list-group-item
+                  =link_to "#{i+1}. #{truncate(t.title,:length=>10)}",information_path(:id=>t.number),:class=>"top-list"
+            .col-md-6.padding-none
+              =link_to "我要当家教",new_teacher_registration_path ,:class=>"btn btn-block btn-color"
+            .col-md-6.padding-none
+              =link_to "我要请家教",new_parent_registration_path ,:class=>"btn btn-block btn-color"
+        

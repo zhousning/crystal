@@ -1,0 +1,13 @@
+= form_for @teacher, :url=>teacher_session_path, :html=>{:class=>"form-inline"} do |f|
+  /= devise_error_messages!
+  .col-xs-12
+    .form-group
+      = f.text_field :phone, autofocus: true, :class=>"form-control bd-radius", :placeholder => "请输入手机号"
+
+  .col-xs-12
+    .form-group
+      = f.password_field :password, autocomplete: "off", :class=>"form-control bd-radius", :placeholder => "请输入密码"
+  .col-xs-12
+    .form-group
+      = f.submit "登录", :class=>"btn  btn-block btn-warning"
+

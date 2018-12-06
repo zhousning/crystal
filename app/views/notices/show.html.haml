@@ -1,0 +1,25 @@
+- provide(:title, "文章 - " + @notice.title)
+
+= render "layouts/subbar_top"
+= render "layouts/nav_menu"
+.wrapper
+  .info-title-menu
+    =link_to "家教呢 ",root_path
+    >
+    =link_to "教育讲堂 ",notices_path
+    >
+    =link_to @notice.notices_category.try(:title),notices_path
+    >
+    =truncate(@notice.title, :lenght=>6)
+  .msg_wrapper-report
+    .msg_main
+      .msg_header
+        %h2.msg_title
+          = "#{@notice.title}"
+        .msg_time.pull-left
+          = "时间:  #{@notice.created_at.strftime("%Y-%m-%d")}"
+          &nbsp;&nbsp;分享:&nbsp;
+        = social_share_button_tag(@notice.title,:class=>"share-icon")
+      .msg_content
+        %p
+          = format_string_newline(@notice.content).html_safe

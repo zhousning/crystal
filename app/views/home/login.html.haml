@@ -1,0 +1,24 @@
+- provide(:title, t('.title'))
+
+.login_container.autowidth
+  .login_main
+    .left
+      =image_tag('denglu1.jpg', :class=>"bgimg")
+    .right
+      %ul.nav_back.nav.nav-tabs.login-nav-tabs{:role=>"tablist"}
+        %li.nav_no.active.nav_text= link_to "家长登录", "#parent_sign_in", :role=>"tab", "data-toggle"=>"tab"
+        %li.nav_no.nav_text= link_to "家教登录", "#teacher_sign_in", :role=>"tab", "data-toggle"=>"tab"
+                                                                                
+      .login-panel
+        .tab-content
+          .tab-pane.fade.in.active#parent_sign_in
+            = render "parents_new"                                                                          
+          .tab-pane.fade#teacher_sign_in                                                                    
+            = render "teachers_new"                  
+      .input_div
+        .row
+          .col-md-4
+            = link_to "家长注册", new_parent_registration_path, :class=>"login_reg"
+          .col-md-4.col-md-offset-4.reg_align
+            = link_to "家教注册", new_teacher_registration_path, :class=>"login_reg"
+

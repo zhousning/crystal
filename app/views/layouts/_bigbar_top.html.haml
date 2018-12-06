@@ -1,0 +1,13 @@
+.bigbar-header.autowidth
+  .bigbar-wrapper
+    %h1
+      %a{:href => root_path}
+        =image_tag('logo.png',:class => "bigbar-logo-img",:alt=>"家教呢")
+    %h2
+      - if request.path == login_path
+        你好，欢迎来到家教呢！
+        = link_to "免费注册", sign_up_path
+      - else
+        你好，欢迎来到家教呢！
+        = link_to "请登录", login_path
+

@@ -1,0 +1,92 @@
+- provide(:title, t('.title'))
+.menu-main
+  .p_wrapper
+    =#render :partial => "teachers/profile"
+    %header{:role=>"banner",:class=>"navbar navbar-fixed-top navbar-bg"}
+      .navbar-header
+        %a{:"data-toggle"=>"collapse-side",:"data-target"=>".side-collapse",:"data-target-2"=>".side-collapse-container",:class=>"pull-left btn-lg"}
+          %span.glyphicon.glyphicon-list
+        %a{:href=>root_path}
+          =image_tag('logo.png',:class => "header-logo-img2 pull-left")
+        %h4
+          =t("#{controller_name}.menu.#{action_name}")
+          %button.btn.btn-primary.btn-xs.signin
+            %span.badge 
+              - if current_teacher.signdate.last == Time.now.strftime("%Y%m%d")
+                连续签到
+                = link_to "#{current_teacher.signcount}", nil
+                天
+              - else
+                = link_to "签到", sign_today_teachers_path
+
+
+      .side-collapse.in
+        %nav{:role=>"navigation",:class=>"navbar-collapse"}
+          %ul.nav.navbar-nav
+            %li
+              %a{:href=>editinfo_basic_teachers_path}
+                %span.glyphicon.glyphicon-user
+                =t('teachers.menu.editinfo_basic')
+            %li.divider
+            %li
+              %a{:href=>editinfo_study_teachers_path}
+                %span.glyphicon.glyphicon-gift
+                =t('teachers.menu.editinfo_study')
+            %li.divider
+            %li
+              %a{:href=>editinfo_experience_teachers_path}
+                %span.glyphicon.glyphicon-road
+                =t('teachers.menu.editinfo_experience')
+            %li.divider
+            %li
+              %a{:href=>editinfo_plan_teachers_path}
+                %span.glyphicon.glyphicon-time
+                =t('teachers.menu.editinfo_plan')
+            %li.divider
+            %li
+              %a{:href=>messages_teachers_path}
+                %span.glyphicon.glyphicon-envelope
+                =t('teachers.menu.messages')
+            %li.divider
+            %li
+              %a{:href=>gallery_teachers_path}
+                %span.glyphicon.glyphicon-camera
+                =t('teachers.menu.gallery')
+            %li.divider
+            %li
+              %a{:href=>edit_teacher_registration_path}
+                %span.glyphicon.glyphicon-wrench
+                =t('teachers.menu.edit')
+            %li.divider
+            %li
+              %a{:href=>new_course_path}
+                %span.glyphicon.glyphicon-open
+                =t('courses.menu.new')
+            %li.divider
+            %li
+              %a{:href=>courses_path}
+                %span.glyphicon.glyphicon-paperclip
+                =t('courses.menu.index')
+            %li.divider
+            %li
+              %a{:href=>order_all_teachers_path}
+                %span.glyphicon.glyphicon-cog
+                =t('teachers.menu.order_all')
+            %li.divider
+            %li
+              %a{:href=>order_unpay_teachers_path}
+                %span.glyphicon.glyphicon-pushpin
+                =t('teachers.menu.order_unpay')
+            %li.divider
+            %li
+              %a{:href=>order_reserving_teachers_path}
+                %span.glyphicon.glyphicon-refresh
+                =t('teachers.menu.order_transfer')
+            %li.divider
+            %li
+              %a{:href=>order_transfer_teachers_path}
+                %span.glyphicon.glyphicon-info-sign
+                =t('teachers.menu.order_reserving')
+.clearfix
+.m-top-50
+

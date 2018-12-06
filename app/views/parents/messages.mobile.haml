@@ -1,0 +1,33 @@
+- provide(:title, t('.title'))
+
+=render "layouts/header"
+- @messages.each do |message|
+  .alert-message.alert-message-success
+    %h5
+      = link_to message.title
+      %small 
+        = message.created_at.strftime("%m-%d %H:%M")
+    %p 
+      .message-content
+        = format_string_newline(message.content).html_safe
+
+- @group_messages.each do |message|
+  .alert-message.alert-message-warning
+    %h5
+      = link_to message.title
+      %small 
+        = message.created_at.strftime("%m-%d %H:%M")
+    %p 
+      .message-content
+        = format_string_newline(message.content).html_safe
+
+- @public_messages.each do |message|
+  .alert-message.alert-message-danger
+    %h5
+      = link_to message.title
+      %small 
+        = message.created_at.strftime("%m-%d %H:%M")
+    %p 
+      .message-content
+        = format_string_newline(message.content).html_safe
+

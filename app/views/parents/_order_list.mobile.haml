@@ -1,0 +1,26 @@
+- if @orders.empty?
+  .order-text-block 目前还没有接到订单
+- else
+  .qa-message-list#wallmessages
+    - @orders.each do |order|
+      .message-item#m16
+        .message-inner
+          .message-head.clearfix
+            %h5.pull-left 
+              = order.courses[0].name
+            %h5.pull-right
+              %strong= get_order_status_string(order.status)
+          .qa-message-content
+            .row
+              .col-xs-8
+                .input-group
+                  家教名称:
+                  = order.courses[0].teacher.name if order.courses.size > 0
+                .input-group
+                  试讲日期:
+                  = order.appointments_time.strftime("%Y-%m-%d")
+                .input-group
+                  试讲费用:
+                  = "￥#{order.total}.00"
+              .col-xs-4.text-center
+                = link_to get_parent_order_button_string(order.status), parent_orders_path(:id=>order.number), :class=>"btn btn-sm #{get_parent_order_button_type(order.status)}"

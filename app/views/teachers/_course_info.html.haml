@@ -1,0 +1,60 @@
+%div#details-info
+  .wrapper
+    %div.details-info-div
+      %div.details-header-box
+        %div.details-header-box1
+          -#
+            - if @teacher.period == 0
+              = image_tag("jb3.png",class:"course-list-box-left-jb2",alt:"平时可以上课")
+            - elsif @teacher.period == 1
+              = image_tag("jb1.png",class:"course-list-box-left-jb2",alt:"假期可以上课")
+            - else
+              %div.course-list-box-left-jb2
+            %div.course-list-box-left-title
+              = @teacher.courses[0].name
+          %div.course-list-box-left-detail
+            = image_tag(@teacher.image_url(:normal))
+        %div.details-header-box2
+          = image_tag("xlrz.png",:class => "details-first-s-img",:title => "学历认证")
+          %span.details-first-s-name 学历认证
+          = image_tag("sfrz.png",:class => "details-first-s-img",:title => "身份认证")
+          %span.details-first-s-name 身份认证
+      %div.details-first-div
+        %div.details-first-f
+          = @teacher.name
+        %div.details-first-s
+          = "ID：#{@teacher.number}"
+      %div.details-second-div
+        %div.details-second-f
+          所在学校：
+        %div.details-second-s
+          - if @teacher.identity == 1
+            - if @teacher.student_identity
+              = @teacher.student_identity.school
+              \-
+              = @teacher.student_identity.major
+              \-
+              = @teacher.student_identity.grade
+      %div.details-second-div
+        %div.details-second-f
+          授课经验：
+        %div.details-second-s
+          = @teacher.teaching_age.to_s() + "年"
+        %div.details-second-f
+          授课方式：
+        %div.details-second-s
+          = "一对一教学"
+      %div.details-second-div
+        %div.details-second-f
+          教学科目：
+        %div.details-second-s2
+          = @teacher.courses.map{|course| course.category.second[0]+course.category.third[0]+course.category.subject}.join(", &nbsp;").html_safe
+    -#
+      %div.details-third-div
+        %div.details-third-s
+          试讲费用
+        %div.details-third-f
+          = "￥ #{@course.price}元"
+        %div.details-first-t
+          = link_to "预约课程",new_order_path(:course_id=>@course.id),:class => "btn btn-lg btn-warning"
+

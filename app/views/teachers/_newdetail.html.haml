@@ -1,0 +1,217 @@
+.col-md-12.info-title.info-bd.info-pdlr
+  %ul.nav.nav-pills
+    %li{ :role => "presentation" }
+      %a{ :href => "#namecard", :class => "font-black"}
+        我的名片
+    %li{ :role => "presentation" }
+      %a{ :href => "#studyresult", :class => "font-black" }
+        学习成果 
+    %li{ :role => "presentation" }
+      %a{ :href => "#experience", :class => "font-black" }
+        教学经历
+  -#      
+    %li{ :role => "presentation" }
+      %a{ :href => "#" }
+        教学计划
+.col-md-12.info-pdlr
+  .col-md-12.info-content.info-mgb
+    .col-md-12.info-bbtm
+      %h4
+        %span{ :class => "glyphicon glyphicon-user" }
+        %a{ :name => "namecard", :class => "font-black" }
+          我的名片 
+    .col-md-12
+      %h5
+        .col-md-2.info-mgb
+          %span{ :class => "text-muted" }
+            姓名：
+          = @teacher.name
+        .col-md-2
+          %span{ :class => "text-muted" }
+            年龄：
+          = @teacher.age.to_s() +"岁"
+        .col-md-2
+          %span{ :class => "text-muted" }
+            性别：
+          - if  @teacher.sex == 1
+            男
+          - else
+            女
+        .col-md-12.info-mgb
+          %span{ :class => "text-muted" }
+            现居地点：
+          - if @teacher.address
+            = get_address_province_string(@teacher.address.province) + get_address_city_string(@teacher.address.city) + get_address_district_string(@teacher.address.district) + get_address_details_string(@teacher.address.details)
+          - else
+            吉林省吉林市
+        .col-md-12.info-mgb.subject-content
+          %span{ :class => "text-muted" }
+            教学科目：
+          = @teacher.courses.map{|course| course.category.second[0]+course.category.third[0]+course.category.subject}.join(",").html_safe
+        .col-md-12.info-mgb
+          %span{ :class => "text-muted" }
+            个人爱好：
+          = @teacher.hobby
+        .col-md-12.info-mgb
+          %span{ :class => "text-muted" }
+            我的简介：  
+        .col-md-12.info-mgb.introduction.content-height
+          %p= format_string_newline(@teacher.introduction).html_safe
+          
+        .row
+        -#  
+          .col-md-12
+            .col-md-12.info-bbtm
+              %h4
+                %span{ :class => "glyphicon glyphicon-camera" }
+                我的相册 
+        .col-md-12
+          - @teacher.galleries.each_with_index do |p,n|
+            -if !(p.photo.blank?)
+              .col-md-3
+                = image_tag(p.photo_url(:normal), width:"100%", height:"170px",:class => "thumbnail")
+  -#
+    .col-md-12.info-pdlr.info-mgb.info-content.info-mtp
+                
+  .col-md-12.info-pdlr.info-mgb.info-content
+    .row
+      .col-md-12
+        .col-md-12.info-bbtm
+          %h4
+            %span{ :class => "glyphicon glyphicon-book" }
+            %a{ :name => "studyresult", :class => "font-black"}
+              我的学习成果
+    .col-md-12
+      .col-md-12.text-center
+        %h4
+          %span{ :class => "glyphicon glyphicon-file" }
+          我的成绩单 
+      .col-md-12.info-bbtm
+        .row.score_style.text-center
+          .col-md-4
+            = "#"
+          .col-md-4
+            = "科目"
+          .col-md-4
+            = "成绩"
+        - @teacher.scores.each_with_index do |s,i|
+          .row.score_style.text-center
+            .col-md-4
+              = i+1
+            .col-md-4
+              = s.title
+            .col-md-4
+              = s.content
+      .col-md-12.text-center
+        %h4
+          %span{ :class => "glyphicon glyphicon-bookmark" }
+          我的荣誉
+      .col-md-12.info-mgb2
+        - @teacher.honors.each do |s|
+          .row
+            .col-md-3.text-center
+              %h4
+                = s.title
+            .col-md-9.content-height
+              = s.content
+      .col-md-12
+        - @teacher.pictures.each_with_index do |p,n|
+          -if p.honors_image_url
+            .col-md-3
+              .thumbnail.honor-img
+                .img-h
+                  = image_tag(p.honors_image_url(:normal), :width => "100%", :height => "170px")
+                .caption.text-center  
+                  = p.title
+  -#                 
+    .col-md-12.info-mgb.info-content
+      .col-md-12.info-bbtm
+        .row
+          .col-md-4
+            %h4
+              %span{ :class => "glyphicon glyphicon-picture" }
+              成绩和荣誉图片
+      -#      
+        .col-md-2.col-md-offset-6    
+          %h4
+            展开全部
+
+  .col-md-12.info-pdlr.info-mgb.info-content
+    .row
+      .col-md-12
+        .col-md-12.info-bbtm
+          %h4
+            %span{ :class => "glyphicon glyphicon-time" }
+              %a{ :name => "experience", :class => "font-black" }
+                我的教学经历
+    .col-md-12
+      .qa-message-list
+        - @careers.each do |c|
+          - if c.start_time and c.end_time
+            .message-item
+              .message-inner
+                .message-head.clearfix
+                  = c.start_time.strftime("%Y-%m-%d")+' 到 '+c.end_time.strftime("%Y-%m-%d")+' '+'| 学生：'+c.child_name+' | 学校：'+c.school+' | 辅导科目：'+c.subject
+                .qa-message-content
+                  = c.content
+
+  .col-md-12.info-pdlr.info-mgb.info-content
+    .row
+      .col-md-12
+        .col-md-12.info-bbtm
+          %h4
+            %span{ :class => "glyphicon glyphicon-time" }
+              %a{ :name => "experience", :class => "font-black" }
+                我的教学评价
+
+    .detail-comments-wrapper
+      .detail-comments-tab
+        .detail-comments-total
+          %ul.total
+            %li= "好评 (#{@good_num})"
+            %li= "中评 (#{@medium_num})"
+            %li= "差评 (#{@bad_num})"
+        .detail-comments-new
+          = link_to "我要评价", new_comment_path(:teacher_id=>@teacher.id), :class=>"btn btn-warning"
+      %ul.detail-comments-list
+        - @comments.each do |comment|
+          %li
+            .detail-comment-head-image
+              = image_tag "head.png",:class=>"img-circle"
+            .detail-comment-content-block
+              .detail-comment-tips
+                %span.name= comment.parent.name
+                %ul.ful
+                  - if comment.total == Setting.comments.total_good
+                    %li.stuff &nbsp;
+                    %li.stuff &nbsp;
+                    %li.stuff &nbsp;
+                    %li.stuff &nbsp;
+                    %li.stuff &nbsp;
+                  - elsif comment.total == Setting.comments.total_medium
+                    %li.stuff &nbsp;
+                    %li.stuff &nbsp;
+                    %li.stuff &nbsp;
+                    %li &nbsp;
+                    %li &nbsp;
+                  - else
+                    %li.stuff &nbsp;
+                    %li &nbsp;
+                    %li &nbsp;
+                    %li &nbsp;
+                    %li &nbsp;
+
+                %span.time= comment.created_at.strftime('%Y-%m-%d %H:%M:%S')
+              .detail-comment-content
+                = comment.content
+
+
+  -#              
+    .col-md-12.info-pdlr.info-mgb.info-content
+      .col-md-12
+        .col-md-12.info-bbtm
+          %h4
+            %span{ :class => "glyphicon glyphicon-list-alt" }
+            我的教学计划
+      .col-md-12
+            教学计划图表

@@ -1,0 +1,26 @@
+.row.footrow
+  .col-xs-4.footinfo.text-muted
+    %span.glyphicon.glyphicon-hand-up
+    =link_to "用户登录",login_path, :class => "text-muted"
+  .col-xs-4.footinfo.text-muted
+    %span.glyphicon.glyphicon-pencil
+    -if !current_parent
+      =link_to "家长注册",new_parent_registration_path, :class => "text-muted"
+    -else
+      家长注册
+  .col-xs-4.footinfo.text-muted
+    %span.glyphicon.glyphicon-pencil
+    -if !current_teacher
+      =link_to "家教注册",new_teacher_registration_path, :class => "text-muted"
+    -else
+      家教注册
+  .col-xs-12.footinfo.text-muted.footphone
+    %span.glyphicon.glyphicon-earphone
+    = link_to "客服电话:13664320122", "tel:13664320122", :class => "text-muted"
+%p.text-center
+  %small
+    Copyright © 2014 - 2015 家教呢版权所有
+    <script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F82445d85fc131ec4d306d7d2089b8471' type='text/javascript'%3E%3C/script%3E"));
+    </script>

@@ -1,0 +1,38 @@
+- provide(:title, "新闻报道")
+= render "layouts/subbar_top"
+.filter-top
+.col-xs-12.infor-attr
+  .row.infor-category
+    -if @category
+      .col-xs-3.infor-category-item
+        =link_to "全部", notices_path()
+    -else
+      .col-xs-3.infor-category-item.visited
+        =link_to "全部", notices_path(),:class=>"visited"
+    -@notices_category.each do |p|
+      -if @category&&@category.id==p.id
+        .col-xs-3.infor-category-item.visited
+          =link_to p.title,list_notices_path(:id=>p.id),:class=>"visited";
+      -else
+        .col-xs-3.infor-category-item
+          =link_to p.title, list_notices_path(:id=>p.id);
+.row.job-all
+  .col-xs-12
+    %table.table.table-hover.table-bordered
+      .job-list 
+        .list-group
+          .list-group-item.disabled
+            %i.glyphicon.glyphicon-sort-by-alphabet
+            教育讲堂列表
+      -@notices.each do |notice|
+        %tr
+          %td
+            %h6.pull-right.text-center
+              = notice.created_at.strftime("%Y-%m-%d")
+            %a{:href=>notice_path(:id=>notice.number)}
+              %h5
+                = truncate(notice.title,:length=>10)
+              %p.text-muted
+                = truncate(notice.content,:length=>40)
+
+= paginate @notices

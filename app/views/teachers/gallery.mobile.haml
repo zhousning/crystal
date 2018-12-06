@@ -1,0 +1,33 @@
+
+- provide(:title, t('.title'))
+=render "layouts/header"
+= nested_form_for current_teacher,:url=>upload_teachers_path,:html => {:multipart => true,:method=>'post'} do |f|
+  = hidden_field_tag "item_img",Setting.teachers.item_img_gallery
+  .form-group
+    .panel.tpanel-titles.tpanel-ab
+      .panel-heading.tpanel-titles.pheight
+        .row
+          .col-md-12.col-xs-12
+            .col-md-4
+              = f.link_to_add "添加", :galleries, :data => { :target => "#pictures_content" }, :class => "btn btn-default"
+              %button{ :class => "btn btn-success" }
+                %span{ :class => "glyphicon glyphicon-floppy-save" }
+                  保存信息
+      .panel-body  
+        .col-xs-12
+          #pictures_content
+            .col-xs-12.hidden
+              = f.fields_for :galleries, current_teacher.galleries do |s|
+                .col-md-12.col-xs-12.form-group
+                  .col-xs-2
+                    = s.link_to_remove "", :class => " input-group btn-default glyphicon glyphicon-trash"
+                  .col-xs-10
+                    = s.file_field :photo
+        .col-md-12.col-xs-12
+          -current_teacher.galleries.each_with_index do |p,n|
+            -if !(p.photo.blank?)
+              .col-md-6.col-xs-6
+                %label.te-bottom.te-top.cursor-pointer{ :onclick => "change_color(this)" }
+                  =check_box_tag "remove_galleries_image[]", n, checked = false, :class => "sr-only" 
+                  %span{ :class => "glyphicon glyphicon-remove-circle" }
+                = image_tag(p.photo_url(:normal),:height=>"60px",:class=>"thumbnail")

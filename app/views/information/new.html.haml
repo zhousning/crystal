@@ -1,0 +1,68 @@
+- provide(:title, t('.title'))
+= render "layouts/subbar_top"
+= render "layouts/nav_menu"
+.wrapper
+  .row.col-md-9
+    .new-job-title
+      = form_for(@information, :html => {:class=>"form-horizontal"}) do |f|
+        .oaerror.success
+          %strong 温馨提示: 
+          请仔细填写各项信息，方便别人能够找到你。
+        .row
+          .col-md-11
+            .row
+              .form-group
+                %label{:for=>"info_Category_id",:class=>"col-md-2 control-label"} 
+                  =t('information.parttime.category')
+                  %i.col-red *
+                .col-md-6
+                  =f.select(:info_category_id,InfoCategory.all.collect {|p| [ p.title, p.id ] }, { include_blank: false },:class=>"form-control")
+            .row
+              .form-group
+                %label{:for=>"title",:class=>"control-label col-md-2"}
+                  =t('information.parttime.title')
+                  %i.col-red *
+                .col-md-10
+                  = f.text_field :title,:id=>"title",:class=>"form-control",:placeholder=>"准确描述信息的标题，3~20个字"
+
+            .row
+              .form-group
+                %label{:for=>"content",:class=>"control-label col-md-2"} 
+                  =t('information.parttime.content')
+                  %i.col-red *
+                .col-md-10
+                  = f.text_area :content,:class=>"form-control",:id=>"content",:placeholder=>"20~2000个字之间，不能填写电话、QQ号等联系方式",:rows=>8
+            .row
+              .form-group
+                %label{:for=>"name",:class=>"control-label col-md-2"}
+                  ="#{t('information.parttime.name')}"
+                  %i.col-red *
+                .col-md-4
+                  = f.text_field :name,:id=>"name",:class=>"form-control"
+                %label{:for=>"phone",:class=>"control-label col-md-2"} 
+                  =t('information.parttime.phone')
+                  %i.col-red *
+                .col-md-4
+                  = f.text_field :phone,:class=>"form-control",:id=>"phone"
+            .row
+              .form-group
+                %label{:for=>"qq",:class=>"control-label col-md-2"} 
+                  =t('information.parttime.qq')
+                .col-md-4
+                  = f.text_field :qq,:class=>"form-control",:id=>"qq"
+                %label{:for=>"weixin",:class=>"control-label col-md-2"} 
+                  =t('information.parttime.weixin')
+                .col-md-4
+                  = f.text_field :weixin,:class=>"form-control",:id=>"weixin"
+              .form-group
+                %label{:for=>"content",:class=>"control-label col-md-2"} 
+                  =t('information.parttime.img')
+                .col-md-8
+                  =f.file_field :img,:class=>"control-label"
+            %hr
+            .row
+              .form-group
+                .col-md-3.col-md-offset-2
+                  = f.button_tag "发布信息",:class=>"btn btn-warning btn-lg btn-block"
+                .col-md-2
+                  = link_to "返回",information_index_path,:method=>"get",:class=>"btn btn-default btn-lg btn-block"

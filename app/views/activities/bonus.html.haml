@@ -1,0 +1,96 @@
+!!! 5
+%html{:lang=>"zh-cn"}
+  %head
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    %title= "家教呢红包活动"
+    = stylesheet_link_tag "application", :media => "all"
+  %body
+    .container.pd
+      .row.act-w
+        .col-xs-12.act-h.bc-rd
+          %p
+            %h4.text-center
+              注册
+              %strong"家教呢"
+              送红包活动
+      .row.act-w
+        .col-xs-12
+          .row.act-h.bc-bl
+            .col-xs-1
+              %p
+                %h4.text-center
+                  %span{:class => "glyphicon glyphicon-comment", :'aria-hidden' =>"true"}
+            .col-xs-10
+              %p
+                %h4.text-left
+                  1. 关注家教呢微信公众号
+      .row.act-w
+        .col-xs-12
+          .row.act-h.bc-bl
+            .col-xs-1
+              %p
+                %h4.text-center
+                  %span{:class => "glyphicon glyphicon-home", :'aria-hidden' =>"true"}
+            .col-xs-10
+              %p
+                %h4.text-left
+                  2. 注册家教呢账号
+                  = link_to "立即注册", new_parent_registration_path, :class=>"btn btn-sm btn-success", :rel=>"nofollow"
+      .row.act-w
+        .col-xs-12
+          .row.act-h.bc-bl
+            .col-xs-1
+              %p
+                %h4.text-center
+                  %span{:class => "glyphicon glyphicon-hand-up", :'aria-hidden' =>"true"}
+            .col-xs-10
+              %p
+                %h4.text-left
+                  3. 分享此活动页到朋友圈
+      .row.act-w
+        .col-xs-12
+          .row.act-h.bc-wt
+            .col-xs-1
+              %p
+                %h4.text-center
+                  %span{:class => "glyphicon glyphicon-send", :'aria-hidden' =>"true"}
+            .col-xs-10
+              %p
+                %h4.text-left
+                  4. 发送注册手机号和分享截图到家教呢公众号
+      .row.act-w
+        .col-xs-12
+          .row.act-h.bc-wt
+            .col-xs-1
+              %p
+                %h4.text-center
+                  %span{:class => "glyphicon glyphicon-usd", :'aria-hidden' =>"true"}
+            .col-xs-10
+              %p
+                %h4.text-left
+                  5. 验证通过，收现金红包，获取iPhone6超低价秒杀资格
+      .row.act-w
+        .col-xs-12
+          .row.act-h.bc-gray
+            .col-xs-12
+              %p
+                %h4.text-center
+                  注册用户赢大奖活动奖品
+            .col-xs-12
+              %p
+                %h4.text-justify
+                  1. 微信现金红包
+              %p
+                %h4.text-justify
+                  2. 家教呢优惠券
+              %p
+                %h4.text-justify
+                  3. iPhone6超低价秒杀
+
+      .row.act-w
+        .col-xs-12
+          .row
+            .col-xs-12.act-h
+              = link_to "立即注册", new_parent_registration_path, :class=>"btn btn-lg btn-success btn-block", :rel=>"nofollow"

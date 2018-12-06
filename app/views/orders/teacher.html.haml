@@ -1,0 +1,92 @@
+- provide(:title, t('.title'))
+
+= render "layouts/subbar_top"
+
+#menu
+  .wrapper
+    .menu-c-all
+      = link_to "全部课程","/filters/index"
+    .menu-m
+      %ul
+        %li
+          %a{:class => "menu-m-active", :href=>root_path} 首页
+        %li 
+          %a{:class=>"menu-m-active",:href => flow_path} 预约流程
+        %li
+          %a{:class=>"menu-m-active",:href => tflow_path} 家教入驻
+
+#order-div
+  .wrapper
+    .explain-title#order-progress
+      .explain-title-left
+      预约流程
+      .explain-title-right
+
+    .order-progress-div
+      = tstatus_choice(@order.status)
+
+    .order-pay-div
+      .order-status
+        .order-pay-part-title
+          订单状态：
+          - if teacher_signed_in?
+            - if @order.status == Setting.orders.status_trade_created
+              提交订单成功，请立即支付试讲费用
+            - elsif @order.status == Setting.orders.status_parent_paied
+              收到家长的订单，请点击确认按钮，以确认该订单
+            - elsif @order.status == Setting.orders.status_teacher_paied
+              您确认了该订单，家长信息已可见，请尽快与家长联系
+            - elsif @order.status == Setting.orders.status_trade_success
+              订单完成，试讲费用已打入您的支付宝中，请注意查收
+            - elsif @order.status == Setting.orders.status_trade_failed
+              订单完成，家长因不满意申请了退款，试讲费用已退回到家长的支付宝中
+
+    .order-pay-div
+      .order-trace
+        %table.table
+          %tr
+            %th{:width=>"25%"} 处理时间
+            %th{:width=>"55%"} 处理信息
+            %th{:width=>"20%"} 操作人
+          - @order.order_traces.each do |t|
+            %tr
+              %td= t.created_at.strftime("%Y-%m-%d %H:%M:%S")
+              %td= t.t_content
+              %td= t.t_operator
+
+      .course
+        .order-pay-part-title 课程信息
+        .course-info.margin-left= "#{@course.name} - #{@course.teacher.name}"
+        .course-date
+          试讲日期：
+          %span= @order.appointments_time.strftime("%Y-%m-%d")
+
+      .order-info
+        .order-pay-part-title 家长信息
+        .info-parent.margin-left
+          - if [Setting.orders.status_teacher_paied, Setting.orders.status_trade_success, Setting.orders.status_trade_failed].include? @order.status
+            .info-highlight
+              = @order.parent.name
+              &nbsp;&nbsp;
+              = @order.phone
+          - else
+            = @order.parent.name
+            &nbsp;&nbsp;
+            = @order.phone[0..6] + "xxxx"
+        .info-address.margin-left= @order.addr
+        .info-hours.margin-left
+          家长已经支付了
+          %span.info-highlight= @order.hours
+          小时课时费用，共计
+          %span.info-highlight= @order.total
+          元
+
+      .order-split-line
+
+      .pay-button
+        - if @order.status == Setting.orders.status_parent_paied
+          = link_to "确认订单", teacher_pay_orders_path(:id=>@order.number), :class=>"btn btn-lg btn-warning"
+        - elsif [Setting.orders.status_teacher_paied, Setting.orders.status_trade_success, Setting.orders.status_trade_failed].include? @order.status
+          .money
+            您已确认该订单
+

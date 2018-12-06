@@ -1,0 +1,57 @@
+= nested_form_for current_teacher,:url=>updateInfor_teachers_path,:html => {:multipart => true,:method=>"post",:class=>"form-horizontal tpadding "}, :validate => true do |f| 
+  .form-group.te-mgb
+    .col-md-12.col-xs-12
+      .form-group
+        .tpadding
+          .form-group
+            .tpadding
+              .form-group
+                .col-md-12.col-xs-12
+                  .col-md-12.col-xs-12.info-bottom
+                    .col-md-4.col-xs-4
+                      %h4 我的教学计划
+                    .col-md-2.col-xs-2.col-md-offset-6.col-xs-offset-6
+                      %button{ :class => "btn btn-success" }
+                        %span{ :class => "glyphicon glyphicon-floppy-save" }
+                        保存信息
+          .form-group
+            = f.label "授课时期：", :class=>"col-md-3 col-xs-3 control-label"
+            .col-md-9.col-xs-9.tp-left
+              %label.radio-inline
+                = f.radio_button :period, Setting.courses.period_normal
+                = Setting.courses.period_normal_string
+              %label.radio-inline
+                = f.radio_button :period, Setting.courses.period_vacation
+                = Setting.courses.period_vacation_string
+              %label.radio-inline
+                = f.radio_button :period, Setting.courses.period_all
+                = Setting.courses.period_all_string
+          .form-group 
+            = f.label "预约时间：", :class=>"col-md-3 col-xs-3 control-label"
+            .col-md-8.col-xs-8.tp-left
+              %table.table.table-bordered
+                %tr
+                  %td
+                    ="星期一"
+                    = check_box_tag "appointments_pos[]",1,@appointments_pos.include?(1)
+                  %td
+                    ="星期二"
+                    = check_box_tag "appointments_pos[]",2,@appointments_pos.include?(2)
+                  %td
+                    ="星期三"
+                    = check_box_tag "appointments_pos[]",3,@appointments_pos.include?(3)
+                  %td
+                    ="星期四"
+                    = check_box_tag "appointments_pos[]",4,@appointments_pos.include?(4)
+                  %td
+                    ="星期五"
+                    = check_box_tag "appointments_pos[]",5,@appointments_pos.include?(5)
+                  %td
+                    ="星期六"
+                    = check_box_tag "appointments_pos[]",6,@appointments_pos.include?(6)
+                  %td
+                    ="星期日"
+                    = check_box_tag "appointments_pos[]",0,@appointments_pos.include?(0)
+                %p 家长将根据你填写的时间进行试讲预约
+        -#  
+          =f.submit "保存信息",:class=>" btn btn-success"

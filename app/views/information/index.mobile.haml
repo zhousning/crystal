@@ -1,0 +1,43 @@
+- provide(:title, t('.title'))
+= render "layouts/subbar_top"
+.filter-top
+.col-xs-12.infor-attr
+  .row.infor-category
+    -if @category
+      .col-xs-3.infor-category-item
+        =link_to "全部", information_index_path()
+    -else
+      .col-xs-3.infor-category-item.visited
+        =link_to "全部", information_index_path(),:class=>"visited"
+    -@infoCategory.each do |p|
+      -if @category&&@category.id==p.id
+        .col-xs-3.infor-category-item.visited
+          =link_to p.title, information_index_path(:infocategory=>p.id),:class=>"visited";
+      -else
+        .col-xs-3.infor-category-item
+          =link_to p.title, information_index_path(:infocategory=>p.id);
+.row
+  .col-xs-12
+    %a.btn.btn-block.btn-color.btn-blue{:href=>new_information_path}
+      %i.glyphicon.glyphicon-send
+      =t('information.send.information')
+.row.job-all
+  .col-xs-12
+    %table.table.table-hover.table-bordered
+      .job-list 
+        .list-group
+          .list-group-item.disabled
+            %i.glyphicon.glyphicon-sort-by-alphabet
+            校园信息列表
+      - @information.each do |information|
+        %tr
+          %td
+            %h6.pull-right.text-center
+              = information.created_at.strftime("%Y-%m-%d")
+            %a{:href=>information_path(:id=>information.number)}
+              %h5
+                = truncate(information.title,:length=>10)
+              %p.text-muted
+                = truncate(information.content,:length=>40)
+
+= paginate @information 
